@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -50,7 +51,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yjG-Ac-jYP">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjG-Ac-jYP">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="Group/Person Name" id="UOA-57-tFP">
@@ -63,10 +64,47 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jdH-Cb-u4W">
+                                <rect key="frame" x="0.0" y="692" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" id="u3S-F2-A66">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dQH-2j-VA9">
+                                            <rect key="frame" x="16" y="7" width="28" height="28"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="Attach">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="wHT-kx-us7">
+                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="FTM-4Z-XIf">
+                                            <rect key="frame" x="54" y="7" width="299" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="zRI-ov-1C8">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LDf-qu-Vi6">
+                                            <rect key="frame" x="350" y="7" width="36" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Send">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="yjG-Ac-jYP" firstAttribute="top" secondItem="m4H-8t-MbD" secondAttribute="top" id="0IU-8j-Rw5"/>
+                            <constraint firstAttribute="trailing" secondItem="jdH-Cb-u4W" secondAttribute="trailing" id="9W9-lH-WO4"/>
                             <constraint firstItem="yjG-Ac-jYP" firstAttribute="leading" secondItem="m4H-8t-MbD" secondAttribute="leading" id="AZv-vg-onR"/>
+                            <constraint firstItem="jdH-Cb-u4W" firstAttribute="leading" secondItem="m4H-8t-MbD" secondAttribute="leadingMargin" id="Dmq-mH-rrH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jdH-Cb-u4W" secondAttribute="trailing" id="SkA-iV-U7a"/>
+                            <constraint firstItem="jdH-Cb-u4W" firstAttribute="leading" secondItem="m4H-8t-MbD" secondAttribute="leading" id="Z1s-Io-dqs"/>
+                            <constraint firstItem="jdH-Cb-u4W" firstAttribute="bottom" secondItem="oTB-d5-jFa" secondAttribute="top" id="d1G-7K-4Kd"/>
                             <constraint firstAttribute="trailing" secondItem="yjG-Ac-jYP" secondAttribute="trailing" id="gNV-v6-zGR"/>
                         </constraints>
                     </view>
@@ -77,4 +115,7 @@
             <point key="canvasLocation" x="1049" y="407"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Attach" width="28" height="28"/>
+    </resources>
 </document>
