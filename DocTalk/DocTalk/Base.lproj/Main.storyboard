@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -64,10 +64,10 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fk9-qC-b4V">
-                                <rect key="frame" x="-2" y="646" width="419" height="90"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fk9-qC-b4V">
+                                <rect key="frame" x="0.0" y="646" width="414" height="90"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="left" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPF-JO-4K4">
+                                    <button opaque="NO" contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPF-JO-4K4">
                                         <rect key="frame" x="8" y="54" width="28" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="28" id="tAU-lO-NdM"/>
@@ -76,22 +76,22 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="bottom" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rKJ-iG-Isa">
-                                        <rect key="frame" x="52" y="54" width="298" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="bottom" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rKJ-iG-Isa">
+                                        <rect key="frame" x="36" y="52" width="334" height="30"/>
                                         <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Gdr-BW-Rc4">
-                                        <rect key="frame" x="8" y="8" width="403" height="29"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Gdr-BW-Rc4">
+                                        <rect key="frame" x="8" y="8" width="398" height="29"/>
                                         <segments>
                                             <segment title="Normal"/>
                                             <segment title="Semi-Urgent"/>
                                             <segment title="Urgent"/>
                                         </segments>
                                     </segmentedControl>
-                                    <button opaque="NO" contentMode="right" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2v-C9-8dk">
-                                        <rect key="frame" x="366" y="52" width="36" height="30"/>
+                                    <button opaque="NO" contentMode="right" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2v-C9-8dk">
+                                        <rect key="frame" x="370" y="52" width="36" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="36" id="LWB-2R-6Jb"/>
                                         </constraints>
@@ -102,11 +102,16 @@
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="Gdr-BW-Rc4" firstAttribute="top" secondItem="Fk9-qC-b4V" secondAttribute="topMargin" id="7ye-un-hGL"/>
                                     <constraint firstItem="M2v-C9-8dk" firstAttribute="leading" secondItem="rKJ-iG-Isa" secondAttribute="trailing" id="8Ld-xV-paP"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="M2v-C9-8dk" secondAttribute="trailing" id="GkQ-qD-Ocp"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="iPF-JO-4K4" secondAttribute="bottom" id="OhH-aA-bgc"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="M2v-C9-8dk" secondAttribute="bottom" id="PA7-q3-fcO"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="Gdr-BW-Rc4" secondAttribute="trailing" id="VTh-u0-swe"/>
+                                    <constraint firstAttribute="height" constant="90" id="YSe-Xm-hhZ"/>
                                     <constraint firstItem="rKJ-iG-Isa" firstAttribute="leading" secondItem="iPF-JO-4K4" secondAttribute="trailing" id="dEJ-c0-HQi"/>
                                     <constraint firstItem="Gdr-BW-Rc4" firstAttribute="leading" secondItem="Fk9-qC-b4V" secondAttribute="leadingMargin" id="dcQ-5w-B6P"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="rKJ-iG-Isa" secondAttribute="bottom" id="koq-ou-feC"/>
                                     <constraint firstItem="iPF-JO-4K4" firstAttribute="leading" secondItem="Fk9-qC-b4V" secondAttribute="leadingMargin" id="puK-ud-hzq"/>
                                 </constraints>
                             </view>
@@ -114,6 +119,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Fk9-qC-b4V" firstAttribute="leading" secondItem="m4H-8t-MbD" secondAttribute="leading" id="0cl-Vh-590"/>
+                            <constraint firstItem="oTB-d5-jFa" firstAttribute="top" secondItem="Fk9-qC-b4V" secondAttribute="bottom" id="ElG-pV-TFt"/>
                             <constraint firstItem="oTB-d5-jFa" firstAttribute="top" secondItem="Fk9-qC-b4V" secondAttribute="bottom" id="WBB-Fc-6DD"/>
                             <constraint firstAttribute="trailing" secondItem="Fk9-qC-b4V" secondAttribute="trailing" id="mff-09-K0l"/>
                         </constraints>
