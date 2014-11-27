@@ -18,13 +18,19 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyu-i1-Bjn">
-                                <rect key="frame" x="161" y="353" width="93" height="30"/>
-                                <state key="normal" title="Change Page">
+                                <rect key="frame" x="120" y="353" width="174" height="30"/>
+                                <state key="normal" title="Go to GUI message page">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="t8x-k0-9Ti" kind="show" id="T9l-sI-bJE"/>
                                 </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rE-1d-3hI">
+                                <rect key="frame" x="100" y="391" width="215" height="30"/>
+                                <state key="normal" title="Go to functional message page">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -51,7 +57,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yjG-Ac-jYP">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjG-Ac-jYP">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="Group/Person Name" id="UOA-57-tFP">
@@ -115,12 +121,22 @@
                                     <constraint firstItem="iPF-JO-4K4" firstAttribute="leading" secondItem="Fk9-qC-b4V" secondAttribute="leadingMargin" id="puK-ud-hzq"/>
                                 </constraints>
                             </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1IZ-wX-qlE">
+                                <rect key="frame" x="0.0" y="44" width="414" height="602"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Fk9-qC-b4V" firstAttribute="leading" secondItem="m4H-8t-MbD" secondAttribute="leading" id="0cl-Vh-590"/>
+                            <constraint firstItem="1IZ-wX-qlE" firstAttribute="leading" secondItem="m4H-8t-MbD" secondAttribute="leading" id="2vm-UF-aeM"/>
+                            <constraint firstItem="Fk9-qC-b4V" firstAttribute="top" secondItem="1IZ-wX-qlE" secondAttribute="bottom" id="2x0-qQ-c2p"/>
+                            <constraint firstItem="yjG-Ac-jYP" firstAttribute="top" secondItem="m4H-8t-MbD" secondAttribute="top" id="6Pe-nl-742"/>
                             <constraint firstItem="oTB-d5-jFa" firstAttribute="top" secondItem="Fk9-qC-b4V" secondAttribute="bottom" id="ElG-pV-TFt"/>
+                            <constraint firstItem="yjG-Ac-jYP" firstAttribute="leading" secondItem="m4H-8t-MbD" secondAttribute="leading" id="QMz-jP-Lj3"/>
+                            <constraint firstAttribute="trailing" secondItem="yjG-Ac-jYP" secondAttribute="trailing" id="W3B-3T-58c"/>
                             <constraint firstItem="oTB-d5-jFa" firstAttribute="top" secondItem="Fk9-qC-b4V" secondAttribute="bottom" id="WBB-Fc-6DD"/>
+                            <constraint firstAttribute="trailing" secondItem="1IZ-wX-qlE" secondAttribute="trailing" id="XIA-Xv-gFT"/>
+                            <constraint firstItem="1IZ-wX-qlE" firstAttribute="top" secondItem="yjG-Ac-jYP" secondAttribute="bottom" id="cVt-YV-T0u"/>
                             <constraint firstAttribute="trailing" secondItem="Fk9-qC-b4V" secondAttribute="trailing" id="mff-09-K0l"/>
                         </constraints>
                     </view>
@@ -128,7 +144,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBy-l7-8cS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1049" y="407"/>
+            <point key="canvasLocation" x="1392" y="30"/>
         </scene>
     </scenes>
     <resources>
