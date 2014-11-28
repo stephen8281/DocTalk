@@ -43,7 +43,7 @@
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"contact.sql"];
     
     // Load the data from database
-    [self loadData];
+//    [self loadData];
 
 }
 
@@ -53,6 +53,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)sortByAction
+{
+    NSLog(@"edit button clicked");
+}
 
 
 #pragma mark - Private method implementation
