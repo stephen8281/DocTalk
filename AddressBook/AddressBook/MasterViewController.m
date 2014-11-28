@@ -43,7 +43,7 @@
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"contact.sql"];
     
     // Load the data from database
-//    [self loadData];
+    [self loadData];
 
 }
 
