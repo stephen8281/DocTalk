@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource,ABPeoplePickerNavigationControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *myContactList;
+
+- (IBAction)showAddressBook:(id)sender;
 
 @end
 

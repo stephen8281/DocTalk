@@ -14,6 +14,9 @@
 		DCC2C8BE1A29762D00B7A97C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCC2C8BD1A29762D00B7A97C /* Images.xcassets */; };
 		DCC2C8C11A29762D00B7A97C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC2C8BF1A29762D00B7A97C /* LaunchScreen.xib */; };
 		DCC2C8CD1A29762D00B7A97C /* DocTalkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8CC1A29762D00B7A97C /* DocTalkTests.m */; };
+		DCC2C8EB1A29937200B7A97C /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8EA1A29937200B7A97C /* DBManager.m */; };
+		DCC2C8ED1A29937E00B7A97C /* contact.sql in Resources */ = {isa = PBXBuildFile; fileRef = DCC2C8EC1A29937E00B7A97C /* contact.sql */; };
+		DCC2C8EF1A29939100B7A97C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC2C8EE1A29939100B7A97C /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,10 @@
 		DCC2C8C61A29762D00B7A97C /* DocTalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DocTalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC2C8CB1A29762D00B7A97C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCC2C8CC1A29762D00B7A97C /* DocTalkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DocTalkTests.m; sourceTree = "<group>"; };
+		DCC2C8E91A29936000B7A97C /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		DCC2C8EA1A29937200B7A97C /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		DCC2C8EC1A29937E00B7A97C /* contact.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = contact.sql; sourceTree = "<group>"; };
+		DCC2C8EE1A29939100B7A97C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCC2C8EF1A29939100B7A97C /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +71,8 @@
 		DCC2C8A41A29762C00B7A97C = {
 			isa = PBXGroup;
 			children = (
+				DCC2C8EE1A29939100B7A97C /* libsqlite3.dylib */,
+				DCC2C8EC1A29937E00B7A97C /* contact.sql */,
 				DCC2C8AF1A29762D00B7A97C /* DocTalk */,
 				DCC2C8C91A29762D00B7A97C /* DocTalkTests */,
 				DCC2C8AE1A29762D00B7A97C /* Products */,
@@ -81,6 +91,8 @@
 		DCC2C8AF1A29762D00B7A97C /* DocTalk */ = {
 			isa = PBXGroup;
 			children = (
+				DCC2C8EA1A29937200B7A97C /* DBManager.m */,
+				DCC2C8E91A29936000B7A97C /* DBManager.h */,
 				DCC2C8B41A29762D00B7A97C /* AppDelegate.h */,
 				DCC2C8B51A29762D00B7A97C /* AppDelegate.m */,
 				DCC2C8B71A29762D00B7A97C /* ViewController.h */,
@@ -200,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCC2C8BC1A29762D00B7A97C /* Main.storyboard in Resources */,
+				DCC2C8ED1A29937E00B7A97C /* contact.sql in Resources */,
 				DCC2C8C11A29762D00B7A97C /* LaunchScreen.xib in Resources */,
 				DCC2C8BE1A29762D00B7A97C /* Images.xcassets in Resources */,
 			);
@@ -222,6 +235,7 @@
 				DCC2C8B91A29762D00B7A97C /* ViewController.m in Sources */,
 				DCC2C8B61A29762D00B7A97C /* AppDelegate.m in Sources */,
 				DCC2C8B31A29762D00B7A97C /* main.m in Sources */,
+				DCC2C8EB1A29937200B7A97C /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +426,7 @@
 				DCC2C8D21A29762D00B7A97C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DCC2C8D31A29762D00B7A97C /* Build configuration list for PBXNativeTarget "DocTalkTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +435,7 @@
 				DCC2C8D51A29762D00B7A97C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
