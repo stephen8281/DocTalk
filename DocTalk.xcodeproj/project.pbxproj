@@ -17,6 +17,7 @@
 		DCC2C8EB1A29937200B7A97C /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8EA1A29937200B7A97C /* DBManager.m */; };
 		DCC2C8ED1A29937E00B7A97C /* contact.sql in Resources */ = {isa = PBXBuildFile; fileRef = DCC2C8EC1A29937E00B7A97C /* contact.sql */; };
 		DCC2C8EF1A29939100B7A97C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC2C8EE1A29939100B7A97C /* libsqlite3.dylib */; };
+		DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,8 @@
 		DCC2C8EA1A29937200B7A97C /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		DCC2C8EC1A29937E00B7A97C /* contact.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = contact.sql; sourceTree = "<group>"; };
 		DCC2C8EE1A29939100B7A97C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		DCC2C8F71A29A33F00B7A97C /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +100,8 @@
 				DCC2C8B51A29762D00B7A97C /* AppDelegate.m */,
 				DCC2C8B71A29762D00B7A97C /* ViewController.h */,
 				DCC2C8B81A29762D00B7A97C /* ViewController.m */,
+				DCC2C8F71A29A33F00B7A97C /* DetailViewController.h */,
+				DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */,
 				DCC2C8BA1A29762D00B7A97C /* Main.storyboard */,
 				DCC2C8BD1A29762D00B7A97C /* Images.xcassets */,
 				DCC2C8BF1A29762D00B7A97C /* LaunchScreen.xib */,
@@ -232,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */,
 				DCC2C8B91A29762D00B7A97C /* ViewController.m in Sources */,
 				DCC2C8B61A29762D00B7A97C /* AppDelegate.m in Sources */,
 				DCC2C8B31A29762D00B7A97C /* main.m in Sources */,
@@ -358,8 +364,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DocTalk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -368,8 +376,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DocTalk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

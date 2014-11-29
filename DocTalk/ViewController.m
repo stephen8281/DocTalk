@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "DBManager.h"
+#import "DetailViewController.h"
 
 @interface ViewController ()
 
@@ -108,6 +109,41 @@
     [_addressBookController setPeoplePickerDelegate:self];
     [self presentViewController:_addressBookController animated:YES completion:nil];
 }
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        NSMutableDictionary *contactDetailsDictionary = [[NSMutableDictionary alloc]
+                                                         initWithObjects:@[@"", @"", @"", @"",@""]
+                                                         forKeys:@[@"firstName", @"lastName", @"mobileNumber",@"homeNumber",@"workEmail"]];
+        
+        //get the index of element corresponding to each field in our arrPeopleInfo
+        NSInteger indexOfFirstName = [self.dbManager.arrColumnNames indexOfObject:@"firstname"];
+        NSInteger indexOfLastName = [self.dbManager.arrColumnNames indexOfObject:@"lastname"];
+        NSInteger indexOfMobileNumber = [self.dbManager.arrColumnNames indexOfObject:@"mobilenumber"];
+        NSInteger indexOfHomeNumber = [self.dbManager.arrColumnNames indexOfObject:@"homenumber"];
+        NSInteger indexOfWorkEmail = [self.dbManager.arrColumnNames indexOfObject:@"workemail"];
+        
+        //get the contact detail of person at selected row
+        NSString *firstName = [[self.arrPeopleInfo objectAtIndex:self.tableView.indexPathForSelectedRow.row] objectAtIndex:indexOfFirstName];
+        NSString *lastName = [[self.arrPeopleInfo objectAtIndex:self.tableView.indexPathForSelectedRow.row] objectAtIndex:indexOfLastName];
+        NSString *mobileNumber = [[self.arrPeopleInfo objectAtIndex:self.tableView.indexPathForSelectedRow.row] objectAtIndex:indexOfMobileNumber];
+        NSString *homeNumber = [[self.arrPeopleInfo objectAtIndex:self.tableView.indexPathForSelectedRow.row] objectAtIndex:indexOfHomeNumber];
+        NSString *workEmail = [[self.arrPeopleInfo objectAtIndex:self.tableView.indexPathForSelectedRow.row] objectAtIndex:indexOfWorkEmail];
+        
+        //populate the dictionary
+        [contactDetailsDictionary setObject:firstName forKey:@"firstName"];
+        [contactDetailsDictionary setObject:lastName forKey:@"lastName"];
+        [contactDetailsDictionary setObject:mobileNumber forKey:@"mobileNumber"];
+        [contactDetailsDictionary setObject:homeNumber forKey:@"homeNumber"];
+        [contactDetailsDictionary setObject:workEmail forKey:@"workEmail"];
+        
+        [[segue destinationViewController] setDictContactDetails:contactDetailsDictionary];
+    }
+}
+
+
 
 #pragma mark - ABPeoplePickerNavigationController Delegate method implementation
 

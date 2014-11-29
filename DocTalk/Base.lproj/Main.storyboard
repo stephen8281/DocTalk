@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qwq-Jx-2zW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qwq-Jx-2zW">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -9,7 +9,7 @@
             <objects>
                 <tableViewController id="byK-iL-brg" customClass="ViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vu7-o6-QQ6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -18,6 +18,9 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ers-YA-gy0" id="aUh-B5-3p2">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="7zJ-1T-QTh" kind="push" identifier="showDetail" id="rCd-Pz-3kX"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -27,6 +30,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="My Contact" id="yVF-9z-MMs">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Tmq-9G-m8k">
+                            <color key="tintColor" red="1" green="0.43069672959999999" blue="0.1644332791" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="showAddressBook:" destination="byK-iL-brg" id="BMQ-EM-m5h"/>
                             </connections>
@@ -38,7 +42,66 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2yC-va-g2E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="971" y="115"/>
+            <point key="canvasLocation" x="517.86666666666667" y="108.86666666666666"/>
+        </scene>
+        <!--ContactDetail-->
+        <scene sceneID="ibO-xQ-oS5">
+            <objects>
+                <viewController id="7zJ-1T-QTh" customClass="DetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3HK-hs-KFw"/>
+                        <viewControllerLayoutGuide type="bottom" id="WBH-yv-Ipn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jRX-nN-7fP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="x9I-ZB-Nnv">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qBJ-X4-X0e">
+                                <rect key="frame" x="110" y="72" width="110" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="uo8-gh-GlK">
+                                <rect key="frame" x="-7" y="148" width="327" height="420"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bu0-1f-AUS">
+                                <rect key="frame" x="0.0" y="104" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Call" id="H9d-zU-NMg">
+                                        <color key="tintColor" red="1" green="0.43069672959999999" blue="0.1644332791" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="makeCall:" destination="7zJ-1T-QTh" id="HjC-tl-7Uy"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="40" style="plain" systemItem="flexibleSpace" id="nfQ-Wk-Pdc">
+                                        <color key="tintColor" red="1" green="0.43069672959999999" blue="0.1644332791" alpha="1" colorSpace="calibratedRGB"/>
+                                    </barButtonItem>
+                                    <barButtonItem title="SMS" id="Led-OQ-bv3">
+                                        <color key="tintColor" red="1" green="0.43069672959999999" blue="0.1644332791" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="sendSMS:" destination="7zJ-1T-QTh" id="jme-8g-Uzg"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="ContactDetail" id="cAa-VT-IgW"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="lblContactName" destination="qBJ-X4-X0e" id="ajE-2A-TPK"/>
+                        <outlet property="tblContactDetails" destination="uo8-gh-GlK" id="8sr-FR-ycp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RIF-5h-Ji9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="912" y="108"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pZE-ms-Rrh">
@@ -56,7 +119,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="16k-XE-y7D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="247" y="117"/>
+            <point key="canvasLocation" x="131.73333333333332" y="110.76000000000001"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>
