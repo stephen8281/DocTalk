@@ -19,6 +19,9 @@ NSArray *Messages;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.myMessages.delegate = self;
+    self.myMessages.dataSource = self;
+    
     Messages = [NSArray arrayWithObjects: @"Test1", @"Test2", @"Test3", @"Test4", @"Test5", @"Test6", @"Test7", @"Test8", @"Test9", nil];
 }
 

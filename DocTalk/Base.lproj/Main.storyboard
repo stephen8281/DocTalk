@@ -125,7 +125,7 @@
             </objects>
             <point key="canvasLocation" x="663" y="110"/>
         </scene>
-        <!--Messages-->
+        <!--My Messages-->
         <scene sceneID="bPb-2T-aSB">
             <objects>
                 <tableViewController id="NDz-2Y-cQx" customClass="MessagesViewController" sceneMemberID="viewController">
@@ -145,11 +145,11 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="NDz-2Y-cQx" id="IfJ-8K-YWi"/>
-                            <outlet property="delegate" destination="NDz-2Y-cQx" id="v2Y-6H-9dE"/>
+                            <outlet property="dataSource" destination="NDz-2Y-cQx" id="RTO-G5-6z3"/>
+                            <outlet property="delegate" destination="NDz-2Y-cQx" id="U1Q-W5-F79"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Messages" id="Hcq-wn-rJJ">
+                    <navigationItem key="navigationItem" title="My Messages" id="Hcq-wn-rJJ">
                         <barButtonItem key="leftBarButtonItem" title="Layout" id="c8C-aw-8cN">
                             <color key="tintColor" red="1" green="0.43069672959999999" blue="0.1644332791" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
@@ -157,6 +157,9 @@
                             <color key="tintColor" red="1" green="0.43069672959999999" blue="0.1644332791" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="myMessages" destination="esc-yf-X9x" id="zmt-Iw-7zJ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0eX-2b-JhU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

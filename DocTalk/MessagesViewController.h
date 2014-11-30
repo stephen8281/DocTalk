@@ -10,4 +10,6 @@
 
 @interface MessagesViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
+@property (strong, nonatomic) IBOutlet UITableView *myMessages;
+
 @end
