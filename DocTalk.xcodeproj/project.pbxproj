@@ -18,6 +18,7 @@
 		DCC2C8ED1A29937E00B7A97C /* contact.sql in Resources */ = {isa = PBXBuildFile; fileRef = DCC2C8EC1A29937E00B7A97C /* contact.sql */; };
 		DCC2C8EF1A29939100B7A97C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC2C8EE1A29939100B7A97C /* libsqlite3.dylib */; };
 		DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */; };
+		DCC2C8FC1A2ADAE500B7A97C /* SendMessageContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */; };
 		DF239DB61A2A413000652DC8 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF239DB51A2A413000652DC8 /* MessagesViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,8 @@
 		DCC2C8EE1A29939100B7A97C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		DCC2C8F71A29A33F00B7A97C /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		DCC2C8FA1A2ADAE500B7A97C /* SendMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMessageController.h; sourceTree = "<group>"; };
+		DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMessageContoller.m; sourceTree = "<group>"; };
 		DF239DB41A2A413000652DC8 /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
 		DF239DB51A2A413000652DC8 /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +100,8 @@
 		DCC2C8AF1A29762D00B7A97C /* DocTalk */ = {
 			isa = PBXGroup;
 			children = (
+				DCC2C8FA1A2ADAE500B7A97C /* SendMessageController.h */,
+				DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */,
 				DCC2C8EA1A29937200B7A97C /* DBManager.m */,
 				DCC2C8E91A29936000B7A97C /* DBManager.h */,
 				DCC2C8B41A29762D00B7A97C /* AppDelegate.h */,
@@ -244,6 +249,7 @@
 			files = (
 				DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */,
 				DCC2C8B91A29762D00B7A97C /* ViewController.m in Sources */,
+				DCC2C8FC1A2ADAE500B7A97C /* SendMessageContoller.m in Sources */,
 				DF239DB61A2A413000652DC8 /* MessagesViewController.m in Sources */,
 				DCC2C8B61A29762D00B7A97C /* AppDelegate.m in Sources */,
 				DCC2C8B31A29762D00B7A97C /* main.m in Sources */,

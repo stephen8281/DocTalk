@@ -205,7 +205,7 @@
 }
 
 
-#pragma mark - IBAction method implementation
+#pragma mark - IBAction method and wifi button implementation
 
 -(IBAction)makeCall:(id)sender{
     [self performPhoneAction:YES];
@@ -214,6 +214,18 @@
 
 -(IBAction)sendSMS:(id)sender{
     [self performPhoneAction:NO];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showName"]) {
+
+        NSString *name = [[NSString alloc]initWithFormat:[_dictContactDetails objectForKey:@"firstName"]];
+        //NSMutableString *name = [[NSMutableString alloc]initWithCapacity:0];
+        //[name appendString:[_dictContactDetails objectForKey:@"firstName"]];
+        
+        [[segue destinationViewController] setName:name];
+    }
 }
 
 
