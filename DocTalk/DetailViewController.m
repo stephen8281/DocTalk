@@ -1,9 +1,9 @@
 //
 //  DetailViewController.m
-//  AddressBook
+//  DocTalk
 //
-//  Created by Gabriel Theodoropoulos on 9/12/13.
-//  Copyright (c) 2013 Appcoda. All rights reserved.
+//  Created by Stephen Tai on 2014-11-28.
+//  Copyright (c) 2013 DocTalk. All rights reserved.
 //
 
 #import "DetailViewController.h"
@@ -205,7 +205,7 @@
 }
 
 
-#pragma mark - IBAction method implementation
+#pragma mark - IBAction method and wifi button implementation
 
 -(IBAction)makeCall:(id)sender{
     [self performPhoneAction:YES];
@@ -214,6 +214,18 @@
 
 -(IBAction)sendSMS:(id)sender{
     [self performPhoneAction:NO];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showName"]) {
+
+        NSString *name = [[NSString alloc]initWithFormat:[_dictContactDetails objectForKey:@"firstName"]];
+        //NSMutableString *name = [[NSMutableString alloc]initWithCapacity:0];
+        //[name appendString:[_dictContactDetails objectForKey:@"firstName"]];
+        
+        [[segue destinationViewController] setName:name];
+    }
 }
 
 
