@@ -44,10 +44,23 @@ NSArray *Messages;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"Cell"];
+    
+//    Set the image
+    UIImage *image = [UIImage imageNamed:@"ProfilePic.png"];
+    cell.imageView.image = image;
+    
+//    Set the message title
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [Messages objectAtIndex:indexPath.row]];
     
+//    Set the message preview
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Hey this is a really cool preview message which you can use to get an idea of what the message might be about"];
+    
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 44.0;
 }
 
 /*
