@@ -23,6 +23,9 @@ NSArray *Messages;
     self.myMessages.dataSource = self;
     
     Messages = [NSArray arrayWithObjects: @"Test1", @"Test2", @"Test3", @"Test4", @"Test5", @"Test6", @"Test7", @"Test8", @"Test9", nil];
+    
+    // Reload the table view data.
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,11 +36,11 @@ NSArray *Messages;
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return sizeof(Messages);
+    return Messages.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
