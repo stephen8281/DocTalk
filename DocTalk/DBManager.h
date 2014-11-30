@@ -1,8 +1,8 @@
 //
 //  DBManager.h
-//  AddressBook
+//  DocTalk
 //
-//  Created by DocTalk on 2014-11-25.
+//  Created by Stephen on 2014-11-25.
 //  Copyright (c) 2014 Appcoda. All rights reserved.
 //
 

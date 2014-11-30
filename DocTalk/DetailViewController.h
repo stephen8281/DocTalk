@@ -1,9 +1,9 @@
 //
 //  DetailViewController.h
-//  AddressBook
+//  DocTalk
 //
-//  Created by Gabriel Theodoropoulos on 9/12/13.
-//  Copyright (c) 2013 Appcoda. All rights reserved.
+//  Created by Stephen Tai on 2014-11-28.
+//  Copyright (c) 2013 DocTalk. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
