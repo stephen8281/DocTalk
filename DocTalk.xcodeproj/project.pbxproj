@@ -21,6 +21,7 @@
 		DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */; };
 		DCC2C8FC1A2ADAE500B7A97C /* SendMessageContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */; };
 		DF239DB61A2A413000652DC8 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF239DB51A2A413000652DC8 /* MessagesViewController.m */; };
+		DFD780F11A2BEEFE006DDA5D /* ThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMessageContoller.m; sourceTree = "<group>"; };
 		DF239DB41A2A413000652DC8 /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
 		DF239DB51A2A413000652DC8 /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
+		DFD780EF1A2BEEFE006DDA5D /* ThreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadViewController.h; sourceTree = "<group>"; };
+		DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				DCC2C8B81A29762D00B7A97C /* ViewController.m */,
 				DCC2C8F71A29A33F00B7A97C /* DetailViewController.h */,
 				DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */,
+				DFD780EF1A2BEEFE006DDA5D /* ThreadViewController.h */,
+				DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */,
 				DF239DB41A2A413000652DC8 /* MessagesViewController.h */,
 				DF239DB51A2A413000652DC8 /* MessagesViewController.m */,
 				DCC2C8BA1A29762D00B7A97C /* Main.storyboard */,
@@ -252,6 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFD780F11A2BEEFE006DDA5D /* ThreadViewController.m in Sources */,
 				DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */,
 				DCC2C8B91A29762D00B7A97C /* ViewController.m in Sources */,
 				DCC2C8FC1A2ADAE500B7A97C /* SendMessageContoller.m in Sources */,

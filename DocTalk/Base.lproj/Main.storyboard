@@ -210,13 +210,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="9ud-yr-zoC">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="PVm-tQ-SuA" detailTextLabel="UUb-tK-G23" style="IBUITableViewCellStyleSubtitle" id="9ud-yr-zoC">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9ud-yr-zoC" id="5Rs-zC-k8N">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PVm-tQ-SuA">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UUb-tK-G23">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="vLO-jb-uEt" kind="push" id="QlW-dg-shD"/>
+                                    <segue destination="vLO-jb-uEt" kind="push" identifier="ListToThread" id="6mp-mb-z1v"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -241,10 +255,10 @@
             </objects>
             <point key="canvasLocation" x="1049" y="852"/>
         </scene>
-        <!--View Controller-->
+        <!--Thread View Controller-->
         <scene sceneID="EC0-xy-gPi">
             <objects>
-                <viewController id="vLO-jb-uEt" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ThreadViewController" id="vLO-jb-uEt" customClass="ThreadViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kzL-4Z-Whx"/>
                         <viewControllerLayoutGuide type="bottom" id="U89-Jd-T9a"/>
@@ -255,6 +269,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Mgf-Kz-Pm0"/>
+                    <connections>
+                        <outlet property="Thread" destination="77Q-Xu-CES" id="z5E-sG-2GI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYU-co-wwM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

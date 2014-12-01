@@ -7,6 +7,7 @@
 //
 
 #import "MessagesViewController.h"
+#import "ThreadViewController.h"
 
 @interface MessagesViewController ()
 
@@ -14,6 +15,7 @@
 
 @implementation MessagesViewController
 
+@synthesize myMessages;
 NSArray *Messages;
 
 - (void)viewDidLoad {
@@ -44,12 +46,12 @@ NSArray *Messages;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"Cell"];
+     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
 //    Set the image
     UIImage *image = [UIImage imageNamed:@"ProfilePic.png"];
     cell.imageView.image = image;
-    
+
 //    Set the message title
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [Messages objectAtIndex:indexPath.row]];
     
@@ -63,39 +65,13 @@ NSArray *Messages;
     return 44.0;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ListToThread"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        ThreadViewController *controller = (ThreadViewController *)segue.destinationViewController;
+        controller.messageID = [Messages objectAtIndex:indexPath.row];
+    }
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation
