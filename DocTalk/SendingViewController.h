@@ -10,9 +10,11 @@
 
 @interface SendingViewController : UIViewController
 
-@property (strong, nonatomic) UISegmentedControl *segmentedControl;
-@property (strong, nonatomic) UIButton *attachButton;
-@property (strong, nonatomic) UITextField *textEntry;
-@property (strong, nonatomic) UIButton *sendButton;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *priorityControl;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (weak, nonatomic) IBOutlet UIButton *attachButton;
+@property (weak, nonatomic) IBOutlet UITextField *textEntry;
+
+- (IBAction)priorityChanged:(id)sender;
 
 @end

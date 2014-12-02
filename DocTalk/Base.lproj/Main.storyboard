@@ -377,6 +377,9 @@
                                     <segment title="Semi-Urgent"/>
                                     <segment title="Urgent"/>
                                 </segments>
+                                <connections>
+                                    <action selector="priorityChanged:" destination="1Fx-WJ-Qfi" eventType="valueChanged" id="55D-6s-lKH"/>
+                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7R9-aO-okB">
                                 <rect key="frame" x="268" y="45" width="36" height="30"/>
@@ -416,6 +419,12 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
+                    <connections>
+                        <outlet property="attachButton" destination="LgJ-88-tjg" id="uy2-nj-zvJ"/>
+                        <outlet property="priorityControl" destination="F3t-ru-IHP" id="DDm-Jr-8In"/>
+                        <outlet property="sendButton" destination="7R9-aO-okB" id="Jtz-LZ-QA7"/>
+                        <outlet property="textEntry" destination="g9P-eX-mlu" id="P27-2R-JA6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AT3-Ku-7cv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
