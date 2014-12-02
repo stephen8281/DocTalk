@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 DocTalk. All rights reserved.
 //
 
-#import "MessagesViewController.h"
+#import "ThreadListViewController.h"
 #import "ThreadViewController.h"
 
-@interface MessagesViewController ()
+@interface ThreadListViewController ()
 
 @end
 
-@implementation MessagesViewController
+@implementation ThreadListViewController
 
 @synthesize myMessages;
 NSArray *Messages;

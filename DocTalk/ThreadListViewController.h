@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MessagesViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ThreadListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *myMessages;
 

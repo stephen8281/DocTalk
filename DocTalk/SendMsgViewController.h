@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SendingViewController : UIViewController
+@interface SendMsgViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *priorityControl;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;

@@ -205,7 +205,7 @@
         <!--My Messages-->
         <scene sceneID="bPb-2T-aSB">
             <objects>
-                <tableViewController id="NDz-2Y-cQx" customClass="MessagesViewController" sceneMemberID="viewController">
+                <tableViewController id="NDz-2Y-cQx" customClass="ThreadListViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="esc-yf-X9x">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -355,10 +355,10 @@
             </objects>
             <point key="canvasLocation" x="663" y="-560"/>
         </scene>
-        <!--Sending View Controller-->
+        <!--Send Msg View Controller-->
         <scene sceneID="HdN-MZ-yxO">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="1Fx-WJ-Qfi" customClass="SendingViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="1Fx-WJ-Qfi" customClass="SendMsgViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="war-sX-dnX"/>
                         <viewControllerLayoutGuide type="bottom" id="98G-Sw-emL"/>
@@ -428,7 +428,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AT3-Ku-7cv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1865" y="851.5"/>
+            <point key="canvasLocation" x="1929" y="1043.5"/>
         </scene>
     </scenes>
     <resources>

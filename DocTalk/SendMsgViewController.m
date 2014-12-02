@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 DocTalk. All rights reserved.
 //
 
-#import "SendingViewController.h"
+#import "SendMsgViewController.h"
 
-@interface SendingViewController ()
+@interface SendMsgViewController ()
 
 @end
 
-@implementation SendingViewController
+@implementation SendMsgViewController
 
 @synthesize priorityControl;
 
