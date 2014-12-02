@@ -22,6 +22,7 @@
 		DCC2C8FC1A2ADAE500B7A97C /* SendMessageContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */; };
 		DF239DB61A2A413000652DC8 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF239DB51A2A413000652DC8 /* MessagesViewController.m */; };
 		DFD780F11A2BEEFE006DDA5D /* ThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */; };
+		DFDF355A1A2D45B100435573 /* SendingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDF35591A2D45B100435573 /* SendingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		DF239DB51A2A413000652DC8 /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
 		DFD780EF1A2BEEFE006DDA5D /* ThreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadViewController.h; sourceTree = "<group>"; };
 		DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadViewController.m; sourceTree = "<group>"; };
+		DFDF35581A2D45B100435573 /* SendingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendingViewController.h; sourceTree = "<group>"; };
+		DFDF35591A2D45B100435573 /* SendingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +121,8 @@
 				DCC2C8B81A29762D00B7A97C /* ViewController.m */,
 				DCC2C8F71A29A33F00B7A97C /* DetailViewController.h */,
 				DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */,
+				DFDF35581A2D45B100435573 /* SendingViewController.h */,
+				DFDF35591A2D45B100435573 /* SendingViewController.m */,
 				DFD780EF1A2BEEFE006DDA5D /* ThreadViewController.h */,
 				DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */,
 				DF239DB41A2A413000652DC8 /* MessagesViewController.h */,
@@ -260,6 +265,7 @@
 				DFD780F11A2BEEFE006DDA5D /* ThreadViewController.m in Sources */,
 				DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */,
 				DCC2C8B91A29762D00B7A97C /* ViewController.m in Sources */,
+				DFDF355A1A2D45B100435573 /* SendingViewController.m in Sources */,
 				DCC2C8FC1A2ADAE500B7A97C /* SendMessageContoller.m in Sources */,
 				DF239DB61A2A413000652DC8 /* MessagesViewController.m in Sources */,
 				DC0EE1131A2AF08900DE575A /* ReadMessageController.m in Sources */,
