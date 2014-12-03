@@ -36,7 +36,7 @@
 
 -(void)animateTextField:(UITextField*)textField up:(BOOL)up
 {
-    const int movementDistance = -130; // tweak as needed
+    const int movementDistance = -180; // tweak as needed
     const float movementDuration = 0.3f; // tweak as needed
     
     int movement = (up ? movementDistance : -movementDistance);
@@ -47,7 +47,7 @@
     self.view.frame = CGRectOffset(self.view.frame, 0, movement);
     [UIView commitAnimations];
 }
-// -- 
+// --
 
 -(void) postMessage:(NSString*) message withName:(NSString *) name{
     if (![message isEqual:@""]){

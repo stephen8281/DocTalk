@@ -53,8 +53,8 @@
             <objects>
                 <viewController id="7zJ-1T-QTh" customClass="DetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jNu-mm-OaI"/>
-                        <viewControllerLayoutGuide type="bottom" id="v3c-hJ-0wb"/>
+                        <viewControllerLayoutGuide type="top" id="h3K-Od-CJa"/>
+                        <viewControllerLayoutGuide type="bottom" id="YSg-l8-x6R"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jRX-nN-7fP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -119,20 +119,20 @@
             <objects>
                 <viewController id="Ho7-8V-03b" customClass="SendMessageController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="vCC-13-5WF"/>
-                        <viewControllerLayoutGuide type="bottom" id="bJJ-5I-lGu"/>
+                        <viewControllerLayoutGuide type="top" id="nA1-Da-DL3"/>
+                        <viewControllerLayoutGuide type="bottom" id="SI9-x4-U9d"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qfT-Ow-pAe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iem-cX-GwS">
-                                <rect key="frame" x="0.0" y="481" width="273" height="30"/>
+                                <rect key="frame" x="0.0" y="401" width="273" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLR-zl-Acg">
-                                <rect key="frame" x="274" y="480" width="46" height="30"/>
+                                <rect key="frame" x="274" y="401" width="46" height="30"/>
                                 <color key="backgroundColor" red="0.28990993536179849" green="0.79547427398989901" blue="0.57164920031404853" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Send">
                                     <color key="titleColor" red="1" green="0.96206962164594334" blue="0.99769990966858701" alpha="1" colorSpace="calibratedRGB"/>
@@ -145,13 +145,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="3fg-cm-JiR"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="480"/>
                     <connections>
                         <outlet property="messageText" destination="Iem-cX-GwS" id="pgU-Dv-Sbt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TJD-68-Qg2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1865" y="110"/>
+            <point key="canvasLocation" x="1885" y="110"/>
         </scene>
         <!--ReadMessage-->
         <scene sceneID="viy-UY-o3U">
@@ -261,8 +263,8 @@
             <objects>
                 <viewController storyboardIdentifier="ThreadViewController" hidesBottomBarWhenPushed="YES" id="vLO-jb-uEt" customClass="ThreadViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="kzL-4Z-Whx"/>
-                        <viewControllerLayoutGuide type="bottom" id="U89-Jd-T9a"/>
+                        <viewControllerLayoutGuide type="top" id="7qj-Gt-lFt"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mx3-0k-AcD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="77Q-Xu-CES">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
