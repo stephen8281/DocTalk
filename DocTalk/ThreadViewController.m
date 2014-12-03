@@ -61,8 +61,8 @@ NSMutableArray *Messages;
     
 //    Find the desired width of textfield
     int width = (int)[[[Messages objectAtIndex:indexPath.row] objectForKey:@"Message"] length]*2;
-    if (width > cell.frame.size.width - cell.imageView.frame.size.width - 50) {
-        width = cell.frame.size.width - cell.imageView.frame.size.width - 50;
+    if (width > self.MsgList.frame.size.width - cell.imageView.frame.size.width - 70) {
+        width = self.MsgList.frame.size.width - cell.imageView.frame.size.width - 70;
     }else if (width < 100){
         width = 100;
     }
@@ -74,8 +74,8 @@ NSMutableArray *Messages;
         imageRect = CGRectMake(10, 10, 40, 40);
         textRect = CGRectMake(60, 8, width, 30);
     } else {
-        imageRect = CGRectMake(cell.frame.size.width, 10, 40, 40);
-        textRect = CGRectMake(cell.frame.size.width - width - 10, 8, width, 30);
+        imageRect = CGRectMake(self.MsgList.frame.size.width - 50, 10, 40, 40);
+        textRect = CGRectMake(self.MsgList.frame.size.width - width - 60, 8, width, 30);
     }
     
 //    Make the image
