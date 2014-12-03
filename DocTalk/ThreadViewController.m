@@ -31,10 +31,13 @@ NSMutableArray *Messages;
 //    For now it is hard coded with one message
     Messages = [NSMutableArray arrayWithObjects:nil];
     
-    NSArray *obj = [NSArray arrayWithObjects:@"ProfilePic", @"Hi this is some message I would like to send", @"0", nil];
-    NSArray *key = [NSArray arrayWithObjects:@"Picture", @"Message", @"Priority", nil];
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjects:obj forKeys:key];
-    [Messages addObject:dict];
+    NSArray *obj1 = [NSArray arrayWithObjects:@"ProfilePic", @"This message isnt really important", @"0", @"0", @"ToMe", nil];
+    NSArray *key = [NSArray arrayWithObjects:@"Picture", @"Message", @"Priority", @"Height", @"MsgDirection", nil];
+    NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] initWithObjects:obj1 forKeys:key];
+    [Messages addObject:dict1];
+    NSArray *obj2 = [NSArray arrayWithObjects:@"ProfilePic", @"This message is really important and it is also quite a bit longer then the previous message that is why it takes up more room....", @"2", @"0", @"FromMe", nil];
+    NSMutableDictionary *dict2 = [[NSMutableDictionary alloc] initWithObjects:obj2 forKeys:key];
+    [Messages addObject:dict2];
     
     // Reload the table view data.
     [MsgList reloadData];
@@ -56,9 +59,6 @@ NSMutableArray *Messages;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
-//    Make the image
-    cell.imageView.image = [UIImage imageNamed:[[Messages objectAtIndex:indexPath.row] objectForKey:@"Picture"]];
-    
 //    Find the desired width of textfield
     int width = (int)[[[Messages objectAtIndex:indexPath.row] objectForKey:@"Message"] length]*2;
     if (width > cell.frame.size.width - cell.imageView.frame.size.width - 50) {
@@ -67,8 +67,23 @@ NSMutableArray *Messages;
         width = 100;
     }
     
+//    Find the position and size of the image view and text field view
+    CGRect imageRect;
+    CGRect textRect;
+    if ([[[Messages objectAtIndex:indexPath.row] objectForKey:@"MsgDirection"] isEqualToString:@"ToMe"]) {
+        imageRect = CGRectMake(10, 10, 40, 40);
+        textRect = CGRectMake(60, 8, width, 30);
+    } else {
+        imageRect = CGRectMake(cell.frame.size.width, 10, 40, 40);
+        textRect = CGRectMake(cell.frame.size.width - width - 10, 8, width, 30);
+    }
+    
+//    Make the image
+    UIImageView *profilePic = [[UIImageView alloc] initWithFrame:imageRect];
+    profilePic.image = [UIImage imageNamed:[[Messages objectAtIndex:indexPath.row] objectForKey:@"Picture"]];
+    
 //    Make the text field
-    UITextView *msg = [[UITextView alloc] initWithFrame:CGRectMake(80, 8, width, 30)];
+    UITextView *msg = [[UITextView alloc] initWithFrame:textRect];
     [msg setTranslatesAutoresizingMaskIntoConstraints:NO];
     [msg.layer setBorderColor: [[UIColor grayColor] CGColor]];
     [msg.layer setCornerRadius:10];
@@ -78,6 +93,7 @@ NSMutableArray *Messages;
     msg.keyboardType = UIKeyboardTypeDefault;
     msg.text = [[Messages objectAtIndex:indexPath.row] objectForKey:@"Message"];
     [msg sizeToFit];
+    [[Messages objectAtIndex:indexPath.row] setObject:[NSString stringWithFormat:@"%f", msg.frame.size.height] forKey:@"Height"];
 
 //    Apply priority shadow
     [msg.layer setMasksToBounds:NO];
@@ -86,20 +102,21 @@ NSMutableArray *Messages;
     msg.layer.shadowRadius = 1.0f;
     if ([[[Messages objectAtIndex:indexPath.row] objectForKey:@"Priority"] isEqual: @"0"]) {
         msg.layer.shadowColor = [[UIColor colorWithRed:0 green:0.7 blue:0 alpha:1] CGColor];
-    }else if ([[[Messages objectAtIndex:indexPath.row] objectForKey:@"Priority"] isEqual: @"0"]){
+    }else if ([[[Messages objectAtIndex:indexPath.row] objectForKey:@"Priority"] isEqual: @"1"]){
         msg.layer.shadowColor = [[UIColor colorWithRed:1 green:0.5 blue:0 alpha:1] CGColor];
-    }else if ([[[Messages objectAtIndex:indexPath.row] objectForKey:@"Priority"] isEqual: @"0"]){
+    }else if ([[[Messages objectAtIndex:indexPath.row] objectForKey:@"Priority"] isEqual: @"2"]){
         msg.layer.shadowColor = [[UIColor colorWithRed:1 green:0 blue:0 alpha:1] CGColor];
     }
     
-// Add the textfield to the cell
+// Add the views to the cell
+    [cell addSubview:profilePic];
     [cell addSubview:msg];
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44.0;
+    return [[[Messages objectAtIndex:indexPath.row] objectForKey:@"Height"] floatValue] + 20;
 }
 
 @end
