@@ -320,69 +320,6 @@
             </objects>
             <point key="canvasLocation" x="1444" y="852"/>
         </scene>
-        <!--Add Contact To Thread-->
-        <scene sceneID="l9C-FO-dqr">
-            <objects>
-                <tableViewController id="0SL-hp-Fu0" customClass="AddToThreadTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="foF-0a-Rm7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="Kps-v5-fs8">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="0SL-hp-Fu0" id="Lpg-BF-vL5"/>
-                            </connections>
-                        </searchBar>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="ReQ-4F-Z5E" detailTextLabel="jYZ-KQ-C9t" style="IBUITableViewCellStyleSubtitle" id="3yZ-u3-QSW">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3yZ-u3-QSW" id="xxw-7d-bwI">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ReQ-4F-Z5E">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jYZ-KQ-C9t">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="0SL-hp-Fu0" id="blp-mp-igq"/>
-                            <outlet property="delegate" destination="0SL-hp-Fu0" id="bAQ-RY-I3F"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Add Contact To Thread" id="O8v-dV-WAD"/>
-                    <connections>
-                        <outlet property="myContacts" destination="foF-0a-Rm7" id="icx-pi-8Dv"/>
-                        <outlet property="mySearchBar" destination="Kps-v5-fs8" id="Yzd-gk-OoY"/>
-                        <outlet property="searchDisplayController" destination="mAi-Pq-JjZ" id="F5S-3e-bAN"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3XH-mX-9H4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="mAi-Pq-JjZ">
-                    <connections>
-                        <outlet property="delegate" destination="0SL-hp-Fu0" id="ATe-bn-gCi"/>
-                        <outlet property="searchBar" destination="Kps-v5-fs8" id="JPy-or-Dcb"/>
-                        <outlet property="searchContentsController" destination="0SL-hp-Fu0" id="hVe-cC-m0V"/>
-                        <outlet property="searchResultsDataSource" destination="0SL-hp-Fu0" id="Ihb-NQ-gQn"/>
-                        <outlet property="searchResultsDelegate" destination="0SL-hp-Fu0" id="al6-Vz-Nhh"/>
-                    </connections>
-                </searchDisplayController>
-            </objects>
-            <point key="canvasLocation" x="1865" y="852"/>
-        </scene>
         <!--Item-->
         <scene sceneID="Daa-BQ-rft">
             <objects>
