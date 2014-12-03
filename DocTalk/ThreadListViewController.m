@@ -42,7 +42,6 @@ NSArray *Threads;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"%lu", (unsigned long)Threads.count);
     return Threads.count;
 }
 
