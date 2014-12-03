@@ -21,6 +21,7 @@
 		DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */; };
 		DCC2C8FC1A2ADAE500B7A97C /* SendMessageContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */; };
 		DF239DB61A2A413000652DC8 /* ThreadListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF239DB51A2A413000652DC8 /* ThreadListViewController.m */; };
+		DFD56F291A2F8AFD00EEE28F /* AddToThreadTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD56F281A2F8AFD00EEE28F /* AddToThreadTableViewController.m */; };
 		DFD780F11A2BEEFE006DDA5D /* ThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */; };
 		DFDF355A1A2D45B100435573 /* SendMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDF35591A2D45B100435573 /* SendMsgViewController.m */; };
 /* End PBXBuildFile section */
@@ -61,6 +62,8 @@
 		DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMessageContoller.m; sourceTree = "<group>"; };
 		DF239DB41A2A413000652DC8 /* ThreadListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadListViewController.h; sourceTree = "<group>"; };
 		DF239DB51A2A413000652DC8 /* ThreadListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadListViewController.m; sourceTree = "<group>"; };
+		DFD56F271A2F8AFD00EEE28F /* AddToThreadTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddToThreadTableViewController.h; sourceTree = "<group>"; };
+		DFD56F281A2F8AFD00EEE28F /* AddToThreadTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddToThreadTableViewController.m; sourceTree = "<group>"; };
 		DFD780EF1A2BEEFE006DDA5D /* ThreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadViewController.h; sourceTree = "<group>"; };
 		DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadViewController.m; sourceTree = "<group>"; };
 		DFDF35581A2D45B100435573 /* SendMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMsgViewController.h; sourceTree = "<group>"; };
@@ -121,6 +124,8 @@
 				DCC2C8B81A29762D00B7A97C /* ViewController.m */,
 				DCC2C8F71A29A33F00B7A97C /* DetailViewController.h */,
 				DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */,
+				DFD56F271A2F8AFD00EEE28F /* AddToThreadTableViewController.h */,
+				DFD56F281A2F8AFD00EEE28F /* AddToThreadTableViewController.m */,
 				DFDF35581A2D45B100435573 /* SendMsgViewController.h */,
 				DFDF35591A2D45B100435573 /* SendMsgViewController.m */,
 				DFD780EF1A2BEEFE006DDA5D /* ThreadViewController.h */,
@@ -265,6 +270,7 @@
 				DFD780F11A2BEEFE006DDA5D /* ThreadViewController.m in Sources */,
 				DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */,
 				DCC2C8B91A29762D00B7A97C /* ViewController.m in Sources */,
+				DFD56F291A2F8AFD00EEE28F /* AddToThreadTableViewController.m in Sources */,
 				DFDF355A1A2D45B100435573 /* SendMsgViewController.m in Sources */,
 				DCC2C8FC1A2ADAE500B7A97C /* SendMessageContoller.m in Sources */,
 				DF239DB61A2A413000652DC8 /* ThreadListViewController.m in Sources */,

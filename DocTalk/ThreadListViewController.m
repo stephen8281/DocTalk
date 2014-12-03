@@ -16,7 +16,7 @@
 @implementation ThreadListViewController
 
 @synthesize myMessages;
-NSArray *Messages;
+NSArray *Threads;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,7 +24,7 @@ NSArray *Messages;
     self.myMessages.delegate = self;
     self.myMessages.dataSource = self;
     
-    Messages = [NSArray arrayWithObjects: @"Test1", @"Test2", @"Test3", @"Test4", @"Test5", @"Test6", @"Test7", @"Test8", @"Test9", nil];
+    Threads = [NSArray arrayWithObjects: @"Test1", @"Test2", @"Test3", @"Test4", @"Test5", @"Test6", @"Test7", @"Test8", @"Test9", nil];
     
     // Reload the table view data.
     [self.tableView reloadData];
@@ -42,7 +42,8 @@ NSArray *Messages;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return Messages.count;
+    NSLog(@"%lu", (unsigned long)Threads.count);
+    return Threads.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -53,7 +54,7 @@ NSArray *Messages;
     cell.imageView.image = image;
 
 //    Set the message title
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [Messages objectAtIndex:indexPath.row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [Threads objectAtIndex:indexPath.row]];
     
 //    Set the message preview
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Hey this is a really cool preview message which you can use to get an idea of what the message might be about"];
@@ -69,18 +70,8 @@ NSArray *Messages;
     if ([segue.identifier isEqualToString:@"ListToThread"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         ThreadViewController *controller = (ThreadViewController *)segue.destinationViewController;
-        controller.messageID = [Messages objectAtIndex:indexPath.row];
+        controller.messageID = [Threads objectAtIndex:indexPath.row];
     }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
