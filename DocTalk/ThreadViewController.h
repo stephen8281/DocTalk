@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ThreadViewController : UIViewController
+@interface ThreadViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UIView *Thread;
 @property (strong, nonatomic) NSString *messageID;
+@property (strong, nonatomic) IBOutlet UITableView *MsgList;
 
 @end

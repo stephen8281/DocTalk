@@ -277,12 +277,33 @@
                                     <segue destination="1Fx-WJ-Qfi" kind="embed" id="Pxd-mS-Btt"/>
                                 </connections>
                             </containerView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Mlt-Ud-SYH">
+                                <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="sFN-p5-pVz">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sFN-p5-pVz" id="1m9-Pc-2X8">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="77Q-Xu-CES" id="7dA-Ao-fvs"/>
+                                    <outlet property="delegate" destination="77Q-Xu-CES" id="6fu-f7-gOx"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="U89-Jd-T9a" firstAttribute="top" secondItem="i1y-dC-KBf" secondAttribute="bottom" id="AXl-dG-clp"/>
+                            <constraint firstItem="Mlt-Ud-SYH" firstAttribute="top" secondItem="kzL-4Z-Whx" secondAttribute="bottom" id="EWS-KY-xGX"/>
                             <constraint firstItem="i1y-dC-KBf" firstAttribute="leading" secondItem="77Q-Xu-CES" secondAttribute="leading" id="Oek-JA-f4b"/>
+                            <constraint firstItem="i1y-dC-KBf" firstAttribute="top" secondItem="Mlt-Ud-SYH" secondAttribute="bottom" id="Td2-dR-Xez"/>
                             <constraint firstAttribute="trailing" secondItem="i1y-dC-KBf" secondAttribute="trailing" id="fCr-Dh-I3q"/>
+                            <constraint firstAttribute="trailing" secondItem="Mlt-Ud-SYH" secondAttribute="trailing" id="l3z-nx-RfR"/>
+                            <constraint firstItem="Mlt-Ud-SYH" firstAttribute="leading" secondItem="77Q-Xu-CES" secondAttribute="leading" id="pjd-9a-zh9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Mgf-Kz-Pm0">
@@ -291,12 +312,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="MsgList" destination="Mlt-Ud-SYH" id="9Iy-r6-rpm"/>
                         <outlet property="Thread" destination="77Q-Xu-CES" id="z5E-sG-2GI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYU-co-wwM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1444" y="855"/>
+            <point key="canvasLocation" x="1444" y="852"/>
         </scene>
         <!--Item-->
         <scene sceneID="Daa-BQ-rft">
