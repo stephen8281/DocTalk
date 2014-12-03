@@ -34,7 +34,7 @@
 
 -(void)start
 {
-    NSURL *url = [NSURL URLWithString:@"http:localhost/getjson.php"];
+    NSURL *url = [NSURL URLWithString:@"http://128.189.246.205/getjson.php"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
