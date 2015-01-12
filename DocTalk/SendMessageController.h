@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define kPostURL @"http://128.189.246.205/test.php"
+#define kPostURL @"http://192.168.1.66/test.php"
 #define kName @"name"
 #define kMessage @"message"
 

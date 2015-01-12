@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="KBO-eJ-bnL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="KBO-eJ-bnL">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -53,8 +53,8 @@
             <objects>
                 <viewController id="7zJ-1T-QTh" customClass="DetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="h3K-Od-CJa"/>
-                        <viewControllerLayoutGuide type="bottom" id="YSg-l8-x6R"/>
+                        <viewControllerLayoutGuide type="top" id="jNu-mm-OaI"/>
+                        <viewControllerLayoutGuide type="bottom" id="v3c-hJ-0wb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jRX-nN-7fP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -119,8 +119,8 @@
             <objects>
                 <viewController id="Ho7-8V-03b" customClass="SendMessageController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nA1-Da-DL3"/>
-                        <viewControllerLayoutGuide type="bottom" id="SI9-x4-U9d"/>
+                        <viewControllerLayoutGuide type="top" id="vCC-13-5WF"/>
+                        <viewControllerLayoutGuide type="bottom" id="bJJ-5I-lGu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qfT-Ow-pAe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -145,15 +145,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="3fg-cm-JiR"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="480"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="messageText" destination="Iem-cX-GwS" id="pgU-Dv-Sbt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TJD-68-Qg2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1885" y="110"/>
+            <point key="canvasLocation" x="1865" y="110"/>
         </scene>
         <!--ReadMessage-->
         <scene sceneID="viy-UY-o3U">
@@ -263,15 +262,15 @@
             <objects>
                 <viewController storyboardIdentifier="ThreadViewController" hidesBottomBarWhenPushed="YES" id="vLO-jb-uEt" customClass="ThreadViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="7qj-Gt-lFt"/>
-                        <viewControllerLayoutGuide type="bottom" id="Mx3-0k-AcD"/>
+                        <viewControllerLayoutGuide type="top" id="kzL-4Z-Whx"/>
+                        <viewControllerLayoutGuide type="bottom" id="U89-Jd-T9a"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="77Q-Xu-CES">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1y-dC-KBf">
-                                <rect key="frame" x="0.0" y="436" width="320" height="83"/>
+                                <rect key="frame" x="0.0" y="348" width="320" height="83"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="83" id="NrU-FH-Qey"/>
                                 </constraints>
@@ -280,7 +279,7 @@
                                 </connections>
                             </containerView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Mlt-Ud-SYH">
-                                <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="284"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="sFN-p5-pVz">
@@ -313,6 +312,7 @@
                             <color key="tintColor" red="1" green="0.43069672959999999" blue="0.1644332791" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="MsgList" destination="Mlt-Ud-SYH" id="9Iy-r6-rpm"/>
                         <outlet property="Thread" destination="77Q-Xu-CES" id="z5E-sG-2GI"/>

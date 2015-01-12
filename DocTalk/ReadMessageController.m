@@ -34,7 +34,7 @@
 
 -(void)start
 {
-    NSURL *url = [NSURL URLWithString:@"http://128.189.246.205/getjson.php"];
+    NSURL *url = [NSURL URLWithString:@"http://192.168.1.66/getjson.php"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
@@ -68,12 +68,12 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
-- (int)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
-- (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [_json count];
 }
