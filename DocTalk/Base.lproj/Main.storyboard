@@ -476,7 +476,7 @@
         <!--Status-->
         <scene sceneID="tDs-AY-Q0g">
             <objects>
-                <viewController id="Wv8-FM-qHt" sceneMemberID="viewController">
+                <viewController id="Wv8-FM-qHt" customClass="StatusViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aQp-v0-9UQ"/>
                         <viewControllerLayoutGuide type="bottom" id="eVo-IB-MAM"/>
@@ -538,6 +538,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Status" id="cUE-00-fhG"/>
+                    <connections>
+                        <outlet property="greenNotifEn" destination="xQo-Xr-i8M" id="diM-8U-hOc"/>
+                        <outlet property="myStatus" destination="1fn-Ua-41w" id="bbm-58-3Hl"/>
+                        <outlet property="orangeNotifEn" destination="Tue-gM-0fC" id="FqF-pG-051"/>
+                        <outlet property="redNotifEn" destination="MOL-9O-afq" id="p7F-93-HAh"/>
+                        <outlet property="statusMessage" destination="XeK-Ke-the" id="9V5-DG-GwW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rgx-9F-kvp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
