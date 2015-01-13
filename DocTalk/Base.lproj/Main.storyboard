@@ -485,7 +485,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Set a status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekl-SI-RDn">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set a status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekl-SI-RDn">
                                 <rect key="frame" x="16" y="72" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -531,6 +531,11 @@
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ekl-SI-RDn" firstAttribute="top" secondItem="aQp-v0-9UQ" secondAttribute="bottom" constant="8" id="8dh-nJ-Kor"/>
+                            <constraint firstItem="ekl-SI-RDn" firstAttribute="leading" secondItem="1fn-Ua-41w" secondAttribute="leadingMargin" id="YuU-Go-PFr"/>
+                            <constraint firstItem="ekl-SI-RDn" firstAttribute="trailing" secondItem="1fn-Ua-41w" secondAttribute="trailingMargin" id="hhe-iG-vBS"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Status" id="cUE-00-fhG"/>
                 </viewController>
