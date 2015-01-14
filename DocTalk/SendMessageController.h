@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 #define kPostURL @"http://192.168.1.66/test.php"
-#define kName @"name"
+#define kSender @"sender"
+#define kReceiver @"receiver"
 #define kMessage @"message"
 
 @interface SendMessageController : UIViewController <UITextFieldDelegate, UITextViewDelegate>

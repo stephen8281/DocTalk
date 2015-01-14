@@ -16,4 +16,7 @@
 @property (nonatomic,strong)NSArray *json; //news
 @property (nonatomic,strong)NSMutableData *data;
 
+@property(nonatomic,strong)    NSURLConnection *deleteConnection;
+@property(nonatomic,strong)    NSURLConnection *readConnection;
+
 @end

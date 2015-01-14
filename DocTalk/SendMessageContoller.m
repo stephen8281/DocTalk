@@ -9,6 +9,8 @@
 #import "SendMessageController.h"
 
 @interface SendMessageController ()
+-(void) post:(id)sender;
+-(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver;
 
 @end
 
@@ -16,13 +18,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     _messageText.delegate = self;
 
     self.title = _name;
 }
 
-//added for move view up
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - Moving the textfield when keyboard pops up
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -47,13 +54,17 @@
     self.view.frame = CGRectOffset(self.view.frame, 0, movement);
     [UIView commitAnimations];
 }
-// --
 
--(void) postMessage:(NSString*) message withName:(NSString *) name{
+#pragma mark - Methods for posting message onto the server
+
+-(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver {
+    
     if (![message isEqual:@""]){
         NSMutableString *postString = [NSMutableString stringWithString:kPostURL];
         
-        [postString appendString:[NSString stringWithFormat:@"?%@=%@", kName, name]];
+        [postString appendString:[NSString stringWithFormat:@"?%@=%@", kSender, sender]];
+        
+        [postString appendString:[NSString stringWithFormat:@"&%@=%@", kReceiver, receiver]];
 
         
         [postString appendString:[NSString stringWithFormat:@"&%@=%@", kMessage, message]];
@@ -67,14 +78,18 @@
     }
 }
 
+#pragma mark - IBaction method implementation
+//TODO: sender hardcoded for now, will change it after login is implemented
 -(IBAction)post:(id)sender{
-    [self postMessage:_messageText.text withName:_name];
+    
+    [self postMessage:_messageText.text withSender:@"Stephen" withReceiver:_name];
     [_messageText resignFirstResponder];
     _messageText.text = nil;
 
 }
 
-#pragma dismisskeyboard
+
+#pragma mark - Methods to dismiss Keyboard
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [_messageText resignFirstResponder];
@@ -89,16 +104,6 @@
     }
     return NO;
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
-
 
 
 @end
