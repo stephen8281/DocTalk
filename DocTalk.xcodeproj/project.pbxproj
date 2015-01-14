@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DC0EE1131A2AF08900DE575A /* ReadMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0EE1121A2AF08900DE575A /* ReadMessageController.m */; };
+		DCA622851A648AB100830A80 /* chat.sql in Resources */ = {isa = PBXBuildFile; fileRef = DCA622841A648AB100830A80 /* chat.sql */; };
 		DCC2C8B31A29762D00B7A97C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8B21A29762D00B7A97C /* main.m */; };
 		DCC2C8B61A29762D00B7A97C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8B51A29762D00B7A97C /* AppDelegate.m */; };
 		DCC2C8B91A29762D00B7A97C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8B81A29762D00B7A97C /* ViewController.m */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		DC0EE1111A2AF08900DE575A /* ReadMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadMessageController.h; sourceTree = "<group>"; };
 		DC0EE1121A2AF08900DE575A /* ReadMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadMessageController.m; sourceTree = "<group>"; };
+		DCA622841A648AB100830A80 /* chat.sql */ = {isa = PBXFileReference; lastKnownFileType = file; name = chat.sql; path = DocTalk/chat.sql; sourceTree = "<group>"; };
 		DCC2C8AD1A29762D00B7A97C /* DocTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC2C8B11A29762D00B7A97C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCC2C8B21A29762D00B7A97C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			children = (
 				DCC2C8EE1A29939100B7A97C /* libsqlite3.dylib */,
 				DCC2C8EC1A29937E00B7A97C /* contact.sql */,
+				DCA622841A648AB100830A80 /* chat.sql */,
 				DCC2C8AF1A29762D00B7A97C /* DocTalk */,
 				DCC2C8C91A29762D00B7A97C /* DocTalkTests */,
 				DCC2C8AE1A29762D00B7A97C /* Products */,
@@ -243,6 +246,7 @@
 			files = (
 				DCC2C8BC1A29762D00B7A97C /* Main.storyboard in Resources */,
 				DCC2C8ED1A29937E00B7A97C /* contact.sql in Resources */,
+				DCA622851A648AB100830A80 /* chat.sql in Resources */,
 				DCC2C8C11A29762D00B7A97C /* LaunchScreen.xib in Resources */,
 				DCC2C8BE1A29762D00B7A97C /* Images.xcassets in Resources */,
 			);
