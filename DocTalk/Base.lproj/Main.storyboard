@@ -322,11 +322,11 @@
             </objects>
             <point key="canvasLocation" x="1444" y="852"/>
         </scene>
-        <!--Item-->
+        <!--Chat-->
         <scene sceneID="Daa-BQ-rft">
             <objects>
                 <navigationController id="7RB-DF-TnE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="7BO-qm-FNS"/>
+                    <tabBarItem key="tabBarItem" title="Chat" image="Chat" id="7BO-qm-FNS"/>
                     <navigationItem key="navigationItem" id="Bs9-56-xab"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5WD-Xf-Qeq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -459,7 +459,7 @@
         <scene sceneID="e5U-aa-Mpc">
             <objects>
                 <navigationController id="Tj6-ye-ger" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Status" id="LPh-UN-WMg"/>
+                    <tabBarItem key="tabBarItem" title="Status" image="Status" id="LPh-UN-WMg"/>
                     <navigationItem key="navigationItem" id="9jE-ZO-tE5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nWr-2v-ck9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -553,6 +553,8 @@
     </scenes>
     <resources>
         <image name="Attach" width="512" height="512"/>
+        <image name="Chat" width="512" height="512"/>
+        <image name="Status" width="512" height="512"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
