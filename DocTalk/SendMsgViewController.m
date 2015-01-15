@@ -15,16 +15,25 @@
 @implementation SendMsgViewController
 
 @synthesize priorityControl;
+@synthesize textEntry;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self priorityChanged:nil];
+    
+    textEntry.delegate = self;
+    textEntry.returnKeyType = UIReturnKeyDone;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(BOOL) textFieldShouldReturn:(UITextField*) textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (IBAction)priorityChanged:(id)sender {

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StatusViewController : UIViewController
+@interface StatusViewController : UIViewController <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *myStatus;
 @property (strong, nonatomic) IBOutlet UITextField *statusMessage;
