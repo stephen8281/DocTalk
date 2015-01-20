@@ -806,7 +806,7 @@
         <!--Automatic Message Deletion-->
         <scene sceneID="CAA-VM-ZhR">
             <objects>
-                <viewController id="ofh-NJ-eef" sceneMemberID="viewController">
+                <viewController id="ofh-NJ-eef" customClass="AutoMsgDelViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Z1K-BC-ZAd"/>
                         <viewControllerLayoutGuide type="bottom" id="ySl-Vx-wIm"/>
@@ -815,28 +815,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Automatic Message Deletion" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PTS-CP-se0">
-                                <rect key="frame" x="16" y="77" width="220" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="08t-IO-Id4">
-                                <rect key="frame" x="255" y="72" width="51" height="31"/>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0S-Db-RfD">
-                                <rect key="frame" x="16" y="106" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Automatically Delete Messages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0S-Db-RfD">
+                                <rect key="frame" x="16" y="72" width="241" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iBN-sv-HOC">
-                                <rect key="frame" x="140" y="180" width="180" height="162"/>
+                                <rect key="frame" x="70" y="101" width="180" height="162"/>
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Automatic Message Deletion" id="JnY-X1-mhP"/>
+                    <connections>
+                        <outlet property="autoMsgDelSettings" destination="kol-Nn-Y6e" id="Xj8-xj-Jnt"/>
+                        <outlet property="autoMsgDelTime" destination="iBN-sv-HOC" id="vqZ-Mj-DpJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wgA-tV-PEZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

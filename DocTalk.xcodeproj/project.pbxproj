@@ -25,6 +25,7 @@
 		DF2477191A65B5ED00FBC65E /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2477181A65B5ED00FBC65E /* StatusViewController.m */; };
 		DF24771F1A6C51D400FBC65E /* ProfileSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF24771E1A6C51D400FBC65E /* ProfileSettingsViewController.m */; };
 		DF2477221A6EC62C00FBC65E /* PasswordSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2477211A6EC62C00FBC65E /* PasswordSettingsViewController.m */; };
+		DF2477251A6F0F3400FBC65E /* AutoMsgDelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2477241A6F0F3400FBC65E /* AutoMsgDelViewController.m */; };
 		DFD780F11A2BEEFE006DDA5D /* ThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */; };
 		DFDF355A1A2D45B100435573 /* SendMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDF35591A2D45B100435573 /* SendMsgViewController.m */; };
 /* End PBXBuildFile section */
@@ -72,6 +73,8 @@
 		DF24771E1A6C51D400FBC65E /* ProfileSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileSettingsViewController.m; sourceTree = "<group>"; };
 		DF2477201A6EC62C00FBC65E /* PasswordSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordSettingsViewController.h; sourceTree = "<group>"; };
 		DF2477211A6EC62C00FBC65E /* PasswordSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordSettingsViewController.m; sourceTree = "<group>"; };
+		DF2477231A6F0F3400FBC65E /* AutoMsgDelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoMsgDelViewController.h; sourceTree = "<group>"; };
+		DF2477241A6F0F3400FBC65E /* AutoMsgDelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoMsgDelViewController.m; sourceTree = "<group>"; };
 		DFD780EF1A2BEEFE006DDA5D /* ThreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadViewController.h; sourceTree = "<group>"; };
 		DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadViewController.m; sourceTree = "<group>"; };
 		DFDF35581A2D45B100435573 /* SendMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMsgViewController.h; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				DF24771E1A6C51D400FBC65E /* ProfileSettingsViewController.m */,
 				DF2477201A6EC62C00FBC65E /* PasswordSettingsViewController.h */,
 				DF2477211A6EC62C00FBC65E /* PasswordSettingsViewController.m */,
+				DF2477231A6F0F3400FBC65E /* AutoMsgDelViewController.h */,
+				DF2477241A6F0F3400FBC65E /* AutoMsgDelViewController.m */,
 				DCC2C8BA1A29762D00B7A97C /* Main.storyboard */,
 				DCC2C8BD1A29762D00B7A97C /* Images.xcassets */,
 				DCC2C8BF1A29762D00B7A97C /* LaunchScreen.xib */,
@@ -293,6 +298,7 @@
 				DCC2C8B61A29762D00B7A97C /* AppDelegate.m in Sources */,
 				DF2477191A65B5ED00FBC65E /* StatusViewController.m in Sources */,
 				DCC2C8B31A29762D00B7A97C /* main.m in Sources */,
+				DF2477251A6F0F3400FBC65E /* AutoMsgDelViewController.m in Sources */,
 				DCC2C8EB1A29937200B7A97C /* DBManager.m in Sources */,
 				DF2477221A6EC62C00FBC65E /* PasswordSettingsViewController.m in Sources */,
 			);
