@@ -16,13 +16,11 @@
 @interface SendMessageController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 //send message methods
-//@property(nonatomic,strong)    IBOutlet UITextField *nameText;
-@property(nonatomic,strong)    IBOutlet UITextField *messageText;
-@property(nonatomic,strong)    NSURLConnection *postConnection;
+//@property(nonatomic,strong)    IBOutlet UITextField *messageText;
+//@property(nonatomic,strong)    NSURLConnection *postConnection;
+//-(IBAction)post:(id)sender;
 
 @property(nonatomic,strong) NSString *name;
-
--(IBAction)post:(id)sender;
 
 
 //read message methods
