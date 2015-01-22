@@ -179,11 +179,11 @@
             </objects>
             <point key="canvasLocation" x="1917" y="393"/>
         </scene>
-        <!--Item-->
+        <!--Contacts-->
         <scene sceneID="pZE-ms-Rrh">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qwq-Jx-2zW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Vwf-q7-0hr"/>
+                    <tabBarItem key="tabBarItem" title="Contacts" image="Contacts" id="Vwf-q7-0hr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pBJ-wl-C9L">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -818,6 +818,7 @@
     <resources>
         <image name="Attach" width="512" height="512"/>
         <image name="Chat" width="512" height="512"/>
+        <image name="Contacts" width="512" height="512"/>
         <image name="ProfilePic" width="2000" height="2333"/>
         <image name="Settings" width="512" height="512"/>
         <image name="Status" width="512" height="512"/>
