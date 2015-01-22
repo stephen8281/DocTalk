@@ -297,8 +297,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Mlt-Ud-SYH">
-                                <rect key="frame" x="0.0" y="64" width="320" height="294"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Mlt-Ud-SYH">
+                                <rect key="frame" x="0.0" y="64" width="320" height="284"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="sFN-p5-pVz">
@@ -314,8 +314,8 @@
                                     <outlet property="delegate" destination="77Q-Xu-CES" id="6fu-f7-gOx"/>
                                 </connections>
                             </tableView>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i1y-dC-KBf">
-                                <rect key="frame" x="0.0" y="358" width="320" height="73"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1y-dC-KBf">
+                                <rect key="frame" x="0.0" y="348" width="320" height="83"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="83" id="NrU-FH-Qey"/>
                                 </constraints>
@@ -326,9 +326,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="U89-Jd-T9a" firstAttribute="top" secondItem="i1y-dC-KBf" secondAttribute="bottom" id="7RT-w8-J05"/>
                             <constraint firstItem="Mlt-Ud-SYH" firstAttribute="top" secondItem="kzL-4Z-Whx" secondAttribute="bottom" id="EWS-KY-xGX"/>
+                            <constraint firstAttribute="trailing" secondItem="i1y-dC-KBf" secondAttribute="trailing" id="PSF-1H-RRX"/>
                             <constraint firstAttribute="trailing" secondItem="Mlt-Ud-SYH" secondAttribute="trailing" id="l3z-nx-RfR"/>
+                            <constraint firstItem="i1y-dC-KBf" firstAttribute="leading" secondItem="77Q-Xu-CES" secondAttribute="leading" id="m1z-RV-fxB"/>
                             <constraint firstItem="Mlt-Ud-SYH" firstAttribute="leading" secondItem="77Q-Xu-CES" secondAttribute="leading" id="pjd-9a-zh9"/>
+                            <constraint firstItem="i1y-dC-KBf" firstAttribute="top" secondItem="Mlt-Ud-SYH" secondAttribute="bottom" id="rGT-dw-qTo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Mgf-Kz-Pm0">
@@ -414,7 +418,7 @@
                         <viewControllerLayoutGuide type="bottom" id="98G-Sw-emL"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="pv8-os-cr2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="F3t-ru-IHP">
@@ -432,7 +436,7 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7R9-aO-okB">
-                                <rect key="frame" x="268" y="35" width="36" height="30"/>
+                                <rect key="frame" x="268" y="45" width="36" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="JCP-hf-fDI"/>
                                 </constraints>
@@ -441,15 +445,15 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LgJ-88-tjg">
-                                <rect key="frame" x="16" y="35" width="46" height="30"/>
+                                <rect key="frame" x="16" y="45" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Bt7-ws-T7C"/>
                                     <constraint firstAttribute="width" constant="46" id="NJC-Rd-o3c"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="Attach"/>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g9P-eX-mlu">
-                                <rect key="frame" x="62" y="36" width="198" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g9P-eX-mlu">
+                                <rect key="frame" x="62" y="45" width="198" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
