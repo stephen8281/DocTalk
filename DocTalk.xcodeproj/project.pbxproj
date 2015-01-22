@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DC0EE1131A2AF08900DE575A /* ReadMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0EE1121A2AF08900DE575A /* ReadMessageController.m */; };
 		DCA622851A648AB100830A80 /* chat.sql in Resources */ = {isa = PBXBuildFile; fileRef = DCA622841A648AB100830A80 /* chat.sql */; };
 		DCC2C8B31A29762D00B7A97C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8B21A29762D00B7A97C /* main.m */; };
 		DCC2C8B61A29762D00B7A97C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8B51A29762D00B7A97C /* AppDelegate.m */; };
@@ -41,8 +40,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DC0EE1111A2AF08900DE575A /* ReadMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadMessageController.h; sourceTree = "<group>"; };
-		DC0EE1121A2AF08900DE575A /* ReadMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadMessageController.m; sourceTree = "<group>"; };
 		DCA622841A648AB100830A80 /* chat.sql */ = {isa = PBXFileReference; lastKnownFileType = file; name = chat.sql; path = DocTalk/chat.sql; sourceTree = "<group>"; };
 		DCC2C8AD1A29762D00B7A97C /* DocTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC2C8B11A29762D00B7A97C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,8 +121,6 @@
 		DCC2C8AF1A29762D00B7A97C /* DocTalk */ = {
 			isa = PBXGroup;
 			children = (
-				DC0EE1111A2AF08900DE575A /* ReadMessageController.h */,
-				DC0EE1121A2AF08900DE575A /* ReadMessageController.m */,
 				DCC2C8FA1A2ADAE500B7A97C /* SendMessageController.h */,
 				DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */,
 				DFDF35581A2D45B100435573 /* SendMsgViewController.h */,
@@ -293,7 +288,6 @@
 				DFDF355A1A2D45B100435573 /* SendMsgViewController.m in Sources */,
 				DCC2C8FC1A2ADAE500B7A97C /* SendMessageContoller.m in Sources */,
 				DF239DB61A2A413000652DC8 /* ThreadListViewController.m in Sources */,
-				DC0EE1131A2AF08900DE575A /* ReadMessageController.m in Sources */,
 				DF24771F1A6C51D400FBC65E /* ProfileSettingsViewController.m in Sources */,
 				DCC2C8B61A29762D00B7A97C /* AppDelegate.m in Sources */,
 				DF2477191A65B5ED00FBC65E /* StatusViewController.m in Sources */,
