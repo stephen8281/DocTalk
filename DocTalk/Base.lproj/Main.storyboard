@@ -117,7 +117,7 @@
         <!--Send Message Controller-->
         <scene sceneID="Epz-CG-A0h">
             <objects>
-                <viewController id="Ho7-8V-03b" customClass="SendMessageController" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Ho7-8V-03b" customClass="SendMessageController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vCC-13-5WF"/>
                         <viewControllerLayoutGuide type="bottom" id="bJJ-5I-lGu"/>
@@ -126,7 +126,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i1y-dC-KBf">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1y-dC-KBf">
                                 <rect key="frame" x="0.0" y="348" width="320" height="83"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="83" id="NrU-FH-Qey"/>
@@ -163,6 +163,11 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bJJ-5I-lGu" firstAttribute="top" secondItem="i1y-dC-KBf" secondAttribute="bottom" id="Wtd-A0-7dY"/>
+                            <constraint firstItem="i1y-dC-KBf" firstAttribute="leading" secondItem="qfT-Ow-pAe" secondAttribute="leading" id="XDQ-Cp-oZL"/>
+                            <constraint firstAttribute="trailing" secondItem="i1y-dC-KBf" secondAttribute="trailing" id="b0B-IO-f7W"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3fg-cm-JiR"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
@@ -259,7 +264,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Mlt-Ud-SYH">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4d-j4-1hR">
+                                <rect key="frame" x="0.0" y="348" width="320" height="83"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="83" id="oiM-bc-g8h"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="1Fx-WJ-Qfi" kind="embed" id="Nus-oc-kb4"/>
+                                </connections>
+                            </containerView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Mlt-Ud-SYH">
                                 <rect key="frame" x="0.0" y="64" width="320" height="284"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -279,9 +293,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Z4d-j4-1hR" firstAttribute="leading" secondItem="77Q-Xu-CES" secondAttribute="leading" id="3ym-1l-0uj"/>
                             <constraint firstItem="Mlt-Ud-SYH" firstAttribute="top" secondItem="kzL-4Z-Whx" secondAttribute="bottom" id="EWS-KY-xGX"/>
+                            <constraint firstAttribute="trailing" secondItem="Z4d-j4-1hR" secondAttribute="trailing" id="dgL-uR-VAA"/>
+                            <constraint firstItem="U89-Jd-T9a" firstAttribute="top" secondItem="Z4d-j4-1hR" secondAttribute="bottom" id="gOx-EX-kof"/>
                             <constraint firstAttribute="trailing" secondItem="Mlt-Ud-SYH" secondAttribute="trailing" id="l3z-nx-RfR"/>
                             <constraint firstItem="Mlt-Ud-SYH" firstAttribute="leading" secondItem="77Q-Xu-CES" secondAttribute="leading" id="pjd-9a-zh9"/>
+                            <constraint firstItem="Z4d-j4-1hR" firstAttribute="top" secondItem="Mlt-Ud-SYH" secondAttribute="bottom" id="x7u-us-BtK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Mgf-Kz-Pm0">
@@ -809,4 +827,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Nus-oc-kb4"/>
+    </inferredMetricsTieBreakers>
 </document>
