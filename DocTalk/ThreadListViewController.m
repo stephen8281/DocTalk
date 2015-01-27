@@ -73,4 +73,8 @@ NSArray *Threads;
     }
 }
 
+- (IBAction)createMessage:(id)sender {
+    [self.tabBarController setSelectedIndex:0];
+}
+
 @end

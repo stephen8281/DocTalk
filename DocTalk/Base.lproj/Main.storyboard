@@ -233,6 +233,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="LHt-X5-ZKB">
                             <color key="tintColor" red="1" green="0.43069672959999999" blue="0.1644332791" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="createMessage:" destination="NDz-2Y-cQx" id="2Ry-XK-2Zz"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
