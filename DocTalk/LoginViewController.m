@@ -47,7 +47,7 @@
             NSString *post =[[NSString alloc] initWithFormat:@"username=%@&password=%@",[self.txtUsername text],[self.txtPassword text]];
             NSLog(@"PostData: %@",post);
             
-            NSURL *url=[NSURL URLWithString:@"http://localhost/jsonlogin2.php"];
+            NSURL *url=[NSURL URLWithString:@"http://192.168.1.66/jsonlogin2.php"];
             
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             
