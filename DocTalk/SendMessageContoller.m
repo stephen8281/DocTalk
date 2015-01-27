@@ -316,8 +316,8 @@
     
     NSInteger lastRowNumber = [_mainTableView numberOfRowsInSection:0] -1;
     NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
-    
-    [_mainTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+
+    [_mainTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
 
 }
 
