@@ -10,6 +10,7 @@
 		DC5DE2C31A77163A00298C29 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5DE2BE1A77163A00298C29 /* HomeViewController.m */; };
 		DC5DE2C41A77163A00298C29 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5DE2C01A77163A00298C29 /* LoginViewController.m */; };
 		DC5DE2C51A77163A00298C29 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5DE2C21A77163A00298C29 /* SignUpViewController.m */; };
+		DC5DE2CC1A799A0600298C29 /* MessageComposerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5DE2CB1A799A0600298C29 /* MessageComposerView.m */; };
 		DCA622851A648AB100830A80 /* chat.sql in Resources */ = {isa = PBXBuildFile; fileRef = DCA622841A648AB100830A80 /* chat.sql */; };
 		DCC2C8B31A29762D00B7A97C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8B21A29762D00B7A97C /* main.m */; };
 		DCC2C8B61A29762D00B7A97C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8B51A29762D00B7A97C /* AppDelegate.m */; };
@@ -49,6 +50,8 @@
 		DC5DE2C01A77163A00298C29 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		DC5DE2C11A77163A00298C29 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		DC5DE2C21A77163A00298C29 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		DC5DE2CA1A799A0600298C29 /* MessageComposerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageComposerView.h; sourceTree = "<group>"; };
+		DC5DE2CB1A799A0600298C29 /* MessageComposerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageComposerView.m; sourceTree = "<group>"; };
 		DCA622841A648AB100830A80 /* chat.sql */ = {isa = PBXFileReference; lastKnownFileType = file; name = chat.sql; path = DocTalk/chat.sql; sourceTree = "<group>"; };
 		DCC2C8AD1A29762D00B7A97C /* DocTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC2C8B11A29762D00B7A97C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 				DC5DE2C21A77163A00298C29 /* SignUpViewController.m */,
 				DCC2C8FA1A2ADAE500B7A97C /* SendMessageController.h */,
 				DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */,
+				DC5DE2CA1A799A0600298C29 /* MessageComposerView.h */,
+				DC5DE2CB1A799A0600298C29 /* MessageComposerView.m */,
 				DFDF35581A2D45B100435573 /* SendMsgViewController.h */,
 				DFDF35591A2D45B100435573 /* SendMsgViewController.m */,
 				DCC2C8EA1A29937200B7A97C /* DBManager.m */,
@@ -301,6 +306,7 @@
 				DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */,
 				DCC2C8B91A29762D00B7A97C /* ViewController.m in Sources */,
 				DFDF355A1A2D45B100435573 /* SendMsgViewController.m in Sources */,
+				DC5DE2CC1A799A0600298C29 /* MessageComposerView.m in Sources */,
 				DCC2C8FC1A2ADAE500B7A97C /* SendMessageContoller.m in Sources */,
 				DC5DE2C31A77163A00298C29 /* HomeViewController.m in Sources */,
 				DC5DE2C51A77163A00298C29 /* SignUpViewController.m in Sources */,
