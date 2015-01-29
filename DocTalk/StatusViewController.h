@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StatusViewController : UIViewController <UITextFieldDelegate>
+@interface StatusViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *myStatus;
-@property (strong, nonatomic) IBOutlet UITextField *statusMessage;
 @property (strong, nonatomic) IBOutlet UISwitch *redNotifEn;
 @property (strong, nonatomic) IBOutlet UISwitch *orangeNotifEn;
 @property (strong, nonatomic) IBOutlet UISwitch *greenNotifEn;
+@property (weak, nonatomic) IBOutlet UIPickerView *availability;
 
 @end
