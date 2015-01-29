@@ -111,10 +111,14 @@
 {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-        CGSize tabBarSize = [[[self tabBarController]tabBar]bounds].size;
+ 
 
-    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - kbSize.height +tabBarSize.height, self.view.frame.size.width, self.view.frame.size.height);
+
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
     
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - kbSize.height , self.view.frame.size.width, self.view.frame.size.height);
+    [UIView commitAnimations];
 
 }
 
@@ -123,20 +127,23 @@
 {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-     CGSize tabBarSize = [[[self tabBarController]tabBar]bounds].size;
+
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + kbSize.height , self.view.frame.size.width, self.view.frame.size.height);
+
+    [UIView commitAnimations];
+
     
-    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + kbSize.height - tabBarSize.height, self.view.frame.size.width, self.view.frame.size.height);
+    
 }
 
-//- (void)textFieldDidBeginEditing:(UITextField *)textField
-//{
-//    activeField = textField;
+//#pragma mark - UITextViewDelegate
+//-(void)textFieldDidBeginEditing:(UITextField *)textField{
+//    [textField resignFirstResponder];
 //}
-//
-//- (void)textFieldDidEndEditing:(UITextField *)textField
-//{
-//    activeField = nil;
-//}
+
+
 
 #pragma mark - Methods for posting message onto the server
 

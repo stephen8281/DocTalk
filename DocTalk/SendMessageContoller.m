@@ -10,13 +10,14 @@
 #import "DBManager.h"
 
 @interface SendMessageController ()
+
 //send message methods
-//-(void) post:(id)sender;
-//-(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver;
+-(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver;
 
 //read message methods
 -(void) start;
 -(void) deleteMessage:(NSString*)messageID;
+
 -(void) loadData;
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *arrMessage;
@@ -28,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //_messageText.delegate = self;
+
     _mainTableView.delegate = self;
     _mainTableView.dataSource = self;
 
@@ -39,12 +40,24 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
+    //initialize the refresh control will replace with a timer later
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(start) forControlEvents:UIControlEventValueChanged];
     [_mainTableView addSubview:self.refreshControl];
     
     
+    //add subview for MessageComposeView
+    float defaultWidth = 320;
+    float defaultHeight = 54;
+    CGRect subviewFrame = CGRectMake(0, self.view.frame.size.height - defaultHeight, defaultWidth, defaultHeight);
+    self.messageComposerView = [[MessageComposerView alloc]initWithFrame:subviewFrame];
+    self.messageComposerView.delegate = self;
+    [self.view addSubview:self.messageComposerView];
+    
+    //register for notification
     [self registerForKeyboardNotifications];
+    
+    //populate the tables
     [self loadData];
     
 }
@@ -54,82 +67,43 @@
     // Dispose of any resources that can be recreated.
 }
 
-//
-//#pragma mark - Moving the textfield when keyboard pops up
-//
-//-(void)textFieldDidBeginEditing:(UITextField *)textField
-//{
-//    [self animateTextField:textField up:YES];
-//}
-//
-//- (void)textFieldDidEndEditing:(UITextField *)textField
-//{
-//    [self animateTextField:textField up:NO];
-//}
-//
-//-(void)animateTextField:(UITextField*)textField up:(BOOL)up
-//{
-//    const int movementDistance = -180; // tweak as needed
-//    const float movementDuration = 0.3f; // tweak as needed
-//    
-//    int movement = (up ? movementDistance : -movementDistance);
-//    
-//    [UIView beginAnimations: @"animateTextField" context: nil];
-//    [UIView setAnimationBeginsFromCurrentState: YES];
-//    [UIView setAnimationDuration: movementDuration];
-//    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
-//    [UIView commitAnimations];
-//}
-//
-//#pragma mark - Methods for posting message onto the server
-//
-//-(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver {
-//    
-//    if (![message isEqual:@""]){
-//        NSMutableString *postString = [NSMutableString stringWithString:kPostURL];
-//        
-//        [postString appendString:[NSString stringWithFormat:@"?%@=%@", kSender, sender]];
-//        
-//        [postString appendString:[NSString stringWithFormat:@"&%@=%@", kReceiver, receiver]];
-//
-//        
-//        [postString appendString:[NSString stringWithFormat:@"&%@=%@", kMessage, message]];
-//        
-//        [postString setString:[postString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//        
-//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postString]];
-//        [request setHTTPMethod:@"POST"];
-//        
-//        _postConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-//    }
-//}
-//
-//#pragma mark - send button implementation
-////TODO: sender hardcoded for now, will change it after login is implemented
-//-(IBAction)post:(id)sender{
-//    
-//    [self postMessage:_messageText.text withSender:@"Stephen" withReceiver:_name];
-//    [_messageText resignFirstResponder];
-//    _messageText.text = nil;
-//
-//}
-//
-//
-//#pragma mark - Methods to dismiss Keyboard
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    [_messageText resignFirstResponder];
-//
-//}
-//
-//-(BOOL)textFieldShouldReturn:(UITextField *)textField
-//{
-//    if(textField)
-//    {
-//        [textField resignFirstResponder];
-//    }
-//    return NO;
-//}
+#pragma mark - MessageComposerView delegate methods
+-(void)messageComposerSendMessageClickedWithMessage:(NSString *)message
+{
+    //NSLog(@"%@",message);
+    
+    [self postMessage:message withSender:@"Stephen" withReceiver:_name];
+    
+    
+    
+    [_messageComposerView endEditing:YES];
+
+}
+
+
+
+#pragma mark - send message methods
+
+-(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver {
+    
+    if (![message isEqual:@""]){
+        NSMutableString *postString = [NSMutableString stringWithString:sendURL];
+        
+        [postString appendString:[NSString stringWithFormat:@"?%@=%@", @"sender", sender]];
+        
+        [postString appendString:[NSString stringWithFormat:@"&%@=%@", @"receiver", receiver]];
+        
+        
+        [postString appendString:[NSString stringWithFormat:@"&%@=%@", @"message", message]];
+        
+        [postString setString:[postString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postString]];
+        [request setHTTPMethod:@"POST"];
+        
+        _postConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    }
+}
 
 
 #pragma mark - read message methods
@@ -147,6 +121,12 @@
     
     // Reload the table view data.
     [_mainTableView reloadData];
+    
+    NSInteger lastRowNumber = [_mainTableView numberOfRowsInSection:0] -1;
+    NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
+    
+    [_mainTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    
 }
 
 
@@ -154,7 +134,7 @@
 // method for deleting message after an user has read it from the database
 -(void) deleteMessage:(NSString*)messageID
 {
-    NSMutableString *postString = [NSMutableString stringWithString:@"http://192.168.1.66/deletemessage.php"];
+    NSMutableString *postString = [NSMutableString stringWithString:deleteURL];
     
     [postString appendString:[NSString stringWithFormat:@"?%@=%@", @"messageID", (NSString*)messageID]];
     
@@ -169,14 +149,12 @@
 
 
 
-
-
 // Method to establish connection to the online database
 //TODO: receiver is hardcoded for now, will change after login is done
 -(void)start
 {
     
-    NSMutableString *postString = [NSMutableString stringWithString:@"http://192.168.1.66/getjson.php"];
+    NSMutableString *postString = [NSMutableString stringWithString:readURL];
     [postString appendString:[NSString stringWithFormat:@"?%@=%@", @"receiver", @"Stephen"]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postString]];
     [request setHTTPMethod:@"POST"];
@@ -261,10 +239,6 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MainCell"];
     
-//    if(cell == nil){
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"MainCell"];
-//    }
-    
    
     NSInteger indexOfSender = [self.dbManager.arrColumnNames indexOfObject:@"sender"];
     NSInteger indexOfMessage = [self.dbManager.arrColumnNames indexOfObject:@"message"];
@@ -273,24 +247,21 @@
     cell.textLabel.text = [[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfSender];
     cell.detailTextLabel.text = [[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfMessage];
     
-    
-    //cell.textLabel.text = [[_json objectAtIndex:indexPath.row] objectForKey:@"sender"];
-    
-    //cell.detailTextLabel.text = [[_json objectAtIndex:indexPath.row] objectForKey:@"message"];
     return cell;
 }
 
-#pragma mark - segue method
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"sendMessage"]) {
-        
-        [[segue destinationViewController] setName:_name];
-    }
-}
+
+//#pragma mark - segue method
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([[segue identifier] isEqualToString:@"sendMessage"]) {
+//        
+//        [[segue destinationViewController] setName:_name];
+//    }
+//}
 
 #pragma mark - moving up tableview when keyboard shows
-// Call this method somewhere in your view controller setup code.
+
 - (void)registerForKeyboardNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -309,10 +280,10 @@
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 
-    CGSize tabBarSize = [[[self tabBarController]tabBar]bounds].size;
+    //CGSize tabBarSize = [[[self tabBarController]tabBar]bounds].size;
 
     //shrink the table view
-    [_mainTableView setFrame:CGRectMake(_mainTableView.frame.origin.x,_mainTableView.frame.origin.y,_mainTableView.frame.size.width,_mainTableView.frame.size.height -kbSize.height+tabBarSize.height)];
+    [_mainTableView setFrame:CGRectMake(_mainTableView.frame.origin.x,_mainTableView.frame.origin.y,_mainTableView.frame.size.width,_mainTableView.frame.size.height -kbSize.height)];
     
     NSInteger lastRowNumber = [_mainTableView numberOfRowsInSection:0] -1;
     NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
@@ -328,10 +299,9 @@
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
-    CGSize tabBarSize = [[[self tabBarController]tabBar]bounds].size;
     
     //return the tableView to its original size
-    [_mainTableView setFrame:CGRectMake(_mainTableView.frame.origin.x,_mainTableView.frame.origin.y,_mainTableView.frame.size.width,_mainTableView.frame.size.height+kbSize.height-tabBarSize.height)];
+    [_mainTableView setFrame:CGRectMake(_mainTableView.frame.origin.x,_mainTableView.frame.origin.y,_mainTableView.frame.size.width,_mainTableView.frame.size.height+kbSize.height)];
 
 
 }
