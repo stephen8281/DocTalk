@@ -29,6 +29,8 @@
 		DF24771F1A6C51D400FBC65E /* ProfileSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF24771E1A6C51D400FBC65E /* ProfileSettingsViewController.m */; };
 		DF2477221A6EC62C00FBC65E /* PasswordSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2477211A6EC62C00FBC65E /* PasswordSettingsViewController.m */; };
 		DF2477251A6F0F3400FBC65E /* AutoMsgDelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2477241A6F0F3400FBC65E /* AutoMsgDelViewController.m */; };
+		DF2477281A7AAC0900FBC65E /* sortSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2477271A7AAC0900FBC65E /* sortSettingsViewController.m */; };
+		DF24772B1A7AE61A00FBC65E /* sortMessagesContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = DF24772A1A7AE61A00FBC65E /* sortMessagesContainer.m */; };
 		DFD780F11A2BEEFE006DDA5D /* ThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */; };
 		DFDF355A1A2D45B100435573 /* SendMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDF35591A2D45B100435573 /* SendMsgViewController.m */; };
 /* End PBXBuildFile section */
@@ -84,6 +86,10 @@
 		DF2477211A6EC62C00FBC65E /* PasswordSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordSettingsViewController.m; sourceTree = "<group>"; };
 		DF2477231A6F0F3400FBC65E /* AutoMsgDelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoMsgDelViewController.h; sourceTree = "<group>"; };
 		DF2477241A6F0F3400FBC65E /* AutoMsgDelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoMsgDelViewController.m; sourceTree = "<group>"; };
+		DF2477261A7AAC0900FBC65E /* sortSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sortSettingsViewController.h; sourceTree = "<group>"; };
+		DF2477271A7AAC0900FBC65E /* sortSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sortSettingsViewController.m; sourceTree = "<group>"; };
+		DF2477291A7AE61A00FBC65E /* sortMessagesContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sortMessagesContainer.h; sourceTree = "<group>"; };
+		DF24772A1A7AE61A00FBC65E /* sortMessagesContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sortMessagesContainer.m; sourceTree = "<group>"; };
 		DFD780EF1A2BEEFE006DDA5D /* ThreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadViewController.h; sourceTree = "<group>"; };
 		DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadViewController.m; sourceTree = "<group>"; };
 		DFDF35581A2D45B100435573 /* SendMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMsgViewController.h; sourceTree = "<group>"; };
@@ -165,6 +171,10 @@
 				DF2477211A6EC62C00FBC65E /* PasswordSettingsViewController.m */,
 				DF2477231A6F0F3400FBC65E /* AutoMsgDelViewController.h */,
 				DF2477241A6F0F3400FBC65E /* AutoMsgDelViewController.m */,
+				DF2477261A7AAC0900FBC65E /* sortSettingsViewController.h */,
+				DF2477271A7AAC0900FBC65E /* sortSettingsViewController.m */,
+				DF2477291A7AE61A00FBC65E /* sortMessagesContainer.h */,
+				DF24772A1A7AE61A00FBC65E /* sortMessagesContainer.m */,
 				DCC2C8BA1A29762D00B7A97C /* Main.storyboard */,
 				DCC2C8BD1A29762D00B7A97C /* Images.xcassets */,
 				DCC2C8BF1A29762D00B7A97C /* LaunchScreen.xib */,
@@ -313,11 +323,13 @@
 				DF239DB61A2A413000652DC8 /* ThreadListViewController.m in Sources */,
 				DF24771F1A6C51D400FBC65E /* ProfileSettingsViewController.m in Sources */,
 				DCC2C8B61A29762D00B7A97C /* AppDelegate.m in Sources */,
+				DF2477281A7AAC0900FBC65E /* sortSettingsViewController.m in Sources */,
 				DF2477191A65B5ED00FBC65E /* StatusViewController.m in Sources */,
 				DCC2C8B31A29762D00B7A97C /* main.m in Sources */,
 				DF2477251A6F0F3400FBC65E /* AutoMsgDelViewController.m in Sources */,
 				DCC2C8EB1A29937200B7A97C /* DBManager.m in Sources */,
 				DF2477221A6EC62C00FBC65E /* PasswordSettingsViewController.m in Sources */,
+				DF24772B1A7AE61A00FBC65E /* sortMessagesContainer.m in Sources */,
 				DC5DE2C41A77163A00298C29 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
