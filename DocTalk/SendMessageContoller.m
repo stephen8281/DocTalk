@@ -10,15 +10,14 @@
 #import "DBManager.h"
 
 @interface SendMessageController ()
+
 //send message methods
-//-(void) post:(id)sender;
 -(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver;
-
-
 
 //read message methods
 -(void) start;
 -(void) deleteMessage:(NSString*)messageID;
+
 -(void) loadData;
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *arrMessage;
@@ -30,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //_messageText.delegate = self;
+
     _mainTableView.delegate = self;
     _mainTableView.dataSource = self;
 
@@ -74,11 +73,12 @@
     //NSLog(@"%@",message);
     
     [self postMessage:message withSender:@"Stephen" withReceiver:_name];
-    //[_messageComposerView resignFirstResponder];
+    
+    
+    
     [_messageComposerView endEditing:YES];
 
 }
-
 
 
 
@@ -87,14 +87,14 @@
 -(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver {
     
     if (![message isEqual:@""]){
-        NSMutableString *postString = [NSMutableString stringWithString:kPostURL];
+        NSMutableString *postString = [NSMutableString stringWithString:sendURL];
         
-        [postString appendString:[NSString stringWithFormat:@"?%@=%@", kSender, sender]];
+        [postString appendString:[NSString stringWithFormat:@"?%@=%@", @"sender", sender]];
         
-        [postString appendString:[NSString stringWithFormat:@"&%@=%@", kReceiver, receiver]];
+        [postString appendString:[NSString stringWithFormat:@"&%@=%@", @"receiver", receiver]];
         
         
-        [postString appendString:[NSString stringWithFormat:@"&%@=%@", kMessage, message]];
+        [postString appendString:[NSString stringWithFormat:@"&%@=%@", @"message", message]];
         
         [postString setString:[postString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
@@ -121,6 +121,12 @@
     
     // Reload the table view data.
     [_mainTableView reloadData];
+    
+    NSInteger lastRowNumber = [_mainTableView numberOfRowsInSection:0] -1;
+    NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
+    
+    [_mainTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    
 }
 
 
@@ -128,7 +134,7 @@
 // method for deleting message after an user has read it from the database
 -(void) deleteMessage:(NSString*)messageID
 {
-    NSMutableString *postString = [NSMutableString stringWithString:@"http://192.168.1.66/deletemessage.php"];
+    NSMutableString *postString = [NSMutableString stringWithString:deleteURL];
     
     [postString appendString:[NSString stringWithFormat:@"?%@=%@", @"messageID", (NSString*)messageID]];
     
@@ -143,14 +149,12 @@
 
 
 
-
-
 // Method to establish connection to the online database
 //TODO: receiver is hardcoded for now, will change after login is done
 -(void)start
 {
     
-    NSMutableString *postString = [NSMutableString stringWithString:@"http://192.168.1.66/getjson.php"];
+    NSMutableString *postString = [NSMutableString stringWithString:readURL];
     [postString appendString:[NSString stringWithFormat:@"?%@=%@", @"receiver", @"Stephen"]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postString]];
     [request setHTTPMethod:@"POST"];
@@ -243,24 +247,21 @@
     cell.textLabel.text = [[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfSender];
     cell.detailTextLabel.text = [[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfMessage];
     
-    
-    //cell.textLabel.text = [[_json objectAtIndex:indexPath.row] objectForKey:@"sender"];
-    
-    //cell.detailTextLabel.text = [[_json objectAtIndex:indexPath.row] objectForKey:@"message"];
     return cell;
 }
 
-#pragma mark - segue method
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"sendMessage"]) {
-        
-        [[segue destinationViewController] setName:_name];
-    }
-}
+
+//#pragma mark - segue method
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([[segue identifier] isEqualToString:@"sendMessage"]) {
+//        
+//        [[segue destinationViewController] setName:_name];
+//    }
+//}
 
 #pragma mark - moving up tableview when keyboard shows
-// Call this method somewhere in your view controller setup code.
+
 - (void)registerForKeyboardNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
