@@ -898,10 +898,22 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sort contacts by:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBk-2h-cGW">
+                                <rect key="frame" x="16" y="241" width="132" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mjU-I6-Sej">
-                                <rect key="frame" x="16" y="101" width="288" height="154"/>
+                                <rect key="frame" x="16" y="101" width="288" height="132"/>
                                 <connections>
                                     <segue destination="PLh-RW-caf" kind="embed" id="3GN-ci-KCs"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KVJ-Oy-UwU">
+                                <rect key="frame" x="16" y="270" width="288" height="132"/>
+                                <connections>
+                                    <segue destination="XEe-xZ-90w" kind="embed" id="pW9-Jo-8MW"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -950,52 +962,21 @@
             </objects>
             <point key="canvasLocation" x="1834" y="3159"/>
         </scene>
-        <!--Sort Messages Container-->
-        <scene sceneID="b87-ax-46n">
+        <!--Sort Contacts Container-->
+        <scene sceneID="fcR-lT-dy0">
             <objects>
-                <tableViewController id="PLh-RW-caf" customClass="sortMessagesContainer" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fIQ-4m-iOk">
-                        <rect key="frame" x="0.0" y="0.0" width="288" height="154"/>
+                <tableViewController id="XEe-xZ-90w" customClass="sortContactsContainer" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="oMc-hE-aft">
+                        <rect key="frame" x="0.0" y="0.0" width="288" height="132"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="eqm-Dj-jR9" style="IBUITableViewCellStyleDefault" id="aJS-vE-p5C">
-                                <rect key="frame" x="0.0" y="0.0" width="267" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="sortContactCell" textLabel="Owi-qW-7RS" style="IBUITableViewCellStyleDefault" id="MfL-wU-kN0">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aJS-vE-p5C" id="2OZ-vF-UMd">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MfL-wU-kN0" id="akE-bb-GJp">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Sender" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eqm-Dj-jR9">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="KFa-5t-zmH" style="IBUITableViewCellStyleDefault" id="28W-DZ-XgS">
-                                <rect key="frame" x="0.0" y="0.0" width="267" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="28W-DZ-XgS" id="8gl-9q-bLy">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KFa-5t-zmH">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Pw0-Ps-1Ui" style="IBUITableViewCellStyleDefault" id="mvN-8H-9tj">
-                                <rect key="frame" x="0.0" y="0.0" width="267" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mvN-8H-9tj" id="VUb-Ug-9mA">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Urgency" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pw0-Ps-1Ui">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Owi-qW-7RS">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1006,10 +987,52 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
+                            <outlet property="dataSource" destination="XEe-xZ-90w" id="5X5-dy-nGo"/>
+                            <outlet property="delegate" destination="XEe-xZ-90w" id="n3Z-Ht-nQe"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="sortContactsTable" destination="oMc-hE-aft" id="XEE-Xh-Zyg"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cDO-cF-LGa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1435" y="3780"/>
+        </scene>
+        <!--Sort Messages Container-->
+        <scene sceneID="b87-ax-46n">
+            <objects>
+                <tableViewController id="PLh-RW-caf" customClass="sortMessagesContainer" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fIQ-4m-iOk">
+                        <rect key="frame" x="0.0" y="0.0" width="288" height="132"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sortMsgCell" textLabel="8OB-PC-VjG" style="IBUITableViewCellStyleDefault" id="fSF-4A-qkK">
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fSF-4A-qkK" id="vbk-zz-Ugp">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8OB-PC-VjG">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
                             <outlet property="dataSource" destination="PLh-RW-caf" id="nab-S0-0a6"/>
                             <outlet property="delegate" destination="PLh-RW-caf" id="0cL-yN-OQi"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="sortMsgsTable" destination="fIQ-4m-iOk" id="GLn-fQ-urN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Ig-Yv-Qo3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

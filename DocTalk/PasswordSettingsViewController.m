@@ -14,24 +14,18 @@
 
 @implementation PasswordSettingsViewController
 
-@synthesize passwordSettings;
-@synthesize oldPassword;
-@synthesize updatedPassword;
-@synthesize repeatedPassword;
-@synthesize updateButton;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    oldPassword.delegate = self;
-    oldPassword.returnKeyType = UIReturnKeyDone;
+    _oldPassword.delegate = self;
+    _oldPassword.returnKeyType = UIReturnKeyDone;
     
-    updatedPassword.delegate = self;
-    updatedPassword.returnKeyType = UIReturnKeyDone;
+    _updatedPassword.delegate = self;
+    _updatedPassword.returnKeyType = UIReturnKeyDone;
     
-    repeatedPassword.delegate = self;
-    repeatedPassword.returnKeyType = UIReturnKeyDone;
+    _repeatedPassword.delegate = self;
+    _repeatedPassword.returnKeyType = UIReturnKeyDone;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,8 +38,8 @@
     return YES;
 }
 - (IBAction)updateButtonPressed:(id)sender {
-    if ([updatedPassword.text isEqualToString:repeatedPassword.text]) {
-        NSLog(@"new password is %@", repeatedPassword.text);
+    if ([_updatedPassword.text isEqualToString:_repeatedPassword.text]) {
+        NSLog(@"new password is %@", _repeatedPassword.text);
     }else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                         message:@"Please be sure the new password matches the password"

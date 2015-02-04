@@ -12,19 +12,17 @@
 
 @end
 
-@implementation AutoMsgDelViewController
-
-@synthesize autoMsgDelSettings;
-@synthesize autoMsgDelTime;
-NSArray *_pickerData;
+@implementation AutoMsgDelViewController{
+    NSArray *_pickerData;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     _pickerData = @[@"never", @"after 1 hour", @"after 2 hours", @"after 12 hours", @"after 1 day", @"after 1 week", @"after 1 month"];
     
-    autoMsgDelTime.dataSource = self;
-    autoMsgDelTime.delegate = self;
+    _autoMsgDelTime.dataSource = self;
+    _autoMsgDelTime.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {

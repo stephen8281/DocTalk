@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface sortSettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface sortSettingsViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIView *sortSettings;
-@property (weak, nonatomic) IBOutlet UITableView *messageSort;
 
 @end

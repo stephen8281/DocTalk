@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface sortMessagesContainer : UITableViewController
+@interface sortMessagesContainer : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) IBOutlet UITableView *sortMsgsTable;
 
 @end

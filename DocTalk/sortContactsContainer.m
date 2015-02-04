@@ -1,30 +1,30 @@
 //
-//  sortMessagesContainerTableViewController.m
+//  sortContactsContainer.m
 //  DocTalk
 //
-//  Created by Kevin Wagner on 2015-01-29.
+//  Created by Kevin Wagner on 2015-02-04.
 //  Copyright (c) 2015 DocTalk. All rights reserved.
 //
 
-#import "sortMessagesContainer.h"
+#import "sortContactsContainer.h"
 
-@interface sortMessagesContainer ()
+@interface sortContactsContainer ()
 
 @end
 
-@implementation sortMessagesContainer{
+@implementation sortContactsContainer{
     NSArray *options;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _sortMsgsTable.delegate = self;
-    _sortMsgsTable.dataSource = self;
+    _sortContactsTable.delegate = self;
+    _sortContactsTable.dataSource = self;
     
-    [_sortMsgsTable setEditing:YES animated:YES];
+    [_sortContactsTable setEditing:YES animated:YES];
     
-    options = [NSArray arrayWithObjects: @"Sender", @"Time", @"Urgency", nil];
+    options = [NSArray arrayWithObjects: @"First Name", @"Last Name", nil];
     
     // This will remove extra separators from tableview
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -45,11 +45,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sortMsgCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sortContactCell"];
     
     //    Set the message title
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [options objectAtIndex:indexPath.row]];
