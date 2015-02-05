@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProfileSettingsViewController : UIViewController <UITextFieldDelegate>
+@interface ProfileSettingsViewController : UIViewController <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *profileSettings;
 @property (strong, nonatomic) IBOutlet UIImageView *ProfilePic;
