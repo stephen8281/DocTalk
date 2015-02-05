@@ -31,6 +31,7 @@ NSMutableArray *Messages;
 //    For now it is hard coded with one message
     Messages = [NSMutableArray arrayWithObjects:nil];
     
+//    Note that the height field should always be set to 0, it will be overwritten in the cellForRowAtIndexPath method anyways
     NSArray *obj1 = [NSArray arrayWithObjects:@"ProfilePic", @"This message isnt really important", @"0", @"0", @"ToMe", nil];
     NSArray *key = [NSArray arrayWithObjects:@"Picture", @"Message", @"Priority", @"Height", @"MsgDirection", nil];
     NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] initWithObjects:obj1 forKeys:key];
@@ -93,6 +94,8 @@ NSMutableArray *Messages;
     msg.keyboardType = UIKeyboardTypeDefault;
     msg.text = [[Messages objectAtIndex:indexPath.row] objectForKey:@"Message"];
     [msg sizeToFit];
+    
+//    This sets the height field in messages
     [[Messages objectAtIndex:indexPath.row] setObject:[NSString stringWithFormat:@"%f", msg.frame.size.height] forKey:@"Height"];
 
 //    Apply priority shadow
