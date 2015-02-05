@@ -31,7 +31,6 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"Sort Messages based on %@", [sortMessagesContainer sortOrder]);
     [self.tableView reloadData];
 }
 
@@ -51,7 +50,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    NSLog(@"Sort Messages based on %@", [sortMessagesContainer sortOrder]);
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
 //    Set the image
     UIImage *image = [UIImage imageNamed:@"ProfilePic.png"];
