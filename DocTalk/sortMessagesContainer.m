@@ -12,8 +12,15 @@
 
 @end
 
-@implementation sortMessagesContainer{
-    NSArray *options;
+@implementation sortMessagesContainer
+
+static NSMutableArray *sort = nil;
+
++ (void)initialize {
+    sort = [NSMutableArray arrayWithObjects: @"Sender", @"Time", @"Urgency", nil];
+}
++ (NSMutableArray *)sortOrder {
+    return sort;
 }
 
 - (void)viewDidLoad {
@@ -23,8 +30,6 @@
     _sortMsgsTable.dataSource = self;
     
     [_sortMsgsTable setEditing:YES animated:YES];
-    
-    options = [NSArray arrayWithObjects: @"Sender", @"Time", @"Urgency", nil];
     
     // This will remove extra separators from tableview
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -52,7 +57,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sortMsgCell"];
     
     //    Set the message title
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [options objectAtIndex:indexPath.row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[sortMessagesContainer sortOrder] objectAtIndex:indexPath.row]];
     cell.showsReorderControl = YES;
     
     return cell;
@@ -65,7 +70,14 @@
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
+    NSMutableArray * options = [sortMessagesContainer sortOrder];
+    NSLog(@"%@ moved higher than %@", [options objectAtIndex:sourceIndexPath.row], [options objectAtIndex:destinationIndexPath.row]);
     
+//    Rearrange the options list to reflect changes
+    id temp = [options objectAtIndex:sourceIndexPath.row];
+    [options removeObjectAtIndex:sourceIndexPath.row];
+    [options insertObject:temp atIndex:destinationIndexPath.row];
+    sort = options;
 }
 
 // This function pretty much just gets rid of the delete control

@@ -8,25 +8,30 @@
 
 #import "ThreadListViewController.h"
 #import "ThreadViewController.h"
+#import "sortMessagesContainer.h"
 
 @interface ThreadListViewController ()
 
 @end
 
-@implementation ThreadListViewController
-
-@synthesize myMessages;
-NSArray *Threads;
+@implementation ThreadListViewController{
+    NSArray *Threads;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    myMessages.delegate = self;
-    myMessages.dataSource = self;
+    _myMessages.delegate = self;
+    _myMessages.dataSource = self;
     
     Threads = [NSArray arrayWithObjects: @"Test1", @"Test2", @"Test3", @"Test4", @"Test5", @"Test6", @"Test7", @"Test8", @"Test9", nil];
     
     // Reload the table view data.
+    [self.tableView reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"Sort Messages based on %@", [sortMessagesContainer sortOrder]);
     [self.tableView reloadData];
 }
 
