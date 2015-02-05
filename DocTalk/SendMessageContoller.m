@@ -15,13 +15,15 @@
 -(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver;
 
 //read message methods
--(void) start;
+-(void)LaunchTimer;
+-(void) readMessage;
 -(void) deleteMessage:(NSString*)messageID;
 
--(void) loadData;
+-(void)loadData:(NSString*)personTalkingTo;
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *arrMessage;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) NSString *phoneOwner;
 
 @end
 
@@ -40,11 +42,13 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    //initialize the refresh control will replace with a timer later
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(start) forControlEvents:UIControlEventValueChanged];
-    [_mainTableView addSubview:self.refreshControl];
+    self.phoneOwner = @"Stephen";
     
+    //initialize the refresh control will replace with a timer later
+//    self.refreshControl = [[UIRefreshControl alloc] init];
+//    [self.refreshControl addTarget:self action:@selector(readMessage)  forControlEvents:UIControlEventValueChanged];
+//    [_mainTableView addSubview:self.refreshControl];
+
     
     //add subview for MessageComposeView
     float defaultWidth = 320;
@@ -58,7 +62,9 @@
     [self registerForKeyboardNotifications];
     
     //populate the tables
-    [self loadData];
+    [self loadData:_name];
+    
+    [self performSelectorOnMainThread:@selector(LaunchTimer) withObject:nil waitUntilDone:NO];
     
 }
 
@@ -72,9 +78,7 @@
 {
     //NSLog(@"%@",message);
     
-    [self postMessage:message withSender:@"Stephen" withReceiver:_name];
-    
-    
+    [self postMessage:message withSender:self.phoneOwner withReceiver:_name];
     
     [_messageComposerView endEditing:YES];
 
@@ -103,15 +107,18 @@
         
         _postConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
     }
+    
 }
 
 
 #pragma mark - read message methods
 
--(void)loadData{
+-(void)loadData:(NSString*)personTalkingTo{
     
+    NSString *query = [NSString stringWithFormat:@"select * from messageTable where (sender = '%@' and receiver = '%@') or (sender = '%@' and receiver = '%@') order by messageID", personTalkingTo,_phoneOwner,_phoneOwner,personTalkingTo];
     // Form the query.
-    NSString *query = @"select * from messageTable";
+    //NSString *query = @"select * from messageTable";
+
     
     // Get the results.
     if (self.arrMessage != nil) {
@@ -119,13 +126,17 @@
     }
     self.arrMessage = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     
+    
     // Reload the table view data.
     [_mainTableView reloadData];
     
     NSInteger lastRowNumber = [_mainTableView numberOfRowsInSection:0] -1;
-    NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
-    
-    [_mainTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    if (lastRowNumber>0) {
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
+        
+        [_mainTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+
     
 }
 
@@ -147,21 +158,27 @@
     _deleteConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 }
 
-
+//Timer to periodically check in with server for new messages
+-(void)LaunchTimer
+{
+    NSTimer *myTimer = [NSTimer timerWithTimeInterval:6.0 target:self selector:@selector(readMessage) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop]addTimer:myTimer forMode:NSDefaultRunLoopMode];
+}
 
 // Method to establish connection to the online database
 //TODO: receiver is hardcoded for now, will change after login is done
--(void)start
+-(void) readMessage
 {
     
     NSMutableString *postString = [NSMutableString stringWithString:readURL];
-    [postString appendString:[NSString stringWithFormat:@"?%@=%@", @"receiver", @"Stephen"]];
+    [postString appendString:[NSString stringWithFormat:@"?%@=%@", @"receiver", self.phoneOwner]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postString]];
     [request setHTTPMethod:@"POST"];
     
     _readConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    //[refreshControl endRefreshing];
     
+        //[self performSelectorOnMainThread:@selector(readMessage) withObject:nil waitUntilDone:NO];
+
 }
 
 
@@ -203,15 +220,19 @@
         if (self.dbManager.affectedRows != 0) {
             NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
             
-            [self deleteMessage:messageID];
+            if(connection == _readConnection)
+            {
+                [self deleteMessage:messageID];
+            }
+
         }
         else{
             NSLog(@"Could not execute the query.");
         }
     }
     
-    [self loadData];
-    [self.refreshControl endRefreshing];
+    [self loadData:_name];
+    //[self.refreshControl endRefreshing];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -231,6 +252,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+
     return self.arrMessage.count;
 }
 
@@ -286,9 +308,13 @@
     [_mainTableView setFrame:CGRectMake(_mainTableView.frame.origin.x,_mainTableView.frame.origin.y,_mainTableView.frame.size.width,_mainTableView.frame.size.height -kbSize.height)];
     
     NSInteger lastRowNumber = [_mainTableView numberOfRowsInSection:0] -1;
-    NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
+    
+    if (lastRowNumber>0) {
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
 
-    [_mainTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        [_mainTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+
 
 }
 

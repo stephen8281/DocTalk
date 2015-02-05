@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MessageComposerView.h"
 
-#define sendURL @"http://192.168.1.66/test.php"
-#define readURL @"http://192.168.1.66/getjson.php"
-#define deleteURL @"http://192.168.1.66/deletemessage.php"
+#define sendURL @"http://192.168.1.73/test.php"
+#define readURL @"http://192.168.1.73/getjson.php"
+#define deleteURL @"http://192.168.1.73/deletemessage.php"
 
 
 @interface SendMessageController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource,MessageComposerViewDelegate>
