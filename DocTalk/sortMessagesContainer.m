@@ -70,10 +70,8 @@ static NSMutableArray *sort = nil;
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    NSMutableArray * options = [sortMessagesContainer sortOrder];
-    NSLog(@"%@ moved higher than %@", [options objectAtIndex:sourceIndexPath.row], [options objectAtIndex:destinationIndexPath.row]);
-    
 //    Rearrange the options list to reflect changes
+    NSMutableArray * options = [sortMessagesContainer sortOrder];
     id temp = [options objectAtIndex:sourceIndexPath.row];
     [options removeObjectAtIndex:sourceIndexPath.row];
     [options insertObject:temp atIndex:destinationIndexPath.row];

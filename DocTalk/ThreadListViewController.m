@@ -59,10 +59,16 @@
     cell.imageView.image = image;
 
 //    Set the message title
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [Threads objectAtIndex:indexPath.row]];
+    UILabel *Sender = (UILabel *)[cell viewWithTag:1];
+    Sender.text = [NSString stringWithFormat:@"%@", [Threads objectAtIndex:indexPath.row]];
     
 //    Set the message preview
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Hey this is a really cool preview message which you can use to get an idea of what the message might be about"];
+    UILabel *Preview = (UILabel *)[cell viewWithTag:2];
+    Preview.text = [NSString stringWithFormat:@"%@", @"Hey this is a really cool preview message which you can use to get an idea of what the message might be about"];
+    
+//    Set the message time
+    UILabel *Time = (UILabel *)[cell viewWithTag:3];
+    Time.text = [NSString stringWithFormat:@"%@", @"Time stamp"];
     
     return cell;
 }
