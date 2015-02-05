@@ -210,9 +210,6 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XUR-Lz-OBD">
-                                            <rect key="frame" x="8" y="0.0" width="46" height="44"/>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sww-In-OYC">
                                             <rect key="frame" x="223" y="9" width="64" height="19"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -248,7 +245,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0eX-2b-JhU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1049" y="842"/>
+            <point key="canvasLocation" x="1049" y="855"/>
         </scene>
         <!--Thread View Controller-->
         <scene sceneID="EC0-xy-gPi">
