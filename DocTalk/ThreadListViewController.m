@@ -61,7 +61,6 @@
 //    Set the message title
     UILabel *Sender = (UILabel *)[cell viewWithTag:1];
     Sender.text = [NSString stringWithFormat:@"%@", [Threads objectAtIndex:indexPath.row]];
-    Sender.textColor = [UIColor colorWithRed:1 green:0.5 blue:0 alpha:1];
     
 //    Set the message preview
     UILabel *Preview = (UILabel *)[cell viewWithTag:2];
@@ -70,6 +69,16 @@
 //    Set the message time
     UILabel *Time = (UILabel *)[cell viewWithTag:3];
     Time.text = [NSString stringWithFormat:@"%@", @"Time stamp"];
+    
+//    Make a little circle to display the urgency
+    UIImageView *Urgency = (UIImageView *)[cell viewWithTag:4];
+    if (indexPath.row % 3 == 0) {
+        Urgency.image = [UIImage imageNamed: @"normalBubble.png"];
+    } else if (indexPath.row % 3 == 1) {
+        Urgency.image = [UIImage imageNamed: @"semiurgentBubble.png"];
+    } else {
+        Urgency.image = [UIImage imageNamed: @"urgentBubble.png"];
+    }
     
     return cell;
 }
