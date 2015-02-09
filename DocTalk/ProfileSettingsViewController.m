@@ -79,6 +79,27 @@
     return YES;
 }
 
+- (IBAction)browseProfilePic:(id)sender {
+    UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+    ipc.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
+    ipc.mediaTypes =[UIImagePickerController availableMediaTypesForSourceType:ipc.sourceType];
+    ipc.delegate = self;
+    ipc.editing = NO;
+    [self presentViewController:ipc animated:YES completion:nil];
+}
+
+-(void)imagePickerController:
+(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    ProfilePic.image = info[UIImagePickerControllerOriginalImage];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 /*
 #pragma mark - Navigation
 
