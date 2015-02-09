@@ -700,7 +700,7 @@
 				DF24772B1A7AE61A00FBC65E /* sortMessagesContainer.m in Sources */,
 
 				DC711A101A85B71A00FBC7F1 /* JSQMessagesToolbarButtonFactory.m in Sources */,
-				DF2477221A6EC62C00FBC65E /* PasswordSettingsViewController.m in Sources */,
+
 				DC711A251A85B71A00FBC7F1 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				DC711A041A85B71A00FBC7F1 /* NSString+JSQMessages.m in Sources */,
 				DC711A1C1A85B71A00FBC7F1 /* JSQMessagesCollectionView.m in Sources */,
