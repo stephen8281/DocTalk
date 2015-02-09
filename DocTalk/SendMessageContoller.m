@@ -15,7 +15,7 @@
 -(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver;
 
 //read message methods
--(void)LaunchTimer;
+-(void) LaunchTimer;
 -(void) readMessage;
 -(void) deleteMessage:(NSString*)messageID;
 
@@ -25,6 +25,8 @@
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSString *phoneOwner;
 
+//@property(nonatomic,strong)NSMutableArray *messages;
+
 @end
 
 @implementation SendMessageController
@@ -32,17 +34,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    _mainTableView.delegate = self;
-    _mainTableView.dataSource = self;
+    //_mainTableView.delegate = self;
+   // _mainTableView.dataSource = self;
 
     self.title = _name;
+    self.phoneOwner = @"Stephen";
+    
+    self.senderId = _phoneOwner;
+    self.senderDisplayName = _phoneOwner;
+    self.showLoadEarlierMessagesHeader = YES;
+    
     
     //Initialize database to store messages locally
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"chat.sql"];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    self.phoneOwner = @"Stephen";
+
     
     //initialize the refresh control will replace with a timer later
 //    self.refreshControl = [[UIRefreshControl alloc] init];
@@ -51,20 +59,29 @@
 
     
     //add subview for MessageComposeView
-    float defaultWidth = 320;
-    float defaultHeight = 54;
-    CGRect subviewFrame = CGRectMake(0, self.view.frame.size.height - defaultHeight, defaultWidth, defaultHeight);
-    self.messageComposerView = [[MessageComposerView alloc]initWithFrame:subviewFrame];
-    self.messageComposerView.delegate = self;
-    [self.view addSubview:self.messageComposerView];
+//    float defaultWidth = 320;
+//    float defaultHeight = 54;
+//    CGRect subviewFrame = CGRectMake(0, self.view.frame.size.height - defaultHeight, defaultWidth, defaultHeight);
+//    self.messageComposerView = [[MessageComposerView alloc]initWithFrame:subviewFrame];
+//    self.messageComposerView.delegate = self;
+//    [self.view addSubview:self.messageComposerView];
     
     //register for notification
     [self registerForKeyboardNotifications];
     
-    //populate the tables
+    //populate the tables from local database
     [self loadData:_name];
+
     
+    //Initialize the chat bubbles
+    JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc]init];
+    _outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+    _incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+    
+    //Check in with the server every 8 second
     [self performSelectorOnMainThread:@selector(LaunchTimer) withObject:nil waitUntilDone:NO];
+    
+    
     
 }
 
@@ -72,6 +89,172 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark - JSQmessage Delegate
+//- (NSString *)senderDisplayName
+//{
+//    return @"Stephen";
+//}
+//- (NSString *)senderId
+//{
+//    return @"Stephentai";
+//}
+
+- (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    NSInteger indexOfSender = [self.dbManager.arrColumnNames indexOfObject:@"sender"];
+    NSInteger indexOfMessage = [self.dbManager.arrColumnNames indexOfObject:@"message"];
+
+    
+    NSString *sender = [NSString stringWithString:[[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfSender]];
+    NSString *text = [NSString stringWithString:[[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfMessage]];
+    
+
+    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:sender senderDisplayName:sender date:[NSDate date] text:text];
+    
+    return message;
+}
+
+- (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    //get the sender of the current text
+    NSInteger indexOfSender = [self.dbManager.arrColumnNames indexOfObject:@"sender"];
+    NSString *sender = [NSString stringWithString:[[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfSender]];
+    
+    if ([sender isEqualToString:self.senderId]) {
+        return _outgoingBubbleImageData;
+    }
+    return _incomingBubbleImageData;
+}
+
+-(id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+-(NSAttributedString*)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    //get the sender of the current text
+    NSInteger indexOfSender = [self.dbManager.arrColumnNames indexOfObject:@"sender"];
+    NSString *sender = [NSString stringWithString:[[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfSender]];
+    
+
+    /**
+     *  iOS7-style sender name labels
+     */
+//    if ([sender isEqualToString:self.senderId]) {
+//        return nil;
+//    }
+    
+    //display the sender only if it is a different person
+    if (indexPath.item - 1 > 0) {
+        NSString *previousMessageSender = [[self.arrMessage objectAtIndex:indexPath.item - 1] objectAtIndex:indexOfSender];
+        if ([previousMessageSender isEqualToString:sender]) {
+            return nil;
+        }
+    }
+    
+    return [[NSAttributedString alloc] initWithString:sender];
+
+}
+
+#pragma mark - UICollectionView DataSource
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    
+    return [self.arrMessage count];
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+
+    cell.textView.textColor = [UIColor blackColor];
+//    cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : [UIColor redColor],
+//                                          NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
+
+    return cell;
+}
+
+#pragma mark - JSQMessages collection view flow layout delegate
+-(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    //get the sender of the text at current index
+    NSInteger indexOfSender = [self.dbManager.arrColumnNames indexOfObject:@"sender"];
+    NSString *sender = [NSString stringWithString:[[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfSender]];
+    
+    /**
+     *  iOS7-style sender name labels
+     */
+    
+    //    if ([sender isEqualToString:self.senderId]) {
+    //        return 0.0f;
+    //    }
+    
+    //check if previous sender is the same and adjust height accordingly
+    if (indexPath.item - 1 > 0) {
+        NSString *previousMessageSender = [[self.arrMessage objectAtIndex:indexPath.item - 1] objectAtIndex:indexOfSender];
+        if ([previousMessageSender isEqualToString:sender]) {
+            return 0.0f;
+        }
+    }
+    
+    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+}
+
+#pragma mark - JSQMessagesViewController Methods
+-(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date
+{
+    [self postMessage:text withSender:self.phoneOwner withReceiver:_name];
+    [JSQSystemSoundPlayer jsq_playMessageSentSound];
+    [self finishSendingMessageAnimated:YES];
+}
+
+- (void)didPressAccessoryButton:(UIButton *)sender
+{
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Media messages"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"Send photo", @"Send video", nil];
+    
+    [sheet showFromToolbar:self.inputToolbar];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        return;
+    }
+    
+//    switch (buttonIndex) {
+//        case 0:
+//            [self.demoData addPhotoMediaMessage];
+//            break;
+//            
+//        case 1:
+//        {
+//            __weak UICollectionView *weakView = self.collectionView;
+//            
+//            [self.demoData addLocationMediaMessageCompletion:^{
+//                [weakView reloadData];
+//            }];
+//        }
+//            break;
+//            
+//        case 2:
+//            [self.demoData addVideoMediaMessage];
+//            break;
+//    }
+//    
+//    [JSQSystemSoundPlayer jsq_playMessageSentSound];
+//    
+//    [self finishSendingMessageAnimated:YES];
+}
+
 
 #pragma mark - MessageComposerView delegate methods
 -(void)messageComposerSendMessageClickedWithMessage:(NSString *)message
@@ -126,16 +309,18 @@
     }
     self.arrMessage = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     
+    [self.collectionView reloadData];
+    //[self scrollToBottomAnimated:YES];
     
-    // Reload the table view data.
-    [_mainTableView reloadData];
-    
-    NSInteger lastRowNumber = [_mainTableView numberOfRowsInSection:0] -1;
-    if (lastRowNumber>0) {
-        NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
-        
-        [_mainTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
-    }
+//    // Reload the table view data.
+//    [_mainTableView reloadData];
+//    
+//    NSInteger lastRowNumber = [_mainTableView numberOfRowsInSection:0] -1;
+//    if (lastRowNumber>0) {
+//        NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
+//        
+//        [_mainTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
+//    }
 
     
 }
@@ -199,6 +384,7 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    BOOL didUpdateDatabase = NO;
     
     _json = [NSJSONSerialization JSONObjectWithData:_data options:nil error:nil];
     
@@ -219,6 +405,7 @@
         
         if (self.dbManager.affectedRows != 0) {
             NSLog(@"Query was executed successfully. Affected rows = %d", self.dbManager.affectedRows);
+            didUpdateDatabase = YES;
             
             if(connection == _readConnection)
             {
@@ -232,13 +419,17 @@
     }
     
     [self loadData:_name];
+    if(didUpdateDatabase)
+    {
+        [self scrollToBottomAnimated:YES];
+    }
     //[self.refreshControl endRefreshing];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Message read/send error - please make sure you are connected to either 3G or WI-FI" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-    [errorView show];
+    //UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Message read/send error - please make sure you are connected to either 3G or WI-FI" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    //[errorView show];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
@@ -261,13 +452,29 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MainCell"];
     
-   
-    NSInteger indexOfSender = [self.dbManager.arrColumnNames indexOfObject:@"sender"];
+   // NSInteger indexOfSender = [self.dbManager.arrColumnNames indexOfObject:@"sender"];
     NSInteger indexOfMessage = [self.dbManager.arrColumnNames indexOfObject:@"message"];
     
+    //cell.textLabel.text = [[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfSender];
+    //cell.detailTextLabel.text = [[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfMessage];
     
-    cell.textLabel.text = [[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfSender];
-    cell.detailTextLabel.text = [[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfMessage];
+    
+    CGRect textRect=CGRectMake(60, 8, 100, 30);
+    UITextView *msg = [[UITextView alloc] initWithFrame:textRect];
+    [msg setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [msg.layer setBorderColor: [[UIColor grayColor] CGColor]];
+    [msg.layer setCornerRadius:10];
+    [msg.layer setBorderWidth:1];
+    msg.editable = false;
+    msg.font = [UIFont systemFontOfSize:15];
+    //msg.keyboardType = UIKeyboardTypeDefault;
+    msg.text = [[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfMessage];
+    [msg sizeToFit];
+    //[[Messages objectAtIndex:indexPath.row] setObject:[NSString stringWithFormat:@"%f", msg.frame.size.height] forKey:@"Height"];
+    [cell addSubview:msg];
+    
+   
+
     
     return cell;
 }

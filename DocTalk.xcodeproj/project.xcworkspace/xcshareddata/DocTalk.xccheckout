@@ -12,6 +12,10 @@
 	<dict>
 		<key>236A26242AEE3503C90CFDFE2DB30C8607BD10C1</key>
 		<string>https://github.com/KCJWagner/DocTalk.git</string>
+		<key>3295696B2ABB63B244A5608CBC7B986155E10CBC</key>
+		<string>https://github.com/jessesquires/JSQSystemSoundPlayer.git</string>
+		<key>90530B99EB0008E7A50951FDFBE02169118FA649</key>
+		<string>https://github.com/jessesquires/JSQMessagesViewController.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>DocTalk.xcodeproj</string>
@@ -19,6 +23,10 @@
 	<dict>
 		<key>236A26242AEE3503C90CFDFE2DB30C8607BD10C1</key>
 		<string>../..</string>
+		<key>3295696B2ABB63B244A5608CBC7B986155E10CBC</key>
+		<string>../../../JSQSystemSoundPlayer</string>
+		<key>90530B99EB0008E7A50951FDFBE02169118FA649</key>
+		<string>../../../JSQMessagesViewController</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/KCJWagner/DocTalk.git</string>
@@ -35,6 +43,22 @@
 			<string>236A26242AEE3503C90CFDFE2DB30C8607BD10C1</string>
 			<key>IDESourceControlWCCName</key>
 			<string>DocTalk</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>90530B99EB0008E7A50951FDFBE02169118FA649</string>
+			<key>IDESourceControlWCCName</key>
+			<string>JSQMessagesViewController</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3295696B2ABB63B244A5608CBC7B986155E10CBC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>JSQSystemSoundPlayer</string>
 		</dict>
 	</array>
 </dict>

@@ -78,7 +78,7 @@ NSMutableArray *Messages;
         imageRect = CGRectMake(self.MsgList.frame.size.width - 50, 10, 40, 40);
         textRect = CGRectMake(self.MsgList.frame.size.width - width - 60, 8, width, 30);
     }
-    
+
 //    Make the image
     UIImageView *profilePic = [[UIImageView alloc] initWithFrame:imageRect];
     profilePic.image = [UIImage imageNamed:[[Messages objectAtIndex:indexPath.row] objectForKey:@"Picture"]];
