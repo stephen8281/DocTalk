@@ -7,7 +7,6 @@
 //
 #import "JSQMessages.h"
 #import <UIKit/UIKit.h>
-#import "MessageComposerView.h"
 
 
 #define sendURL @"http://192.168.1.73/test.php"
@@ -21,27 +20,23 @@
 //UIViewController <UITextFieldDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource,MessageComposerViewDelegate>
 
 
-@property(nonatomic,strong)NSMutableArray *messages;
+//Chat bubbles objects
 @property(nonatomic,strong)JSQMessagesBubbleImage *outgoingBubbleImageData;
 @property(nonatomic,strong)JSQMessagesBubbleImage *incomingBubbleImageData;
 
+//connection objects
+@property(nonatomic,strong)  NSURLConnection *postConnection;
+@property(nonatomic,strong)  NSURLConnection *deleteConnection;
+@property(nonatomic,strong)  NSURLConnection *readConnection;
 
-//send message methods
-@property (nonatomic, strong) MessageComposerView *messageComposerView;
-@property(nonatomic,strong)    NSURLConnection *postConnection;
-
-//recipient name
+//name of the person chatting with
 @property(nonatomic,strong) NSString *name;
 
-
-//read message methods
-@property (nonatomic,strong)IBOutlet UITableView *mainTableView;
-
-@property (nonatomic,strong)NSArray *json; //news
+//objects for receiving json data from server
+@property (nonatomic,strong)NSArray *json;
 @property (nonatomic,strong)NSMutableData *data;
 
-@property(nonatomic,strong)    NSURLConnection *deleteConnection;
-@property(nonatomic,strong)    NSURLConnection *readConnection;
+
 
 @end
 

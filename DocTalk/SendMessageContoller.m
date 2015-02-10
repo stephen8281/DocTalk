@@ -15,18 +15,15 @@
 -(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver;
 
 //read message methods
--(void) LaunchTimer;
+-(void) LaunchTimer; // a timer that calls readMessage every 8 sec
 -(void) readMessage;
 -(void) deleteMessage:(NSString*)messageID;
-
 -(void)loadData:(NSString*)personTalkingTo;
+
 @property (nonatomic, strong) DBManager *dbManager;
-@property (nonatomic, strong) NSMutableArray *arrMessage;
-@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) NSMutableArray *arrMessage; // 2 dimensional array for result from querying local database
 @property (nonatomic, strong) NSString *phoneOwner;
-
-//@property(nonatomic,strong)NSMutableArray *messages;
-
+//@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @end
 
 @implementation SendMessageController
@@ -34,12 +31,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    //_mainTableView.delegate = self;
-   // _mainTableView.dataSource = self;
-
     self.title = _name;
     self.phoneOwner = @"Stephen";
     
+    //set the senderID and senderDisplayName that will be used by JSQMessage
     self.senderId = _phoneOwner;
     self.senderDisplayName = _phoneOwner;
     self.showLoadEarlierMessagesHeader = YES;
@@ -57,17 +52,6 @@
 //    [self.refreshControl addTarget:self action:@selector(readMessage)  forControlEvents:UIControlEventValueChanged];
 //    [_mainTableView addSubview:self.refreshControl];
 
-    
-    //add subview for MessageComposeView
-//    float defaultWidth = 320;
-//    float defaultHeight = 54;
-//    CGRect subviewFrame = CGRectMake(0, self.view.frame.size.height - defaultHeight, defaultWidth, defaultHeight);
-//    self.messageComposerView = [[MessageComposerView alloc]initWithFrame:subviewFrame];
-//    self.messageComposerView.delegate = self;
-//    [self.view addSubview:self.messageComposerView];
-    
-    //register for notification
-    [self registerForKeyboardNotifications];
     
     //populate the tables from local database
     [self loadData:_name];
@@ -91,7 +75,7 @@
 }
 
 
-#pragma mark - JSQmessage Delegate
+#pragma mark - JSQmessage Datasource Delegate
 //- (NSString *)senderDisplayName
 //{
 //    return @"Stephen";
@@ -256,18 +240,6 @@
 }
 
 
-#pragma mark - MessageComposerView delegate methods
--(void)messageComposerSendMessageClickedWithMessage:(NSString *)message
-{
-    //NSLog(@"%@",message);
-    
-    [self postMessage:message withSender:self.phoneOwner withReceiver:_name];
-    
-    [_messageComposerView endEditing:YES];
-
-}
-
-
 
 #pragma mark - send message methods
 
@@ -298,10 +270,8 @@
 
 -(void)loadData:(NSString*)personTalkingTo{
     
+    //Form the query
     NSString *query = [NSString stringWithFormat:@"select * from messageTable where (sender = '%@' and receiver = '%@') or (sender = '%@' and receiver = '%@') order by messageID", personTalkingTo,_phoneOwner,_phoneOwner,personTalkingTo];
-    // Form the query.
-    //NSString *query = @"select * from messageTable";
-
     
     // Get the results.
     if (self.arrMessage != nil) {
@@ -309,22 +279,11 @@
     }
     self.arrMessage = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     
+    //reload the contentview
     [self.collectionView reloadData];
-    //[self scrollToBottomAnimated:YES];
-    
-//    // Reload the table view data.
-//    [_mainTableView reloadData];
-//    
-//    NSInteger lastRowNumber = [_mainTableView numberOfRowsInSection:0] -1;
-//    if (lastRowNumber>0) {
-//        NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
-//        
-//        [_mainTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
-//    }
 
     
 }
-
 
 
 // method for deleting message after an user has read it from the database
@@ -343,6 +302,7 @@
     _deleteConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 }
 
+
 //Timer to periodically check in with server for new messages
 -(void)LaunchTimer
 {
@@ -351,7 +311,6 @@
 }
 
 // Method to establish connection to the online database
-//TODO: receiver is hardcoded for now, will change after login is done
 -(void) readMessage
 {
     
@@ -361,8 +320,6 @@
     [request setHTTPMethod:@"POST"];
     
     _readConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-    
-        //[self performSelectorOnMainThread:@selector(readMessage) withObject:nil waitUntilDone:NO];
 
 }
 
@@ -384,10 +341,14 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    if(connection == _deleteConnection)
+    {
+        return;
+    }
+    
     BOOL didUpdateDatabase = NO;
     
     _json = [NSJSONSerialization JSONObjectWithData:_data options:nil error:nil];
-    
     
     //store the json data into local database
     for(int i = 0; i<[_json count];i++)
@@ -432,113 +393,6 @@
     //[errorView show];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
-
-
-#pragma mark - Tableview
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-
-    return self.arrMessage.count;
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MainCell"];
-    
-   // NSInteger indexOfSender = [self.dbManager.arrColumnNames indexOfObject:@"sender"];
-    NSInteger indexOfMessage = [self.dbManager.arrColumnNames indexOfObject:@"message"];
-    
-    //cell.textLabel.text = [[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfSender];
-    //cell.detailTextLabel.text = [[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfMessage];
-    
-    
-    CGRect textRect=CGRectMake(60, 8, 100, 30);
-    UITextView *msg = [[UITextView alloc] initWithFrame:textRect];
-    [msg setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [msg.layer setBorderColor: [[UIColor grayColor] CGColor]];
-    [msg.layer setCornerRadius:10];
-    [msg.layer setBorderWidth:1];
-    msg.editable = false;
-    msg.font = [UIFont systemFontOfSize:15];
-    //msg.keyboardType = UIKeyboardTypeDefault;
-    msg.text = [[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfMessage];
-    [msg sizeToFit];
-    //[[Messages objectAtIndex:indexPath.row] setObject:[NSString stringWithFormat:@"%f", msg.frame.size.height] forKey:@"Height"];
-    [cell addSubview:msg];
-    
-   
-
-    
-    return cell;
-}
-
-
-//#pragma mark - segue method
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ([[segue identifier] isEqualToString:@"sendMessage"]) {
-//        
-//        [[segue destinationViewController] setName:_name];
-//    }
-//}
-
-#pragma mark - moving up tableview when keyboard shows
-
-- (void)registerForKeyboardNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-
-}
-
-// Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWasShown:(NSNotification*)aNotification
-{
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-
-    //CGSize tabBarSize = [[[self tabBarController]tabBar]bounds].size;
-
-    //shrink the table view
-    [_mainTableView setFrame:CGRectMake(_mainTableView.frame.origin.x,_mainTableView.frame.origin.y,_mainTableView.frame.size.width,_mainTableView.frame.size.height -kbSize.height)];
-    
-    NSInteger lastRowNumber = [_mainTableView numberOfRowsInSection:0] -1;
-    
-    if (lastRowNumber>0) {
-        NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
-
-        [_mainTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
-    }
-
-
-}
-
-// Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-{
-    //Get the keyboard size
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    
-    //return the tableView to its original size
-    [_mainTableView setFrame:CGRectMake(_mainTableView.frame.origin.x,_mainTableView.frame.origin.y,_mainTableView.frame.size.width,_mainTableView.frame.size.height+kbSize.height)];
-
-
-}
-
 
 
 
