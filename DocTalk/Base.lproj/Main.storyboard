@@ -256,6 +256,10 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="x01-ob-CaT" appends="YES" id="3iY-ue-o9l"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Mgf-Kz-Pm0">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="r9e-MF-0cT">
@@ -269,6 +273,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYU-co-wwM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="x01-ob-CaT"/>
             </objects>
             <point key="canvasLocation" x="1444" y="852"/>
         </scene>
@@ -740,6 +745,9 @@
                                 <rect key="frame" x="16" y="178" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Dug-DJ-6Jm" id="jcc-fS-bLk"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eas-h4-mIz">
                                 <rect key="frame" x="16" y="216" width="42" height="21"/>
@@ -751,6 +759,9 @@
                                 <rect key="frame" x="16" y="245" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Dug-DJ-6Jm" id="CDO-EY-HKR"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Phone Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bhu-ND-WVK">
                                 <rect key="frame" x="16" y="283" width="116" height="21"/>
@@ -762,6 +773,9 @@
                                 <rect key="frame" x="16" y="312" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Dug-DJ-6Jm" id="hiS-mr-ngc"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hospital" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvX-At-hN6">
                                 <rect key="frame" x="16" y="350" width="64" height="21"/>
@@ -773,9 +787,16 @@
                                 <rect key="frame" x="16" y="379" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Dug-DJ-6Jm" id="far-vx-eCz"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Y6j-oF-XvK" appends="YES" id="Gvb-LL-lAt"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Profile Settings" id="uXz-u0-Vj7"/>
                     <connections>
@@ -789,6 +810,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eK8-Az-rP4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Y6j-oF-XvK">
+                    <connections>
+                        <action selector="backgroundTap:" destination="Dug-DJ-6Jm" id="v2O-Sy-Gbi"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1834" y="1864"/>
         </scene>
@@ -848,6 +874,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="pfp-VK-TKK" appends="YES" id="ghD-4j-liz"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Change Password" id="yYk-oD-sJR"/>
                     <connections>
@@ -859,6 +889,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0d4-1i-APi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="pfp-VK-TKK">
+                    <connections>
+                        <action selector="backgroundTap:" destination="JOe-8Y-z97" id="qjA-zM-GJS"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1834" y="2488"/>
         </scene>

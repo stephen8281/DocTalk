@@ -13,5 +13,6 @@
 @property (strong, nonatomic) IBOutlet UIView *Thread;
 @property (strong, nonatomic) NSString *messageID;
 @property (strong, nonatomic) IBOutlet UITableView *MsgList;
+- (IBAction)backgroundTap:(id)sender;
 
 @end

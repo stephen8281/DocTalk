@@ -17,5 +17,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UITextField *phoneNumber;
 @property (strong, nonatomic) IBOutlet UITextField *hospital;
+- (IBAction)backgroundTap:(id)sender;
 
 @end
