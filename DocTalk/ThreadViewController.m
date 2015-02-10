@@ -122,4 +122,7 @@ NSMutableArray *Messages;
     return [[[Messages objectAtIndex:indexPath.row] objectForKey:@"Height"] floatValue] + 20;
 }
 
+- (IBAction)backgroundTap:(id)sender {
+    [self.view endEditing:YES];
+}
 @end

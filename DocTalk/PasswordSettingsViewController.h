@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *updatedPassword;
 @property (weak, nonatomic) IBOutlet UITextField *repeatedPassword;
 @property (weak, nonatomic) IBOutlet UIButton *updateButton;
+- (IBAction)backgroundTap:(id)sender;
 
 @end
