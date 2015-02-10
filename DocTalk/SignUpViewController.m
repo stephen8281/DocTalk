@@ -38,17 +38,20 @@
     NSInteger success = 0;
     @try {
         
-        if([[self.txtUsername text] isEqualToString:@""] || [[self.txtPassword text] isEqualToString:@""] ) {
+        if([[self.txtUsername text] isEqualToString:@""] || [[self.txtPassword text] isEqualToString:@""] || [[self.txtNumber text] isEqualToString:@""] ) {
             
-            [self alertStatus:@"Please enter Username and Password" :@"Sign up Failed!" :0];
+            [self alertStatus:@"Please enter all fields!" :@"Sign up Failed!" :0];
             
         } else if (![self.txtConfirmPassword.text isEqualToString:self.txtPassword.text]) {
+            
             [self alertStatus:@"Paswords do no match!" :@"Sign up Failed!" :0];
+            
         } else {
-            NSString *post =[[NSString alloc] initWithFormat:@"username=%@&password=%@&c_password=%@",[self.txtUsername text],[self.txtPassword text],[self.txtConfirmPassword text]];
+            NSString *post =[[NSString alloc] initWithFormat:@"username=%@&phonenumber=%@&password=%@&c_password=%@",[self.txtUsername text],[self.txtNumber text],[self.txtPassword text],[self.txtConfirmPassword text]];
             NSLog(@"PostData: %@",post);
             
-            NSURL *url=[NSURL URLWithString:@"http://192.168.1.66/jsonsignup.php"];
+            //NSURL *url=[NSURL URLWithString:@"http://192.168.1.66/jsonsignup.php"];
+            NSURL *url=[NSURL URLWithString:@"http://localhost/jsonsignup.php"];
             
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             
