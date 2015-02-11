@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 
-#define sendURL @"http://192.168.1.73/test.php"
-#define readURL @"http://192.168.1.73/getjson.php"
+#define sendURL @"http://192.168.1.73/postmessage.php"
+#define readURL @"http://192.168.1.73/readmessage.php"
 #define deleteURL @"http://192.168.1.73/deletemessage.php"
 
 

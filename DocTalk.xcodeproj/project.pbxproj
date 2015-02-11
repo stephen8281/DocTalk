@@ -55,6 +55,7 @@
 		DC6A611B1A8B0EE80016538E /* JSQMessagesToolbarContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC6A60EF1A8B0EE80016538E /* JSQMessagesToolbarContentView.xib */; };
 		DC6A611C1A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6A60F11A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.m */; };
 		DC6A611D1A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC6A60F21A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.xib */; };
+		DC6A611F1A8B12CC0016538E /* contact.sql in Resources */ = {isa = PBXBuildFile; fileRef = DC6A611E1A8B12CC0016538E /* contact.sql */; };
 		DC711A2D1A85B74F00FBC7F1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC711A2C1A85B74F00FBC7F1 /* AudioToolbox.framework */; };
 		DCA622851A648AB100830A80 /* chat.sql in Resources */ = {isa = PBXBuildFile; fileRef = DCA622841A648AB100830A80 /* chat.sql */; };
 		DCC2C8B31A29762D00B7A97C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8B21A29762D00B7A97C /* main.m */; };
@@ -65,7 +66,6 @@
 		DCC2C8C11A29762D00B7A97C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC2C8BF1A29762D00B7A97C /* LaunchScreen.xib */; };
 		DCC2C8CD1A29762D00B7A97C /* DocTalkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8CC1A29762D00B7A97C /* DocTalkTests.m */; };
 		DCC2C8EB1A29937200B7A97C /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8EA1A29937200B7A97C /* DBManager.m */; };
-		DCC2C8ED1A29937E00B7A97C /* contact.sql in Resources */ = {isa = PBXBuildFile; fileRef = DCC2C8EC1A29937E00B7A97C /* contact.sql */; };
 		DCC2C8EF1A29939100B7A97C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC2C8EE1A29939100B7A97C /* libsqlite3.dylib */; };
 		DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */; };
 		DCC2C8FC1A2ADAE500B7A97C /* SendMessageContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */; };
@@ -201,8 +201,9 @@
 		DC6A60F01A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesTypingIndicatorFooterView.h; sourceTree = "<group>"; };
 		DC6A60F11A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesTypingIndicatorFooterView.m; sourceTree = "<group>"; };
 		DC6A60F21A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesTypingIndicatorFooterView.xib; sourceTree = "<group>"; };
+		DC6A611E1A8B12CC0016538E /* contact.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = contact.sql; sourceTree = "<group>"; };
 		DC711A2C1A85B74F00FBC7F1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		DCA622841A648AB100830A80 /* chat.sql */ = {isa = PBXFileReference; lastKnownFileType = file; name = chat.sql; path = DocTalk/chat.sql; sourceTree = "<group>"; };
+		DCA622841A648AB100830A80 /* chat.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = chat.sql; sourceTree = "<group>"; };
 		DCC2C8AD1A29762D00B7A97C /* DocTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCC2C8B11A29762D00B7A97C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCC2C8B21A29762D00B7A97C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -218,7 +219,6 @@
 		DCC2C8CC1A29762D00B7A97C /* DocTalkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DocTalkTests.m; sourceTree = "<group>"; };
 		DCC2C8E91A29936000B7A97C /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		DCC2C8EA1A29937200B7A97C /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
-		DCC2C8EC1A29937E00B7A97C /* contact.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = contact.sql; sourceTree = "<group>"; };
 		DCC2C8EE1A29939100B7A97C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		DCC2C8F71A29A33F00B7A97C /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
@@ -444,8 +444,6 @@
 			children = (
 				DC711A2C1A85B74F00FBC7F1 /* AudioToolbox.framework */,
 				DCC2C8EE1A29939100B7A97C /* libsqlite3.dylib */,
-				DCC2C8EC1A29937E00B7A97C /* contact.sql */,
-				DCA622841A648AB100830A80 /* chat.sql */,
 				DCC2C8AF1A29762D00B7A97C /* DocTalk */,
 				DCC2C8C91A29762D00B7A97C /* DocTalkTests */,
 				DCC2C8AE1A29762D00B7A97C /* Products */,
@@ -464,6 +462,8 @@
 		DCC2C8AF1A29762D00B7A97C /* DocTalk */ = {
 			isa = PBXGroup;
 			children = (
+				DCA622841A648AB100830A80 /* chat.sql */,
+				DC6A611E1A8B12CC0016538E /* contact.sql */,
 				DC6A60861A8B0EE80016538E /* JSQMessagesViewController */,
 				DC6A60811A8B0D540016538E /* JSQSystemSoundPlayer */,
 				DC5DE2BD1A77163A00298C29 /* HomeViewController.h */,
@@ -633,11 +633,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCC2C8BC1A29762D00B7A97C /* Main.storyboard in Resources */,
-				DCC2C8ED1A29937E00B7A97C /* contact.sql in Resources */,
 				DCA622851A648AB100830A80 /* chat.sql in Resources */,
 				DC6A611D1A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				DC6A60FD1A8B0EE80016538E /* JSQMessagesViewController.xib in Resources */,
 				DC6A60F31A8B0EE80016538E /* JSQMessagesAssets.bundle in Resources */,
+				DC6A611F1A8B12CC0016538E /* contact.sql in Resources */,
 				DC6A61181A8B0EE80016538E /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
 				DCC2C8C11A29762D00B7A97C /* LaunchScreen.xib in Resources */,
 				DC6A60F41A8B0EE80016538E /* JSQMessages.strings in Resources */,
