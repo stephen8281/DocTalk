@@ -7,6 +7,7 @@
 //
 
 #import "SendMessageController.h"
+#import "LoginViewController.h"
 #import "DBManager.h"
 
 @interface SendMessageController ()
@@ -45,7 +46,7 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-
+    //NSLog(@"%@",_phone);
     
     //initialize the refresh control will replace with a timer later
 //    self.refreshControl = [[UIRefreshControl alloc] init];

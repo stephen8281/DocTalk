@@ -18,4 +18,7 @@
 - (IBAction)signinClicked:(id)sender;
 
 - (IBAction)backgroundTap:(id)sender;
+
+@property (strong, nonatomic) NSString *phone;
+
 @end
