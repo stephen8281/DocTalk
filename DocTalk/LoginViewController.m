@@ -86,11 +86,15 @@
                                           error:&error];
                 
                 success = [jsonData[@"success"] integerValue];
+                //NSString *phoneNumber = [jsonData objectForKey:@"phonenumber"];
+                _phone = [jsonData objectForKey:@"phonenumber"];
                 NSLog(@"Success: %ld",(long)success);
                 
                 if(success == 1)
                 {
                     NSLog(@"Login SUCCESS");
+                    NSLog(@"%@",_phone);
+                    
                 } else {
                     
                     NSString *error_msg = (NSString *) jsonData[@"error_message"];
@@ -111,6 +115,17 @@
         [self performSegueWithIdentifier:@"login_success" sender:self];
     }
 }
+
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([[segue identifier] isEqualToString:@"login_success"]) {
+//        UITabBarController *tabBar = (UITabBarController*)segue.destinationViewController;
+//        NavigationController *vc = (NavigationController *)[tabBar.viewControllers objectAtIndex:0];
+//        
+//        [[segue destinationViewController] setPhone:_phone];
+//        vc.phone = _phone;
+//    }
+//}
 
 - (void) alertStatus:(NSString *)msg :(NSString *)title :(int) tag
 {

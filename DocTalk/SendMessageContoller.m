@@ -7,6 +7,7 @@
 //
 
 #import "SendMessageController.h"
+#import "LoginViewController.h"
 #import "DBManager.h"
 
 @interface SendMessageController ()
@@ -45,7 +46,7 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-
+    //NSLog(@"%@",_phone);
     
     //initialize the refresh control will replace with a timer later
 //    self.refreshControl = [[UIRefreshControl alloc] init];
@@ -348,7 +349,7 @@
     
     BOOL didUpdateDatabase = NO;
     
-    _json = [NSJSONSerialization JSONObjectWithData:_data options:nil error:nil];
+    _json = [NSJSONSerialization JSONObjectWithData:_data options:NSJSONReadingMutableContainers error:nil];
     
     //store the json data into local database
     for(int i = 0; i<[_json count];i++)
@@ -393,6 +394,7 @@
     //[errorView show];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
+
 
 
 

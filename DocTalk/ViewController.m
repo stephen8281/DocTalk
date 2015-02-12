@@ -31,6 +31,7 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"contact.sql"];
     
+    //NSLog(@"%@",_phone);
     // Load the data from database
     [self loadData];
 }

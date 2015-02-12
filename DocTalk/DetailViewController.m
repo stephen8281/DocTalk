@@ -220,7 +220,7 @@
 {
     if ([[segue identifier] isEqualToString:@"showName"]) {
 
-        NSString *name = [[NSString alloc]initWithFormat:[_dictContactDetails objectForKey:@"firstName"]];
+        NSString *name = [NSString stringWithString:[_dictContactDetails objectForKey:@"firstName"]];
         //NSMutableString *name = [[NSMutableString alloc]initWithCapacity:0];
         //[name appendString:[_dictContactDetails objectForKey:@"firstName"]];
         
