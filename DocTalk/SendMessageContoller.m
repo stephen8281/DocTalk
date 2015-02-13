@@ -34,6 +34,7 @@
 
     self.title = _name;
     self.phoneOwner = @"Stephen";
+    NSLog(@"%@",_phone);
     
     //set the senderID and senderDisplayName that will be used by JSQMessage
     self.senderId = _phoneOwner;

@@ -20,4 +20,6 @@
 -(IBAction)makeCall:(id)sender;
 -(IBAction)sendSMS:(id)sender;
 
+@property (strong, nonatomic) NSString *phone;
+
 @end

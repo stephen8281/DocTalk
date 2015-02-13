@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 
+
 @interface DetailViewController ()
 
 -(void)populateContactData;
@@ -225,6 +226,8 @@
         //[name appendString:[_dictContactDetails objectForKey:@"firstName"]];
         
         [[segue destinationViewController] setName:name];
+        [[segue destinationViewController]setPhone:_phone];
+        
     }
 }
 

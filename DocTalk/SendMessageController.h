@@ -36,6 +36,8 @@
 @property (nonatomic,strong)NSArray *json;
 @property (nonatomic,strong)NSMutableData *data;
 
+@property (strong, nonatomic) NSString *phone;
+
 
 
 @end
