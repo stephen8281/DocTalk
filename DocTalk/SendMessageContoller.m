@@ -19,7 +19,7 @@
 -(void) LaunchTimer; // a timer that calls readMessage every 8 sec
 -(void) readMessage;
 -(void) deleteMessage:(NSString*)messageID;
--(void)loadData:(NSString*)personTalkingTo;
+-(void) loadData;
 
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *arrMessage; // 2 dimensional array for result from querying local database
@@ -36,9 +36,7 @@
     self.title = _receiverName;
     self.phoneOwner = _phone;
     
-    NSLog(@"%@",_phone);
-
-    //reformat the phone number to get rid of unneccesary characters
+    //reformat the phone number to get rid of brackets and dash
     self.incomingNumber = [[_receiverNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
 
   
@@ -61,7 +59,7 @@
 
     
     //populate the tables from local database
-    [self loadData:self.incomingNumber];
+    [self loadData];
 
     
     //Initialize the chat bubbles
@@ -274,10 +272,10 @@
 
 #pragma mark - read message methods
 
--(void)loadData:(NSString*)personTalkingTo{
-    
+-(void)loadData
+{
     //Form the query
-    NSString *query = [NSString stringWithFormat:@"select * from messageTable where (sender = '%@' and receiver = '%@') or (sender = '%@' and receiver = '%@') order by messageID", personTalkingTo,_phoneOwner,_phoneOwner,personTalkingTo];
+    NSString *query = [NSString stringWithFormat:@"select * from messageTable where (sender = '%@' and receiver = '%@') or (sender = '%@' and receiver = '%@') order by messageID", self.incomingNumber,_phoneOwner,_phoneOwner,self.incomingNumber];
     
     // Get the results.
     if (self.arrMessage != nil) {
@@ -385,7 +383,7 @@
         }
     }
     
-    [self loadData:self.incomingNumber];
+    [self loadData];
     if(didUpdateDatabase)
     {
         [self scrollToBottomAnimated:YES];
