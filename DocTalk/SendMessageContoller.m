@@ -24,6 +24,7 @@
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *arrMessage; // 2 dimensional array for result from querying local database
 @property (nonatomic, strong) NSString *phoneOwner;
+@property (nonatomic, strong) NSString *incomingNumber;
 //@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @end
 
@@ -32,10 +33,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = _name;
-    self.phoneOwner = @"Stephen";
-    NSLog(@"%@",_phone);
+    self.title = _receiverName;
+    self.phoneOwner = _phone;
     
+    NSLog(@"%@",_phone);
+
+    //reformat the phone number to get rid of unneccesary characters
+    self.incomingNumber = [[_receiverNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
+
+  
     //set the senderID and senderDisplayName that will be used by JSQMessage
     self.senderId = _phoneOwner;
     self.senderDisplayName = _phoneOwner;
@@ -47,7 +53,6 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    //NSLog(@"%@",_phone);
     
     //initialize the refresh control will replace with a timer later
 //    self.refreshControl = [[UIRefreshControl alloc] init];
@@ -56,7 +61,7 @@
 
     
     //populate the tables from local database
-    [self loadData:_name];
+    [self loadData:self.incomingNumber];
 
     
     //Initialize the chat bubbles
@@ -194,7 +199,7 @@
 #pragma mark - JSQMessagesViewController Methods
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date
 {
-    [self postMessage:text withSender:self.phoneOwner withReceiver:_name];
+    [self postMessage:text withSender:self.phoneOwner withReceiver:self.incomingNumber];
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     [self finishSendingMessageAnimated:YES];
 }
@@ -253,7 +258,6 @@
         [postString appendString:[NSString stringWithFormat:@"?%@=%@", @"sender", sender]];
         
         [postString appendString:[NSString stringWithFormat:@"&%@=%@", @"receiver", receiver]];
-        
         
         [postString appendString:[NSString stringWithFormat:@"&%@=%@", @"message", message]];
         
@@ -381,7 +385,7 @@
         }
     }
     
-    [self loadData:_name];
+    [self loadData:self.incomingNumber];
     if(didUpdateDatabase)
     {
         [self scrollToBottomAnimated:YES];
