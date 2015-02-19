@@ -10,7 +10,6 @@
 		DC5DE2C31A77163A00298C29 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5DE2BE1A77163A00298C29 /* HomeViewController.m */; };
 		DC5DE2C41A77163A00298C29 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5DE2C01A77163A00298C29 /* LoginViewController.m */; };
 		DC5DE2C51A77163A00298C29 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5DE2C21A77163A00298C29 /* SignUpViewController.m */; };
-		DC5DE2CC1A799A0600298C29 /* MessageComposerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5DE2CB1A799A0600298C29 /* MessageComposerView.m */; };
 		DC6A60851A8B0D540016538E /* JSQSystemSoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6A60841A8B0D540016538E /* JSQSystemSoundPlayer.m */; };
 		DC6A60F31A8B0EE80016538E /* JSQMessagesAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DC6A60881A8B0EE80016538E /* JSQMessagesAssets.bundle */; };
 		DC6A60F41A8B0EE80016538E /* JSQMessages.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC6A608A1A8B0EE80016538E /* JSQMessages.strings */; };
@@ -99,8 +98,6 @@
 		DC5DE2C01A77163A00298C29 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		DC5DE2C11A77163A00298C29 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		DC5DE2C21A77163A00298C29 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
-		DC5DE2CA1A799A0600298C29 /* MessageComposerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageComposerView.h; sourceTree = "<group>"; };
-		DC5DE2CB1A799A0600298C29 /* MessageComposerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageComposerView.m; sourceTree = "<group>"; };
 		DC6A60831A8B0D540016538E /* JSQSystemSoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQSystemSoundPlayer.h; sourceTree = "<group>"; };
 		DC6A60841A8B0D540016538E /* JSQSystemSoundPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQSystemSoundPlayer.m; sourceTree = "<group>"; };
 		DC6A60881A8B0EE80016538E /* JSQMessagesAssets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = JSQMessagesAssets.bundle; sourceTree = "<group>"; };
@@ -479,8 +476,6 @@
 				DC5DE2C21A77163A00298C29 /* SignUpViewController.m */,
 				DCC2C8FA1A2ADAE500B7A97C /* SendMessageController.h */,
 				DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */,
-				DC5DE2CA1A799A0600298C29 /* MessageComposerView.h */,
-				DC5DE2CB1A799A0600298C29 /* MessageComposerView.m */,
 				DFDF35581A2D45B100435573 /* SendMsgViewController.h */,
 				DFDF35591A2D45B100435573 /* SendMsgViewController.m */,
 				DCC2C8EA1A29937200B7A97C /* DBManager.m */,
@@ -678,7 +673,6 @@
 				DC6A61141A8B0EE80016538E /* JSQMessagesComposerTextView.m in Sources */,
 				DC6A611A1A8B0EE80016538E /* JSQMessagesToolbarContentView.m in Sources */,
 				DC6A61151A8B0EE80016538E /* JSQMessagesInputToolbar.m in Sources */,
-				DC5DE2CC1A799A0600298C29 /* MessageComposerView.m in Sources */,
 				DC6A60FF1A8B0EE80016538E /* JSQMessagesBubbleImageFactory.m in Sources */,
 				DC6A61091A8B0EE80016538E /* JSQMessagesAvatarImage.m in Sources */,
 				DC6A60F51A8B0EE80016538E /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
