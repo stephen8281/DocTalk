@@ -11,5 +11,6 @@
 @interface TabBarController : UITabBarController
 
 +(NSMutableArray *)getMessages;
++(void)sortMessages;
 
 @end

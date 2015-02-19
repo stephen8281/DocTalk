@@ -8,7 +8,6 @@
 
 #import "ThreadListViewController.h"
 #import "ThreadViewController.h"
-#import "sortMessagesContainer.h"
 
 @interface ThreadListViewController ()
 
@@ -50,8 +49,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Sort Messages based on %@", [sortMessagesContainer sortOrder]);
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
 //    Set the image
