@@ -30,11 +30,14 @@
 @property(nonatomic,strong)  NSURLConnection *readConnection;
 
 //name of the person chatting with
-@property(nonatomic,strong) NSString *name;
+@property(nonatomic,strong) NSString *receiverName;
+@property(nonatomic,strong) NSString *receiverNumber;
 
 //objects for receiving json data from server
 @property (nonatomic,strong)NSArray *json;
 @property (nonatomic,strong)NSMutableData *data;
+
+@property (strong, nonatomic) NSString *phone;
 
 
 

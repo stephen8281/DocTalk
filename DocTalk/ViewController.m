@@ -31,7 +31,6 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"contact.sql"];
     
-    //NSLog(@"%@",_phone);
     // Load the data from database
     [self loadData];
 }
@@ -141,6 +140,7 @@
         [contactDetailsDictionary setObject:workEmail forKey:@"workEmail"];
         
         [[segue destinationViewController] setDictContactDetails:contactDetailsDictionary];
+        [[segue destinationViewController] setPhone:_phone];
     }
 }
 

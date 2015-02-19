@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 
+
 @interface LoginViewController ()
 
 @end
@@ -93,7 +94,7 @@
                 if(success == 1)
                 {
                     NSLog(@"Login SUCCESS");
-                    NSLog(@"%@",_phone);
+                    //NSLog(@"%@",_phone);
                     
                 } else {
                     
@@ -116,16 +117,16 @@
     }
 }
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ([[segue identifier] isEqualToString:@"login_success"]) {
-//        UITabBarController *tabBar = (UITabBarController*)segue.destinationViewController;
-//        NavigationController *vc = (NavigationController *)[tabBar.viewControllers objectAtIndex:0];
-//        
-//        [[segue destinationViewController] setPhone:_phone];
-//        vc.phone = _phone;
-//    }
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"login_success"]) {
+        UITabBarController *tabBar = segue.destinationViewController;
+        UINavigationController *navController = [tabBar.viewControllers objectAtIndex:0];
+        ViewController *cvc = [navController.viewControllers objectAtIndex:0];
+        
+        cvc.phone = _phone;
+    }
+}
 
 - (void) alertStatus:(NSString *)msg :(NSString *)title :(int) tag
 {

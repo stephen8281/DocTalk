@@ -19,11 +19,12 @@
 -(void) LaunchTimer; // a timer that calls readMessage every 8 sec
 -(void) readMessage;
 -(void) deleteMessage:(NSString*)messageID;
--(void)loadData:(NSString*)personTalkingTo;
+-(void) loadData;
 
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *arrMessage; // 2 dimensional array for result from querying local database
 @property (nonatomic, strong) NSString *phoneOwner;
+@property (nonatomic, strong) NSString *incomingNumber;
 //@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @end
 
@@ -32,9 +33,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = _name;
-    self.phoneOwner = @"Stephen";
+    self.title = _receiverName;
+    self.phoneOwner = _phone;
     
+    //reformat the phone number to get rid of brackets and dash
+    self.incomingNumber = [[_receiverNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
+
+  
     //set the senderID and senderDisplayName that will be used by JSQMessage
     self.senderId = _phoneOwner;
     self.senderDisplayName = _phoneOwner;
@@ -46,7 +51,6 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    //NSLog(@"%@",_phone);
     
     //initialize the refresh control will replace with a timer later
 //    self.refreshControl = [[UIRefreshControl alloc] init];
@@ -55,7 +59,7 @@
 
     
     //populate the tables from local database
-    [self loadData:_name];
+    [self loadData];
 
     
     //Initialize the chat bubbles
@@ -193,7 +197,7 @@
 #pragma mark - JSQMessagesViewController Methods
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date
 {
-    [self postMessage:text withSender:self.phoneOwner withReceiver:_name];
+    [self postMessage:text withSender:self.phoneOwner withReceiver:self.incomingNumber];
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     [self finishSendingMessageAnimated:YES];
 }
@@ -253,7 +257,6 @@
         
         [postString appendString:[NSString stringWithFormat:@"&%@=%@", @"receiver", receiver]];
         
-        
         [postString appendString:[NSString stringWithFormat:@"&%@=%@", @"message", message]];
         
         [postString setString:[postString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -269,10 +272,10 @@
 
 #pragma mark - read message methods
 
--(void)loadData:(NSString*)personTalkingTo{
-    
+-(void)loadData
+{
     //Form the query
-    NSString *query = [NSString stringWithFormat:@"select * from messageTable where (sender = '%@' and receiver = '%@') or (sender = '%@' and receiver = '%@') order by messageID", personTalkingTo,_phoneOwner,_phoneOwner,personTalkingTo];
+    NSString *query = [NSString stringWithFormat:@"select * from messageTable where (sender = '%@' and receiver = '%@') or (sender = '%@' and receiver = '%@') order by messageID", self.incomingNumber,_phoneOwner,_phoneOwner,self.incomingNumber];
     
     // Get the results.
     if (self.arrMessage != nil) {
@@ -380,7 +383,7 @@
         }
     }
     
-    [self loadData:_name];
+    [self loadData];
     if(didUpdateDatabase)
     {
         [self scrollToBottomAnimated:YES];

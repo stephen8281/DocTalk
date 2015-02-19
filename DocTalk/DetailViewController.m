@@ -7,6 +7,8 @@
 //
 
 #import "DetailViewController.h"
+#import "SendMessageController.h"
+
 
 @interface DetailViewController ()
 
@@ -221,10 +223,15 @@
     if ([[segue identifier] isEqualToString:@"showName"]) {
 
         NSString *name = [NSString stringWithString:[_dictContactDetails objectForKey:@"firstName"]];
+        NSString *phoneNumber = [NSString stringWithString:[_dictContactDetails objectForKey:@"mobileNumber"]];
         //NSMutableString *name = [[NSMutableString alloc]initWithCapacity:0];
         //[name appendString:[_dictContactDetails objectForKey:@"firstName"]];
         
-        [[segue destinationViewController] setName:name];
+
+        [[segue destinationViewController] setReceiverName: name];
+        [[segue destinationViewController] setReceiverNumber: phoneNumber];
+        [[segue destinationViewController] setPhone: _phone];
+        
     }
 }
 
