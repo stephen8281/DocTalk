@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "ThreadListViewController.h"
 
 
 @interface LoginViewController ()
@@ -38,8 +39,8 @@
 
 - (IBAction)signinClicked:(id)sender {
     //    Added this line of code for testing purposes
-    [self performSegueWithIdentifier:@"login_success" sender:self];
-    return;
+//    [self performSegueWithIdentifier:@"login_success" sender:self];
+//    return;
     
     NSInteger success = 0;
     @try {
@@ -123,8 +124,11 @@
         UITabBarController *tabBar = segue.destinationViewController;
         UINavigationController *navController = [tabBar.viewControllers objectAtIndex:0];
         ViewController *cvc = [navController.viewControllers objectAtIndex:0];
-        
         cvc.phone = _phone;
+        
+        UINavigationController *navController1 = [tabBar.viewControllers objectAtIndex:1];
+        ThreadListViewController *tlvc = [navController1.viewControllers objectAtIndex:0];
+        tlvc.phone = _phone;
     }
 }
 

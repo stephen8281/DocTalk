@@ -23,6 +23,11 @@
 
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *arrMessage; // 2 dimensional array for result from querying local database
+
+//
+@property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
+@property (nonatomic, strong) DBManager *dbManagerForContact;
+
 @property (nonatomic, strong) NSString *phoneOwner;
 @property (nonatomic, strong) NSString *incomingNumber;
 //@property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -34,20 +39,23 @@
     [super viewDidLoad];
 
     self.title = _receiverName;
-    self.phoneOwner = _phone;
     
-    //reformat the phone number to get rid of brackets and dash
+    //set the phoneOwner to be the phone number retrieved from online database
+    self.phoneOwner = _phone;
+        
+    //Initialize database to store messages locally
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"chat.sql"];
+
+    //reformat the phone number of the person chatting with to get rid of brackets and dash
     self.incomingNumber = [[_receiverNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
 
-  
+
+    
     //set the senderID and senderDisplayName that will be used by JSQMessage
     self.senderId = _phoneOwner;
     self.senderDisplayName = _phoneOwner;
     self.showLoadEarlierMessagesHeader = YES;
     
-    
-    //Initialize database to store messages locally
-    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"chat.sql"];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
@@ -58,14 +66,13 @@
 //    [_mainTableView addSubview:self.refreshControl];
 
     
-    //populate the tables from local database
-    [self loadData];
-
-    
     //Initialize the chat bubbles
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc]init];
     _outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
     _incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+    
+    //populate the tables from local database
+    [self loadData];
     
     //Check in with the server every 8 second
     [self performSelectorOnMainThread:@selector(LaunchTimer) withObject:nil waitUntilDone:NO];
@@ -382,6 +389,9 @@
             NSLog(@"Could not execute the query.");
         }
     }
+    
+
+    
     
     [self loadData];
     if(didUpdateDatabase)

@@ -11,5 +11,6 @@
 @interface ThreadListViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *myMessages;
+@property (strong, nonatomic) NSString *phone;
 
 @end

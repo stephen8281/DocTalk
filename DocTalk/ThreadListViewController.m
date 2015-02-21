@@ -8,9 +8,13 @@
 
 #import "ThreadListViewController.h"
 #import "ThreadViewController.h"
+#import "DBManager.h"
 
 @interface ThreadListViewController ()
-
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) NSMutableArray *arrContact; // 2 dimensional array for result from querying local database
+@property (nonatomic, strong) NSMutableArray *arrMessage; // 2 dimensional array for result from querying local database
+-(void) loadData;
 @end
 
 @implementation ThreadListViewController{
@@ -23,19 +27,43 @@
     _myMessages.delegate = self;
     _myMessages.dataSource = self;
     
-    Threads = [NSArray arrayWithObjects: @"Test1", @"Test2", @"Test3", @"Test4", @"Test5", @"Test6", @"Test7", @"Test8", @"Test9", nil];
+    //Threads = [NSArray arrayWithObjects: @"Test1", @"Test2", @"Test3", @"Test4", @"Test5", @"Test6", @"Test7", @"Test8", @"Test9", nil];
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"chat.sql"];
+
+    [self loadData];
     
     // Reload the table view data.
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [self.tableView reloadData];
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self loadData];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - loading the table view
+-(void)loadData
+{
+    //Form the query
+
+    NSString *query = [NSString stringWithFormat:@"SELECT DISTINCT receiver FROM messageTable WHERE sender LIKE '%@' UNION SELECT DISTINCT sender FROM messageTable WHERE receiver LIKE '%@' ",_phone,_phone];
+    if (self.arrContact != nil) {
+        self.arrContact = nil;
+    }
+    self.arrContact = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    
+    
+    //reload the contentview
+    [self.tableView reloadData];
+    
+    
 }
 
 #pragma mark - Table view data source
@@ -45,7 +73,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return Threads.count;
+
+    return self.arrContact.count;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -56,12 +86,26 @@
     cell.imageView.image = image;
 
 //    Set the message title
+    NSString *incomingPerson = [NSString stringWithString:[[self.arrContact objectAtIndex:indexPath.row] objectAtIndex:0]];
     UILabel *Sender = (UILabel *)[cell viewWithTag:1];
-    Sender.text = [NSString stringWithFormat:@"%@", [Threads objectAtIndex:indexPath.row]];
+    Sender.text = incomingPerson;
     
 //    Set the message preview
+    //query to get the latest message sent between phoneOwner and a given incoming person
+    NSString *query1 = [NSString stringWithFormat:@"SELECT * From messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')) AND messageID = (SELECT MAX(messageID) FROM messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')))", incomingPerson,_phone,_phone,incomingPerson, incomingPerson,_phone,_phone,incomingPerson];
+    
+    if (self.arrMessage != nil) {
+        self.arrMessage = nil;
+    }
+    self.arrMessage = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query1]];
+    NSInteger indexOfMessage = [self.dbManager.arrColumnNames indexOfObject:@"message"];
+    
     UILabel *Preview = (UILabel *)[cell viewWithTag:2];
-    Preview.text = [NSString stringWithFormat:@"%@", @"Hey this is a really cool preview message which you can use to get an idea of what the message might be about"];
+    if(self.arrMessage != nil)
+    {
+        Preview.text = [NSString stringWithString:[[self.arrMessage objectAtIndex:0] objectAtIndex:indexOfMessage]];
+    }
+    
     
 //    Set the message time
     UILabel *Time = (UILabel *)[cell viewWithTag:3];
