@@ -191,7 +191,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="vLO-jb-uEt" kind="push" identifier="ListToThread" id="6mp-mb-z1v"/>
+                                    <segue destination="Ho7-8V-03b" kind="push" identifier="showChat" id="ozg-oi-Cha"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -275,7 +275,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYU-co-wwM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="x01-ob-CaT"/>
             </objects>
-            <point key="canvasLocation" x="1444" y="852"/>
+            <point key="canvasLocation" x="1579" y="1131"/>
         </scene>
         <!--Chat-->
         <scene sceneID="Daa-BQ-rft">
@@ -469,17 +469,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="F3t-ru-IHP">
-                                <rect key="frame" x="16" y="8" width="288" height="29"/>
-                                <segments>
-                                    <segment title="Normal"/>
-                                    <segment title="Semi-Urgent"/>
-                                    <segment title="Urgent"/>
-                                </segments>
-                                <connections>
-                                    <action selector="priorityChanged:" destination="1Fx-WJ-Qfi" eventType="valueChanged" id="55D-6s-lKH"/>
-                                </connections>
-                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7R9-aO-okB">
                                 <rect key="frame" x="268" y="45" width="36" height="30"/>
                                 <state key="normal" title="Send">
@@ -498,6 +487,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="F3t-ru-IHP">
+                                <rect key="frame" x="16" y="9" width="288" height="29"/>
+                                <segments>
+                                    <segment title="Normal"/>
+                                    <segment title="Semi-Urgent"/>
+                                    <segment title="Urgent"/>
+                                </segments>
+                                <connections>
+                                    <action selector="priorityChanged:" destination="1Fx-WJ-Qfi" eventType="valueChanged" id="55D-6s-lKH"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
@@ -510,7 +510,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AT3-Ku-7cv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1942" y="854.5"/>
+            <point key="canvasLocation" x="2058" y="1130.5"/>
         </scene>
         <!--Status-->
         <scene sceneID="e5U-aa-Mpc">
@@ -1075,4 +1075,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="ozg-oi-Cha"/>
+    </inferredMetricsTieBreakers>
 </document>

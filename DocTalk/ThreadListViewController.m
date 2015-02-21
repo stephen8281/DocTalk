@@ -8,12 +8,16 @@
 
 #import "ThreadListViewController.h"
 #import "ThreadViewController.h"
+#import "SendMessageController.h"
 #import "DBManager.h"
 
 @interface ThreadListViewController ()
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *arrContact; // 2 dimensional array for result from querying local database
 @property (nonatomic, strong) NSMutableArray *arrMessage; // 2 dimensional array for result from querying local database
+@property (nonatomic, strong) NSMutableArray *arrResult;
+@property(nonatomic,strong) DBManager *dbManangerContact;
+
 -(void) loadData;
 @end
 
@@ -29,6 +33,8 @@
     
     //Threads = [NSArray arrayWithObjects: @"Test1", @"Test2", @"Test3", @"Test4", @"Test5", @"Test6", @"Test7", @"Test8", @"Test9", nil];
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"chat.sql"];
+    self.dbManangerContact = [[DBManager alloc] initWithDatabaseFilename:@"contact.sql"];
+    
 
     [self loadData];
     
@@ -87,13 +93,22 @@
 
 //    Set the message title
     NSString *incomingPerson = [NSString stringWithString:[[self.arrContact objectAtIndex:indexPath.row] objectAtIndex:0]];
+    //NSString *query = [NSString stringWithFormat:@"SELECT * FROM peopleInfo",incomingPerson];
+    
+    if(self.arrResult !=nil)
+    {
+        self.arrResult = nil;
+    }
+    //self.arrResult = [[NSMutableArray alloc]initWithArray:[self.dbManangerContact loadDataFromDB:query]];
+    //NSString *incomingPersonName = [NSString stringWithString:[[self.arrResult objectAtIndex:0] objectAtIndex:0]];
+    NSLog(@"%@",self.arrResult);
+    
     UILabel *Sender = (UILabel *)[cell viewWithTag:1];
     Sender.text = incomingPerson;
     
 //    Set the message preview
     //query to get the latest message sent between phoneOwner and a given incoming person
     NSString *query1 = [NSString stringWithFormat:@"SELECT * From messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')) AND messageID = (SELECT MAX(messageID) FROM messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')))", incomingPerson,_phone,_phone,incomingPerson, incomingPerson,_phone,_phone,incomingPerson];
-    
     if (self.arrMessage != nil) {
         self.arrMessage = nil;
     }
@@ -129,11 +144,29 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"ListToThread"]) {
+//    if ([segue.identifier isEqualToString:@"showChat"]) {
+//        
+
+//        ThreadViewController *controller = (ThreadViewController *)segue.destinationViewController;
+//        controller.messageID = [Threads objectAtIndex:indexPath.row];
+//        
+//
+//    }
+    if ([[segue identifier] isEqualToString:@"showChat"]) {
+        
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        ThreadViewController *controller = (ThreadViewController *)segue.destinationViewController;
-        controller.messageID = [Threads objectAtIndex:indexPath.row];
+        
+        NSString *incomingPerson = [NSString stringWithString:[[self.arrContact objectAtIndex:indexPath.row] objectAtIndex:0]];
+        NSString *query = [NSString stringWithFormat:@"SELECT firstname FROM peopleInfo WHERE mobilenumber =  '%@' ",incomingPerson];
+        NSMutableArray *arrResult = [[NSMutableArray alloc]initWithArray:[self.dbManangerContact loadDataFromDB:query]];
+        //NSString *incomingPersonName = [NSString stringWithString:[[arrResult objectAtIndex:0] objectAtIndex:0]];
+        
+        [[segue destinationViewController] setReceiverNumber: [[self.arrContact objectAtIndex:indexPath.row] objectAtIndex:0]];
+        [[segue destinationViewController] setReceiverName: incomingPerson];
+        [[segue destinationViewController] setPhone: _phone];
+            
     }
+    
 }
 
 - (IBAction)createMessage:(id)sender {
