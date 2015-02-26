@@ -8,6 +8,7 @@
 
 #import "TabBarController.h"
 #import "sortMessagesContainer.h"
+#import "sortContactsContainer.h"
 
 @interface TabBarController ()
 
@@ -17,12 +18,19 @@
 
 // A list of messages
 static NSMutableArray *Messages = nil;
+static NSMutableArray *People = nil;
 
 // A lookup table that converts a value to sort by into an index of a message that needs to be checked when sorting by that value
-static NSArray *SortingMap = nil;
+static NSArray *MessageSortingMap = nil;
+static NSArray *PeopleSortingMap = nil;
 
 // This function returns the latest list of messages
 + (NSMutableArray *)getMessages {
+    [self sortPeople];
+    return People;
+}
+
++ (NSMutableArray *)getPeople {
     [self sortMessages];
     return Messages;
 }
@@ -32,7 +40,7 @@ static NSArray *SortingMap = nil;
     NSArray *tempArray = [Messages sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         NSInteger compareVal = 0;
         for (NSInteger index = 0; index < [order count]; index++) {
-            NSInteger messageIndex = [SortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
+            NSInteger messageIndex = [MessageSortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
             compareVal = (NSInteger)[[a objectAtIndex:messageIndex] compare:[b objectAtIndex:messageIndex]];
             if (compareVal != 0) {
                 break;
@@ -43,14 +51,37 @@ static NSArray *SortingMap = nil;
     Messages = [NSMutableArray arrayWithObjects:tempArray, nil];
 }
 
++ (void)sortPeople {
+    NSArray *order = [sortContactsContainer sortOrder];
+    NSArray *tempArray = [People sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSInteger compareVal = 0;
+        for (NSInteger index = 0; index < [order count]; index++) {
+            NSInteger messageIndex = [PeopleSortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
+            compareVal = (NSInteger)[[a objectAtIndex:messageIndex] compare:[b objectAtIndex:messageIndex]];
+            if (compareVal != 0) {
+                break;
+            }
+        }
+        return compareVal;
+    }];
+    People = [NSMutableArray arrayWithObjects:tempArray, nil];
+}
+
 // For the time being the list of messages is hard coded to this two dimensional array
 + (void)initialize {
-    SortingMap = [NSArray arrayWithObjects:@"ID", @"Sender", @"Receiver", @"Text", @"Urgency", @"Time", nil];
+    MessageSortingMap = [NSArray arrayWithObjects:@"ID", @"Sender", @"Receiver", @"Text", @"Urgency", @"Time", nil];
     Messages = [NSMutableArray arrayWithObjects: [NSMutableArray arrayWithObjects: @"MessageID 1", @"Kevin", @"Receiver 1", @"Text 1", @0, @5000, nil], [NSMutableArray arrayWithObjects: @"MessageID 2", @"Andrew", @"Receiver 2", @"Text 2", @1, @300, nil], [NSMutableArray arrayWithObjects: @"MessageID 3", @"Stephen", @"Receiver 3", @"Text 3", @2, @4000, nil], [NSMutableArray arrayWithObjects: @"MessageID 4", @"Roger", @"Receiver 4", @"Text 4", @0, @1000, nil], [NSMutableArray arrayWithObjects: @"MessageID 5", @"Randy", @"Receiver 5", @"Text 5", @1, @2000, nil], nil];
+    
+    
+    PeopleSortingMap = [NSArray arrayWithObjects:@"First Name", @"Last Name", nil];
+    People = [NSMutableArray arrayWithObjects: [NSMutableArray arrayWithObjects:@"ABC", @"WZA", nil], [NSMutableArray arrayWithObjects:@"ABC", @"DEF", nil], [NSMutableArray arrayWithObjects:@"FGH", @"WZA", nil], nil];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    [TabBarController sortPeople];
+//    NSLog(@"%@", People);
 }
 
 - (void)didReceiveMemoryWarning {

@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *sortContactsTable;
 
++(NSMutableArray *)sortOrder;
+
 @end

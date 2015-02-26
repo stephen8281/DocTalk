@@ -11,6 +11,8 @@
 @interface TabBarController : UITabBarController
 
 +(NSMutableArray *)getMessages;
++(NSMutableArray *)getPeople;
 +(void)sortMessages;
++(void)sortPeople;
 
 @end
