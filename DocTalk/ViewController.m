@@ -54,27 +54,35 @@
     }
     self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     
-//    Sort the people
-    if (self.arrPeopleInfo.count > 1) {
-        NSArray *PeopleSortingMap = [NSArray arrayWithObjects:@"First Name", @"Last Name", nil];
-        NSArray *order = [sortContactsContainer sortOrder];
-        NSArray *tempArray = [self.arrPeopleInfo sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-            //        First sort based on the first thing in the order list, then by the second and so on
-            NSInteger compareVal = 0;
-            for (NSInteger index = 0; index < [order count]; index++) {
-                //            Get the index of the thing we want to sort on
-                NSInteger messageIndex = [PeopleSortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
-                //            Sort based on that field
-                compareVal = (NSInteger)[[a objectAtIndex:messageIndex] compare:[b objectAtIndex:messageIndex]];
-                //            If the two people dont have the same value in this field we're done, otherwise check compare the next field
-                if (compareVal != 0) {
-                    break;
-                }
-            }
-            return compareVal;
-        }];
-        self.arrPeopleInfo = [NSMutableArray arrayWithObjects:tempArray, nil];
-    }
+////    Sort the people
+//    NSLog(@"%@", self.arrPeopleInfo);
+//    if (self.arrPeopleInfo.count > 1) {
+//        NSArray *PeopleSortingMap = [NSArray arrayWithObjects:@"First Name", @"Last Name", nil];
+//        NSArray *order = [sortContactsContainer sortOrder];
+//        NSArray *tempArray = [self.arrPeopleInfo sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+//            //        First sort based on the first thing in the order list, then by the second and so on
+//            NSInteger compareVal = 0;
+//            compareVal = (NSInteger)[[a objectAtIndex:0] compare:[b objectAtIndex:0]];
+//            return compareVal;
+//        }];
+//        //        NSArray *tempArray = [self.arrPeopleInfo sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+////            //        First sort based on the first thing in the order list, then by the second and so on
+////            NSInteger compareVal = 0;
+////            for (NSInteger index = 0; index < [order count]; index++) {
+////                //            Get the index of the thing we want to sort on
+////                NSInteger messageIndex = [PeopleSortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
+////                //            Sort based on that field
+////                compareVal = (NSInteger)[[a objectAtIndex:messageIndex] compare:[b objectAtIndex:messageIndex]];
+////                //            If the two people dont have the same value in this field we're done, otherwise check compare the next field
+////                if (compareVal != 0) {
+////                    break;
+////                }
+////            }
+////            return compareVal;
+////        }];
+//        self.arrPeopleInfo = [NSMutableArray arrayWithObjects:tempArray, nil];
+//    }
+//    NSLog(@"%@", self.arrPeopleInfo);
     
     // Reload the table view data.
     [self.tableView reloadData];
