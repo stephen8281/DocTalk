@@ -7,7 +7,6 @@
 //
 
 #import "ThreadListViewController.h"
-#import "ThreadViewController.h"
 #import "SendMessageController.h"
 #import "DBManager.h"
 
@@ -144,14 +143,6 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if ([segue.identifier isEqualToString:@"showChat"]) {
-//        
-
-//        ThreadViewController *controller = (ThreadViewController *)segue.destinationViewController;
-//        controller.messageID = [Threads objectAtIndex:indexPath.row];
-//        
-//
-//    }
     if ([[segue identifier] isEqualToString:@"showChat"]) {
         
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];

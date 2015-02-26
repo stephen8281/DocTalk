@@ -11,9 +11,13 @@
 @interface StatusViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *myStatus;
-@property (strong, nonatomic) IBOutlet UISwitch *redNotifEn;
-@property (strong, nonatomic) IBOutlet UISwitch *orangeNotifEn;
-@property (strong, nonatomic) IBOutlet UISwitch *greenNotifEn;
+//@property (strong, nonatomic) IBOutlet UISwitch *redNotifEn;
+//@property (strong, nonatomic) IBOutlet UISwitch *orangeNotifEn;
+//@property (strong, nonatomic) IBOutlet UISwitch *greenNotifEn;
 @property (weak, nonatomic) IBOutlet UIPickerView *availability;
+@property (weak, nonatomic) IBOutlet UISlider *NotifEn;
+@property (weak, nonatomic) IBOutlet UILabel *greenLabel;
+@property (weak, nonatomic) IBOutlet UILabel *orangeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *redLabel;
 
 @end

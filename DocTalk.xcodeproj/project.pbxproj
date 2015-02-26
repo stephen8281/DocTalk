@@ -77,8 +77,6 @@
 		DF24772B1A7AE61A00FBC65E /* sortMessagesContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = DF24772A1A7AE61A00FBC65E /* sortMessagesContainer.m */; };
 		DF2477311A82D15C00FBC65E /* sortContactsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2477301A82D15C00FBC65E /* sortContactsContainer.m */; };
 		DF2477341A93F32100FBC65E /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2477331A93F32100FBC65E /* TabBarController.m */; };
-		DFD780F11A2BEEFE006DDA5D /* ThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */; };
-		DFDF355A1A2D45B100435573 /* SendMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDF35591A2D45B100435573 /* SendMsgViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -240,10 +238,6 @@
 		DF2477301A82D15C00FBC65E /* sortContactsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sortContactsContainer.m; sourceTree = "<group>"; };
 		DF2477321A93F32100FBC65E /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		DF2477331A93F32100FBC65E /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
-		DFD780EF1A2BEEFE006DDA5D /* ThreadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadViewController.h; sourceTree = "<group>"; };
-		DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadViewController.m; sourceTree = "<group>"; };
-		DFDF35581A2D45B100435573 /* SendMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMsgViewController.h; sourceTree = "<group>"; };
-		DFDF35591A2D45B100435573 /* SendMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMsgViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -476,8 +470,6 @@
 				DC5DE2C21A77163A00298C29 /* SignUpViewController.m */,
 				DCC2C8FA1A2ADAE500B7A97C /* SendMessageController.h */,
 				DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */,
-				DFDF35581A2D45B100435573 /* SendMsgViewController.h */,
-				DFDF35591A2D45B100435573 /* SendMsgViewController.m */,
 				DCC2C8EA1A29937200B7A97C /* DBManager.m */,
 				DCC2C8E91A29936000B7A97C /* DBManager.h */,
 				DCC2C8B41A29762D00B7A97C /* AppDelegate.h */,
@@ -486,8 +478,6 @@
 				DCC2C8B81A29762D00B7A97C /* ViewController.m */,
 				DCC2C8F71A29A33F00B7A97C /* DetailViewController.h */,
 				DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */,
-				DFD780EF1A2BEEFE006DDA5D /* ThreadViewController.h */,
-				DFD780F01A2BEEFE006DDA5D /* ThreadViewController.m */,
 				DF239DB41A2A413000652DC8 /* ThreadListViewController.h */,
 				DF239DB51A2A413000652DC8 /* ThreadListViewController.m */,
 				DF2477171A65B5ED00FBC65E /* StatusViewController.h */,
@@ -662,14 +652,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFD780F11A2BEEFE006DDA5D /* ThreadViewController.m in Sources */,
 				DC6A611C1A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */,
 				DF2477341A93F32100FBC65E /* TabBarController.m in Sources */,
 				DC6A61081A8B0EE80016538E /* JSQMessage.m in Sources */,
 				DCC2C8B91A29762D00B7A97C /* ViewController.m in Sources */,
 				DC6A610B1A8B0EE80016538E /* JSQPhotoMediaItem.m in Sources */,
-				DFDF355A1A2D45B100435573 /* SendMsgViewController.m in Sources */,
 				DC6A61141A8B0EE80016538E /* JSQMessagesComposerTextView.m in Sources */,
 				DC6A611A1A8B0EE80016538E /* JSQMessagesToolbarContentView.m in Sources */,
 				DC6A61151A8B0EE80016538E /* JSQMessagesInputToolbar.m in Sources */,
