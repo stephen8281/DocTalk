@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface ProfileSettingsViewController : UIViewController <UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *txtName;
+@property (weak, nonatomic) IBOutlet UITextField *txtEmail;
+@property (weak, nonatomic) IBOutlet UITextField *txtPhoneNumber;
+@property (weak, nonatomic) IBOutlet UITextField *txtHospital;
+- (IBAction)updateClicked:(id)sender;
+
 
 @property (strong, nonatomic) IBOutlet UIView *profileSettings;
 @property (strong, nonatomic) IBOutlet UIImageView *ProfilePic;
