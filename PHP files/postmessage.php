@@ -23,10 +23,12 @@ if(!isset($_GET['receiver'])||empty($_GET['receiver']))
 }
 else
 {
-	//$message = $_GET["message"];
-	$message = isset($_GET['message']) ? $_GET['message'] : '';
 
-	$sql = "INSERT INTO messageTable VALUES ('','$sender', '$receiver', '$message')";
+	$message = isset($_GET['message']) ? $_GET['message'] : '';
+	$time = isset($_GET['time']) ? $_GET['time'] : '';
+	$urgency = isset($_GET['urgency']) ? $_GET['urgency'] : '';
+
+	$sql = "INSERT INTO messageTable VALUES ('','$sender', '$receiver', '$message', '$time', '$urgency')";
 
 	if (mysqli_query($conn, $sql)) {
 
