@@ -29,8 +29,7 @@
     
     _myMessages.delegate = self;
     _myMessages.dataSource = self;
-    
-    //Threads = [NSArray arrayWithObjects: @"Test1", @"Test2", @"Test3", @"Test4", @"Test5", @"Test6", @"Test7", @"Test8", @"Test9", nil];
+
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"chat.sql"];
     self.dbManangerContact = [[DBManager alloc] initWithDatabaseFilename:@"contact.sql"];
     
@@ -91,55 +90,57 @@
     cell.imageView.image = image;
 
 //    Set the message title
-    NSString *incomingPerson = [NSString stringWithString:[[self.arrContact objectAtIndex:indexPath.row] objectAtIndex:0]];
-    //NSString *query = [NSString stringWithFormat:@"SELECT * FROM peopleInfo",incomingPerson];
-    
-    if(self.arrResult !=nil)
-    {
-        self.arrResult = nil;
-    }
-    //self.arrResult = [[NSMutableArray alloc]initWithArray:[self.dbManangerContact loadDataFromDB:query]];
-    //NSString *incomingPersonName = [NSString stringWithString:[[self.arrResult objectAtIndex:0] objectAtIndex:0]];
-    NSLog(@"%@",self.arrResult);
-    
     UILabel *Sender = (UILabel *)[cell viewWithTag:1];
+    NSString *incomingPerson = [NSString stringWithString:[[self.arrContact objectAtIndex:indexPath.row] objectAtIndex:0]];
     Sender.text = incomingPerson;
     
 //    Set the message preview
+    UILabel *Preview = (UILabel *)[cell viewWithTag:2];
+    
     //query to get the latest message sent between phoneOwner and a given incoming person
-    NSString *query1 = [NSString stringWithFormat:@"SELECT * From messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')) AND messageID = (SELECT MAX(messageID) FROM messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')))", incomingPerson,_phone,_phone,incomingPerson, incomingPerson,_phone,_phone,incomingPerson];
+    NSString *query1 = [NSString stringWithFormat:@"SELECT * FROM messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')) AND messageID = (SELECT MAX(messageID) FROM messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')))", incomingPerson,_phone,_phone,incomingPerson, incomingPerson,_phone,_phone,incomingPerson];
     if (self.arrMessage != nil) {
         self.arrMessage = nil;
     }
     self.arrMessage = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query1]];
-    NSInteger indexOfMessage = [self.dbManager.arrColumnNames indexOfObject:@"message"];
-    
-    UILabel *Preview = (UILabel *)[cell viewWithTag:2];
+
     if(self.arrMessage != nil)
     {
+        NSInteger indexOfMessage = [self.dbManager.arrColumnNames indexOfObject:@"message"];
         Preview.text = [NSString stringWithString:[[self.arrMessage objectAtIndex:0] objectAtIndex:indexOfMessage]];
     }
     
     
 //    Set the message time
     UILabel *Time = (UILabel *)[cell viewWithTag:3];
-    Time.text = [NSString stringWithFormat:@"%@", @"Time stamp"];
+    if(self.arrMessage != nil)
+    {
+        NSInteger indexOfTime = [self.dbManager.arrColumnNames indexOfObject:@"time"];
+        Time.text = [NSString stringWithString:[[self.arrMessage objectAtIndex:0] objectAtIndex:indexOfTime]];
+    }
+    
     
 //    Make a little circle to display the urgency
     UIImageView *Urgency = (UIImageView *)[cell viewWithTag:4];
-    if (indexPath.row % 3 == 0) {
-        Urgency.image = [UIImage imageNamed: @"normalBubble.png"];
-    } else if (indexPath.row % 3 == 1) {
-        Urgency.image = [UIImage imageNamed: @"semiurgentBubble.png"];
-    } else {
-        Urgency.image = [UIImage imageNamed: @"urgentBubble.png"];
+    NSInteger indexOfUrgency = [self.dbManager.arrColumnNames indexOfObject:@"urgency"];
+    NSString *urgencysString = [NSString stringWithString:[[self.arrMessage objectAtIndex:0] objectAtIndex:indexOfUrgency]];
+    if(self.arrMessage != nil)
+    {
+        if([urgencysString isEqualToString:@"Green"]){
+            Urgency.image = [UIImage imageNamed: @"normalBubble.png"];
+        }else if ([urgencysString isEqualToString:@"Orange"]){
+            Urgency.image = [UIImage imageNamed: @"semiurgentBubble.png"];
+        }else{
+            Urgency.image = [UIImage imageNamed: @"urgentBubble.png"];
+        }
     }
+
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44.0;
+    return 54.0;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
