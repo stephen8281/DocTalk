@@ -119,15 +119,15 @@
         
         if([[self.txtName text] isEqualToString:@""] || [[self.txtEmail text] isEqualToString:@""] || [[self.txtPhoneNumber text] isEqualToString:@""] || [[self.txtHospital text] isEqualToString:@""]) {
             
-            [self alertStatus:@"Please enter all fields!" :@"Sign up Failed!" :0];
+            [self alertStatus:@"Please enter all fields!" :@"Contact profile update failed!" :0];
             
         }
         else {
             NSString *post =[[NSString alloc] initWithFormat:@"name=%@&phonenumber=%@&email=%@&hospital=%@",[self.txtName text],[self.txtPhoneNumber text],[self.txtEmail text],[self.txtHospital text]];
             NSLog(@"PostData: %@",post);
             
-            //NSURL *url=[NSURL URLWithString:@"http://192.168.1.73/profilesertings.php"];
-            NSURL *url=[NSURL URLWithString:@"http://localhost/profilesertings.php"];
+            //NSURL *url=[NSURL URLWithString:@"http://192.168.1.73/profilesettings.php"];
+            NSURL *url=[NSURL URLWithString:@"http://localhost/profilesettings.php"];
             
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             
@@ -169,18 +169,18 @@
                 } else {
                     
                     NSString *error_msg = (NSString *) jsonData[@"error_message"];
-                    [self alertStatus:error_msg :@"Sign up Failed!" :0];
+                    [self alertStatus:error_msg :@"Contact update failed!" :0];
                 }
                 
             } else {
                 //if (error) NSLog(@"Error: %@", error);
-                [self alertStatus:@"Connection Failed" :@"Sign up Failed!" :0];
+                [self alertStatus:@"Connection Failed" :@"Contact update failed!" :0];
             }
         }
     }
     @catch (NSException * e) {
         NSLog(@"Exception: %@", e);
-        [self alertStatus:@"Sign Up Failed." :@"Error!" :0];
+        [self alertStatus:@"Contact update failed." :@"Error!" :0];
     }
     if (success) {
         //[self performSegueWithIdentifier:@"login_success" sender:self];
