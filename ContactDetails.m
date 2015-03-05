@@ -19,11 +19,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     //    The following 3 lines will not be needed once Picture Status and Hospital have been added to the dictContactDetails
-    NSArray *keys = [NSArray arrayWithObjects:@"firstName", @"lastName", @"mobileNumber", @"homeNumber", @"workEmail", @"Picture", @"Status", @"Hospital", nil];
-    NSArray *values = [NSArray arrayWithObjects:@"firstNameTest", @"lastNameTest", @"mobileNumberTest", @"homeNumberTest", @"workEmailTest", @"PictureTest", @"StatusTest", @"HospitalTest", nil];
-    _dictContactDetails = [NSDictionary dictionaryWithObjects:values forKeys:keys];
+//    NSArray *keys = [NSArray arrayWithObjects:@"firstName", @"lastName", @"mobileNumber", @"homeNumber", @"workEmail", @"Picture", @"Status", @"Hospital", nil];
+//    NSArray *values = [NSArray arrayWithObjects:@"firstNameTest", @"lastNameTest", @"mobileNumberTest", @"homeNumberTest", @"workEmailTest", @"PictureTest", @"StatusTest", @"HospitalTest", nil];
+//    _dictContactDetails = [NSDictionary dictionaryWithObjects:values forKeys:keys];
     
     //    Assign table delegate and datasource
     [_detailsTable setDelegate:self];

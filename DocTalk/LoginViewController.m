@@ -39,8 +39,8 @@
 
 - (IBAction)signinClicked:(id)sender {
     //    Added this line of code for testing purposes
-    [self performSegueWithIdentifier:@"login_success" sender:self];
-    return;
+//    [self performSegueWithIdentifier:@"login_success" sender:self];
+//    return;
     
     NSInteger success = 0;
     @try {
