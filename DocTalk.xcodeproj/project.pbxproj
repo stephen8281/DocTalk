@@ -66,7 +66,6 @@
 		DCC2C8CD1A29762D00B7A97C /* DocTalkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8CC1A29762D00B7A97C /* DocTalkTests.m */; };
 		DCC2C8EB1A29937200B7A97C /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8EA1A29937200B7A97C /* DBManager.m */; };
 		DCC2C8EF1A29939100B7A97C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC2C8EE1A29939100B7A97C /* libsqlite3.dylib */; };
-		DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */; };
 		DCC2C8FC1A2ADAE500B7A97C /* SendMessageContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */; };
 		DF239DB61A2A413000652DC8 /* ThreadListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF239DB51A2A413000652DC8 /* ThreadListViewController.m */; };
 		DF2477191A65B5ED00FBC65E /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2477181A65B5ED00FBC65E /* StatusViewController.m */; };
@@ -77,6 +76,7 @@
 		DF24772B1A7AE61A00FBC65E /* sortMessagesContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = DF24772A1A7AE61A00FBC65E /* sortMessagesContainer.m */; };
 		DF2477311A82D15C00FBC65E /* sortContactsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2477301A82D15C00FBC65E /* sortContactsContainer.m */; };
 		DF2477341A93F32100FBC65E /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2477331A93F32100FBC65E /* TabBarController.m */; };
+		DF6C51FC1AA916730093FA3D /* ContactDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = DF6C51FB1AA916730093FA3D /* ContactDetails.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,8 +216,6 @@
 		DCC2C8E91A29936000B7A97C /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		DCC2C8EA1A29937200B7A97C /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		DCC2C8EE1A29939100B7A97C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		DCC2C8F71A29A33F00B7A97C /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		DCC2C8FA1A2ADAE500B7A97C /* SendMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMessageController.h; sourceTree = "<group>"; };
 		DCC2C8FB1A2ADAE500B7A97C /* SendMessageContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMessageContoller.m; sourceTree = "<group>"; };
 		DF239DB41A2A413000652DC8 /* ThreadListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadListViewController.h; sourceTree = "<group>"; };
@@ -238,6 +236,8 @@
 		DF2477301A82D15C00FBC65E /* sortContactsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sortContactsContainer.m; sourceTree = "<group>"; };
 		DF2477321A93F32100FBC65E /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		DF2477331A93F32100FBC65E /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		DF6C51FA1AA916730093FA3D /* ContactDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactDetails.h; path = ../ContactDetails.h; sourceTree = "<group>"; };
+		DF6C51FB1AA916730093FA3D /* ContactDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactDetails.m; path = ../ContactDetails.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -476,8 +476,8 @@
 				DCC2C8B51A29762D00B7A97C /* AppDelegate.m */,
 				DCC2C8B71A29762D00B7A97C /* ViewController.h */,
 				DCC2C8B81A29762D00B7A97C /* ViewController.m */,
-				DCC2C8F71A29A33F00B7A97C /* DetailViewController.h */,
-				DCC2C8F81A29A33F00B7A97C /* DetailViewController.m */,
+				DF6C51FA1AA916730093FA3D /* ContactDetails.h */,
+				DF6C51FB1AA916730093FA3D /* ContactDetails.m */,
 				DF239DB41A2A413000652DC8 /* ThreadListViewController.h */,
 				DF239DB51A2A413000652DC8 /* ThreadListViewController.m */,
 				DF2477171A65B5ED00FBC65E /* StatusViewController.h */,
@@ -653,13 +653,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC6A611C1A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
-				DCC2C8F91A29A33F00B7A97C /* DetailViewController.m in Sources */,
 				DF2477341A93F32100FBC65E /* TabBarController.m in Sources */,
 				DC6A61081A8B0EE80016538E /* JSQMessage.m in Sources */,
 				DCC2C8B91A29762D00B7A97C /* ViewController.m in Sources */,
 				DC6A610B1A8B0EE80016538E /* JSQPhotoMediaItem.m in Sources */,
 				DC6A61141A8B0EE80016538E /* JSQMessagesComposerTextView.m in Sources */,
 				DC6A611A1A8B0EE80016538E /* JSQMessagesToolbarContentView.m in Sources */,
+				DF6C51FC1AA916730093FA3D /* ContactDetails.m in Sources */,
 				DC6A61151A8B0EE80016538E /* JSQMessagesInputToolbar.m in Sources */,
 				DC6A60FF1A8B0EE80016538E /* JSQMessagesBubbleImageFactory.m in Sources */,
 				DC6A61091A8B0EE80016538E /* JSQMessagesAvatarImage.m in Sources */,

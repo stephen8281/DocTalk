@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "DBManager.h"
-#import "DetailViewController.h"
+#import "ContactDetails.h"
 #import "sortContactsContainer.h"
 
 @interface ViewController ()
