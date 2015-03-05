@@ -199,10 +199,16 @@
         CFStringRef currentPhoneValue = ABMultiValueCopyValueAtIndex(phonesRef, i);
         
         if (CFStringCompare(currentPhoneLabel, kABPersonPhoneMobileLabel, 0) == kCFCompareEqualTo) {
-            [contactInfoDict setObject:(__bridge NSString *)currentPhoneValue forKey:@"mobileNumber"];
+        
+            NSString *currentPhone = ([[(__bridge NSString *)currentPhoneValue componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""]);
+            
+            [contactInfoDict setObject:currentPhone forKey:@"mobileNumber"];
         }
         if (CFStringCompare(currentPhoneLabel, kABHomeLabel, 0) == kCFCompareEqualTo) {
-            [contactInfoDict setObject:(__bridge NSString *)currentPhoneValue forKey:@"homeNumber"];
+            
+            NSString *currentPhone = ([[(__bridge NSString *)currentPhoneValue componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""]);
+            [contactInfoDict setObject:currentPhone forKey:@"homeNumber"];
+
         }
         
         CFRelease(currentPhoneLabel);
