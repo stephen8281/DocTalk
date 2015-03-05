@@ -88,7 +88,7 @@
     [self loadData];
     
     //Check in with the server every 8 second
-    //[self performSelectorOnMainThread:@selector(LaunchTimer) withObject:nil waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(LaunchTimer) withObject:nil waitUntilDone:NO];
     
     
     

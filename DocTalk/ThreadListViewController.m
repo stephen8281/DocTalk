@@ -92,7 +92,17 @@
 //    Set the message title
     UILabel *Sender = (UILabel *)[cell viewWithTag:1];
     NSString *incomingPerson = [NSString stringWithString:[[self.arrContact objectAtIndex:indexPath.row] objectAtIndex:0]];
-    Sender.text = incomingPerson;
+    
+    NSString *query2 = [NSString stringWithFormat:@"SELECT firstname FROM peopleInfo WHERE mobilenumber =  '%@' ",incomingPerson];
+
+    if (self.arrResult != nil) {
+        self.arrResult = nil;
+    }
+    self.arrResult = [[NSMutableArray alloc] initWithArray:[self.dbManangerContact loadDataFromDB:query2]];
+    
+    // There is only 1 row with 1 column in the result set
+    Sender.text = [NSString stringWithString:[[self.arrResult objectAtIndex:0] objectAtIndex:0]];
+    //Sender.text = incomingPerson;
     
 //    Set the message preview
     UILabel *Preview = (UILabel *)[cell viewWithTag:2];
@@ -150,11 +160,11 @@
         
         NSString *incomingPerson = [NSString stringWithString:[[self.arrContact objectAtIndex:indexPath.row] objectAtIndex:0]];
         NSString *query = [NSString stringWithFormat:@"SELECT firstname FROM peopleInfo WHERE mobilenumber =  '%@' ",incomingPerson];
-        NSMutableArray *arrResult = [[NSMutableArray alloc]initWithArray:[self.dbManangerContact loadDataFromDB:query]];
-        //NSString *incomingPersonName = [NSString stringWithString:[[arrResult objectAtIndex:0] objectAtIndex:0]];
+        NSMutableArray *result = [[NSMutableArray alloc]initWithArray:[self.dbManangerContact loadDataFromDB:query]];
         
+
         [[segue destinationViewController] setReceiverNumber: [[self.arrContact objectAtIndex:indexPath.row] objectAtIndex:0]];
-        [[segue destinationViewController] setReceiverName: incomingPerson];
+        [[segue destinationViewController] setReceiverName: [NSString stringWithString:[[result objectAtIndex:0] objectAtIndex:0]]];
         [[segue destinationViewController] setPhone: _phone];
             
     }
