@@ -23,7 +23,7 @@
 //    NSArray *keys = [NSArray arrayWithObjects:@"firstName", @"lastName", @"mobileNumber", @"homeNumber", @"workEmail", @"Picture", @"Status", @"Hospital", nil];
 //    NSArray *values = [NSArray arrayWithObjects:@"firstNameTest", @"lastNameTest", @"mobileNumberTest", @"homeNumberTest", @"workEmailTest", @"PictureTest", @"StatusTest", @"HospitalTest", nil];
 //    _dictContactDetails = [NSDictionary dictionaryWithObjects:values forKeys:keys];
-    
+
     //    Assign table delegate and datasource
     [_detailsTable setDelegate:self];
     [_detailsTable setDataSource:self];
@@ -104,7 +104,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showContactThread"]) {
-        NSString *name = [NSString stringWithString:[_dictContactDetails objectForKey:@"Name"]];
+        NSString *name = [NSString stringWithString:[_dictContactDetails objectForKey:@"firstName"]];
         NSString *phoneNumber = [NSString stringWithString:[_dictContactDetails objectForKey:@"mobileNumber"]];
         
         SendMessageController *destination = [segue destinationViewController];
