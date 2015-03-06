@@ -12,18 +12,52 @@ public class Server
 	private static final boolean DEBUG = true;
 	private MySQLsetup mySQLmessage = new MySQLsetup();
 	private MySQLsetup mySQLpassowrds = new MySQLsetup();
-	
+	private static String userName="root";
+    private static String password="ThyferraBactais!real";
+    
 	public void run(String[] args) throws Exception
 	{
 		
 		String clientSentence;
 		String capitalizedSentence;
 		ServerSocket welcomeSocket;
-		welcomeSocket = new ServerSocket(PORT);
-		if(DEBUG) System.out.println("The Server is listening on port " + PORT);
+		int myPort = 0;
+		if(2<=args.length && ( args[0].equals("-s") || args[0].equals("--server")))
+		{
+			myPort = Integer.valueOf(args[1]);
+		}
+		else
+		{
+			myPort = PORT;
+		}
+//		String userName = null;
+//		String password = null;
+		if(6<=args.length )
+		{
+			if(args[2].equals("-u"))
+			{
+			//	mySQLmessage;
+				userName = args[3];
+			}
+			else if(args[4].equals("-u"))
+			{
+				userName = args[5];
+			}
+			if(args[2].equals("-p"))
+			{
+			//	mySQLmessage;
+				password = args[3];
+			}
+			else if(args[4].equals("-p"))
+			{
+				password = args[5];
+			}
+		}
+		welcomeSocket = new ServerSocket(myPort);
+		if(DEBUG) System.out.println("The Server is listening on port " + myPort);
 		else System.out.println("The Server is listening");
-		mySQLmessage.setupMessageTables();
-		mySQLpassowrds.setupPasswordTable();
+		mySQLmessage.setupMessageTables(userName,password);
+		mySQLpassowrds.setupPasswordTable(userName,password);
 		
 		while(true)
 		{
@@ -50,9 +84,11 @@ public class Server
 				for( int i=0; i<breakByLine.length ;i++)
 				{
 					String[] brokenLine = breakByLine[i].split("\\|");
+					if(DEBUG) System.out.println(brokenLine[0]);
 					String sender = brokenLine[1];
 					String revciver = brokenLine[3];
 					capitalizedSentence += sender + "|" + revciver + "\n";
+					mySQLmessage.deleteMessage(brokenLine[0].split(" ")[1]);		//remove messages once delivered
 				}
 				
 				capitalizedSentence = stripSlashN(capitalizedSentence) + '\n';
@@ -127,9 +163,9 @@ public class Server
 				//TODO: !!!remove this whole case for production!!!
 				if(DEBUG) mySQLmessage.dropDatabase();
 				break;
-			case "s":
-				pingMySQLServer();
-				break;
+//			case "s":
+//				pingMySQLServer();
+//				break;
 			case "h":
 				if(2 <= brokenClientInput.length)
 				{	
@@ -189,7 +225,7 @@ public class Server
 	
 	private void pingMySQLServer()
 	{
-		mySQLmessage.setupMessageTables();
+		mySQLmessage.setupMessageTables(userName,password);
 		//mySQLserver.testJCBdriver();
 		//mySQLserver.dropDatabase();
 	}

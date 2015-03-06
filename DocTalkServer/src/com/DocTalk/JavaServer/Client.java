@@ -27,7 +27,15 @@ public class Client
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 		sentence = inFromUser.readLine();
 		outToServer.writeBytes(sentence + '\n');
+		
 		modifiedSentence = inFromServer.readLine();
+//		modifiedSentence = "";
+//		int ch;
+//		do
+//		{
+//			ch = inFromServer.read();
+//			modifiedSentence += (char) ch;
+//		}while(-1 != ch);
 		modifiedSentence = replaceSlashN(modifiedSentence);
 		System.out.println("FROM SERVER: \n\t\t" + modifiedSentence);
 		clientSocket.close();

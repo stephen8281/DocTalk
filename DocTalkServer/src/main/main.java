@@ -1,10 +1,13 @@
 package main;
 
+import com.DocTalk.JavaServer.listener;
+
 
 public class main 
 {
 	private static com.DocTalk.JavaServer.Server myServer= new com.DocTalk.JavaServer.Server();
 	private static com.DocTalk.JavaServer.Client myTestClient= new com.DocTalk.JavaServer.Client();
+	private static com.DocTalk.JavaServer.listener mylistener= new com.DocTalk.JavaServer.listener();
 	private static final boolean DEBUG = true;
 	
 	
@@ -22,6 +25,9 @@ public class main
 				case "-c": case "--client":
 					myTestClient.run(args);
 					break;
+				case "-l":
+					//mylistener.run(args);
+					mylistener.runHTTP(args);
 				default:
 					System.out.println("Unknown user input");
 					usage();

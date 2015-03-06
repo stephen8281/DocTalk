@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class MySQLsetup 
 {
-	private final static boolean DEBUG = true;
+	private final static boolean DEBUG = false;
 	private final static String dataBaseName = "docTalk";
 	private final static String messageTableName = "docTalkMessages";
 	private final static String passwordTableName = "docTalkPasswords";
@@ -16,13 +16,11 @@ public class MySQLsetup
 	private static Statement massageStatment = null;
 	private static Connection passwordConn = null;
 	private static Statement passwordStatment = null;
-	private final static String userName="root";
-    private final static String password="ThyferraBactais!real";
-    private final static String url="jdbc:mysql://localhost:3306/";
+	private final static String url="jdbc:mysql://localhost:3306/";
     final static int mySQLnameFieldSize = 35;
     
     
-	public static void setupMessageTables()
+	public static void setupMessageTables(String userName,String password)
 	{
 		
 		try {
@@ -35,7 +33,7 @@ public class MySQLsetup
 //            String password="BantingandBest";
            
           //conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?" + "user=DocTalk&password=BantingandBest");
-            setupStatment();
+            setupStatment(userName,password);
             int result = massageStatment.executeUpdate("CREATE DATABASE IF NOT EXISTS " + dataBaseName);
             System.out.println("result is: " + result);
             
@@ -62,7 +60,7 @@ public class MySQLsetup
         }
 	}
 	
-	public static void setupPasswordTable()
+	public static void setupPasswordTable(String userName,String password)
 	{
 		
 		try {
@@ -98,7 +96,7 @@ public class MySQLsetup
 	}
 	
 	
-	private static boolean setupStatment()
+	private static boolean setupStatment(String userName,String password)
 	{
 		boolean res = false;
 		try {
@@ -211,6 +209,22 @@ public class MySQLsetup
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		return sucsess;
+	}
+	
+	public boolean deleteMessage(String idNum)
+	{
+		boolean sucsess = false;
+		try 
+		{
+			massageStatment.executeUpdate("DELETE FROM " + messageTableName + " WHERE id=" + idNum +";" );
+	//		printResultSet(massageStatment.getResultSet());
+	//		s.execute("COMMIT;");
+			sucsess = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return sucsess;
 	}
