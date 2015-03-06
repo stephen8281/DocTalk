@@ -8,7 +8,8 @@
 
 #import "ViewController.h"
 #import "DBManager.h"
-#import "DetailViewController.h"
+#import "ContactDetails.h"
+#import "sortContactsContainer.h"
 
 @interface ViewController ()
 
@@ -30,7 +31,9 @@
     self.myContactList.dataSource = self;
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"contact.sql"];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated{
     // Load the data from database
     [self loadData];
 }
@@ -43,7 +46,6 @@
 #pragma mark - Private method implementation
 
 -(void)loadData{
-    
     // Form the query.
     NSString *query = @"select * from peopleInfo";
     
@@ -52,6 +54,28 @@
         self.arrPeopleInfo = nil;
     }
     self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    
+//    Sort the people
+    if (self.arrPeopleInfo.count > 1) {
+        NSArray *PeopleSortingMap = [NSArray arrayWithObjects:@"Last Name", @"First Name", nil];
+        NSArray *order = [sortContactsContainer sortOrder];
+        NSArray *tempArray = [self.arrPeopleInfo sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+            //        First sort based on the first thing in the order list, then by the second and so on
+            NSInteger compareVal = 0;
+            for (NSInteger index = 0; index < [order count]; index++) {
+                //            Get the index of the thing we want to sort on
+                NSInteger messageIndex = [PeopleSortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
+                //            Sort based on that field
+                compareVal = (NSInteger)[[a objectAtIndex:messageIndex] compare:[b objectAtIndex:messageIndex]];
+                //            If the two people dont have the same value in this field we're done, otherwise check compare the next field
+                if (compareVal != 0) {
+                    break;
+                }
+            }
+            return compareVal;
+        }];
+        self.arrPeopleInfo = tempArray;
+    }
     
     // Reload the table view data.
     [self.tableView reloadData];
@@ -65,7 +89,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
     return self.arrPeopleInfo.count;
 }
 
@@ -100,8 +123,6 @@
         [self loadData];
     }
 }
-
-
 
 #pragma mark - IBAction method implementation
 -(IBAction)showAddressBook:(id)sender {
@@ -140,6 +161,7 @@
         [contactDetailsDictionary setObject:workEmail forKey:@"workEmail"];
         
         [[segue destinationViewController] setDictContactDetails:contactDetailsDictionary];
+        [[segue destinationViewController] setPhone:_phone];
     }
 }
 
@@ -177,10 +199,16 @@
         CFStringRef currentPhoneValue = ABMultiValueCopyValueAtIndex(phonesRef, i);
         
         if (CFStringCompare(currentPhoneLabel, kABPersonPhoneMobileLabel, 0) == kCFCompareEqualTo) {
-            [contactInfoDict setObject:(__bridge NSString *)currentPhoneValue forKey:@"mobileNumber"];
+        
+            NSString *currentPhone = ([[(__bridge NSString *)currentPhoneValue componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""]);
+            
+            [contactInfoDict setObject:currentPhone forKey:@"mobileNumber"];
         }
         if (CFStringCompare(currentPhoneLabel, kABHomeLabel, 0) == kCFCompareEqualTo) {
-            [contactInfoDict setObject:(__bridge NSString *)currentPhoneValue forKey:@"homeNumber"];
+            
+            NSString *currentPhone = ([[(__bridge NSString *)currentPhoneValue componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""]);
+            [contactInfoDict setObject:currentPhone forKey:@"homeNumber"];
+
         }
         
         CFRelease(currentPhoneLabel);

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewController.h"
 
 @interface LoginViewController : UIViewController <UITextFieldDelegate>
 
@@ -18,4 +19,7 @@
 - (IBAction)signinClicked:(id)sender;
 
 - (IBAction)backgroundTap:(id)sender;
+
+@property (strong, nonatomic) NSString *phone;
+
 @end

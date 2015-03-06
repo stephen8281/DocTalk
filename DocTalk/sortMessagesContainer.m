@@ -16,11 +16,12 @@
 
 static NSMutableArray *sort = nil;
 
-+ (void)initialize {
-    sort = [NSMutableArray arrayWithObjects: @"Sender", @"Time", @"Urgency", nil];
-}
 + (NSMutableArray *)sortOrder {
     return sort;
+}
+
++ (void)initialize {
+    sort = [NSMutableArray arrayWithObjects: @"Sender", @"Time", @"Urgency", nil];
 }
 
 - (void)viewDidLoad {

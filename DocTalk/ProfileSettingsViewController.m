@@ -113,4 +113,92 @@
 - (IBAction)backgroundTap:(id)sender {
     [self.view endEditing:YES];
 }
+- (IBAction)updateClicked:(id)sender {
+    NSInteger success = 0;
+    @try {
+        
+        if([[self.txtName text] isEqualToString:@""] || [[self.txtEmail text] isEqualToString:@""] || [[self.txtPhoneNumber text] isEqualToString:@""] || [[self.txtHospital text] isEqualToString:@""]) {
+            
+            [self alertStatus:@"Please enter all fields!" :@"Contact profile update failed!" :0];
+            
+        }
+        else {
+            NSString *post =[[NSString alloc] initWithFormat:@"name=%@&phonenumber=%@&email=%@&hospital=%@",[self.txtName text],[self.txtPhoneNumber text],[self.txtEmail text],[self.txtHospital text]];
+            NSLog(@"PostData: %@",post);
+            
+            //NSURL *url=[NSURL URLWithString:@"http://192.168.1.73/profilesettings.php"];
+            NSURL *url=[NSURL URLWithString:@"http://localhost/profilesettings.php"];
+            
+            NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+            
+            NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setURL:url];
+            [request setHTTPMethod:@"POST"];
+            [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+            [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:postData];
+            
+            //[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+            
+            NSError *error = [[NSError alloc] init];
+            NSHTTPURLResponse *response = nil;
+            NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            
+            NSLog(@"Response code: %ld", (long)[response statusCode]);
+            
+            if ([response statusCode] >= 200 && [response statusCode] < 300)
+            {
+                NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
+                NSLog(@"Response ==> %@", responseData);
+                
+                NSError *error = nil;
+                NSDictionary *jsonData = [NSJSONSerialization
+                                          JSONObjectWithData:urlData
+                                          options:NSJSONReadingMutableContainers
+                                          error:&error];
+                
+                success = [jsonData[@"success"] integerValue];
+                NSLog(@"Success: %ld",(long)success);
+                
+                if(success == 1)
+                {
+                    NSLog(@"Sign up SUCCESS");
+                } else {
+                    
+                    NSString *error_msg = (NSString *) jsonData[@"error_message"];
+                    [self alertStatus:error_msg :@"Contact update failed!" :0];
+                }
+                
+            } else {
+                //if (error) NSLog(@"Error: %@", error);
+                [self alertStatus:@"Connection Failed" :@"Contact update failed!" :0];
+            }
+        }
+    }
+    @catch (NSException * e) {
+        NSLog(@"Exception: %@", e);
+        [self alertStatus:@"Contact update failed." :@"Error!" :0];
+    }
+    if (success) {
+        //[self performSegueWithIdentifier:@"login_success" sender:self];
+        [self performSegueWithIdentifier:@"goto_login" sender:self];
+    }
+    
+    
+}
+
+- (void) alertStatus:(NSString *)msg :(NSString *)title :(int) tag
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                        message:msg
+                                                       delegate:self
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil, nil];
+    alertView.tag = tag;
+    [alertView show];
+}
+
 @end

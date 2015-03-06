@@ -14,9 +14,9 @@
 
 @implementation StatusViewController
 
-@synthesize redNotifEn;
-@synthesize orangeNotifEn;
-@synthesize greenNotifEn;
+//@synthesize redNotifEn;
+//@synthesize orangeNotifEn;
+//@synthesize greenNotifEn;
 @synthesize availability;
 NSArray *_mainOptions;
 NSArray *_availableOptions;
@@ -36,6 +36,8 @@ NSString *_sellected;
     
     availability.dataSource = self;
     availability.delegate = self;
+    
+    _NotifEn.tintColor = [UIColor colorWithRed:0 green:0.7 blue:0 alpha:1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,6 +87,41 @@ NSString *_sellected;
     if (component == 0) {
         _sellected = [_mainOptions objectAtIndex:row];
         [availability reloadAllComponents];
+    }
+}
+
+- (IBAction)notifEnChanged:(id)sender {
+//    Make the slider snap to one of 3 values
+    NSUInteger index = (NSUInteger)(_NotifEn.value + 0.5);
+    [_NotifEn setValue:index animated:NO];
+    
+    //    Change the tint of the slider
+    switch (index) {
+        case 0:
+            _greenLabel.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+            _orangeLabel.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+            _redLabel.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+            break;
+        case 1:
+            _NotifEn.tintColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
+            _greenLabel.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+            _orangeLabel.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+            _redLabel.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
+            break;
+        case 2:
+            _NotifEn.tintColor = [UIColor colorWithRed:1 green:0.5 blue:0 alpha:1];
+            _greenLabel.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+            _orangeLabel.backgroundColor = [UIColor colorWithRed:1 green:0.5 blue:0 alpha:1];
+            _redLabel.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
+            break;
+        case 3:
+            _NotifEn.tintColor = [UIColor colorWithRed:0 green:0.7 blue:0 alpha:1];
+            _greenLabel.backgroundColor = [UIColor colorWithRed:0 green:0.7 blue:0 alpha:1];
+            _orangeLabel.backgroundColor = [UIColor colorWithRed:1 green:0.5 blue:0 alpha:1];
+            _redLabel.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
+            break;
+        default:
+            break;
     }
 }
 

@@ -7,23 +7,35 @@
 //
 
 #import "SendMessageController.h"
+#import "LoginViewController.h"
 #import "DBManager.h"
 
 @interface SendMessageController ()
 
 //send message methods
--(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver;
+//-(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver;
+-(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver withTime:(NSString *) time withUrgency:(NSString *)urgency;
 
 //read message methods
 -(void) LaunchTimer; // a timer that calls readMessage every 8 sec
 -(void) readMessage;
 -(void) deleteMessage:(NSString*)messageID;
--(void)loadData:(NSString*)personTalkingTo;
+-(void) loadData;
 
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *arrMessage; // 2 dimensional array for result from querying local database
+
+//
+@property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
+@property (nonatomic, strong) DBManager *dbManagerForContact;
+
 @property (nonatomic, strong) NSString *phoneOwner;
+@property (nonatomic, strong) NSString *incomingNumber;
 //@property (nonatomic, strong) UIRefreshControl *refreshControl;
+
+@property (nonatomic, strong) NSString *urgency;
+@property (nonatomic, strong) NSString *time;
+
 @end
 
 @implementation SendMessageController
@@ -31,21 +43,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = _name;
-    self.phoneOwner = @"Stephen";
+    self.title = _receiverName;
+    
+    //set the phoneOwner to be the phone number retrieved from online database
+    self.phoneOwner = _phone;
+    //  self.phoneOwner = @"Stephen";
+        
+    //Initialize database to store messages locally
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"chat.sql"];
+
+    //reformat the phone number of the person chatting with to get rid of brackets and dash
+    self.incomingNumber = [[_receiverNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
+
+
     
     //set the senderID and senderDisplayName that will be used by JSQMessage
     self.senderId = _phoneOwner;
     self.senderDisplayName = _phoneOwner;
     self.showLoadEarlierMessagesHeader = YES;
     
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"MMM dd, yyyy HH:mm"];
+    NSDate *now = [[NSDate alloc] init];
+    self.time = [format stringFromDate:now];
     
-    //Initialize database to store messages locally
-    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"chat.sql"];
+    self.urgency = @"Green";
+    
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-
     
     //initialize the refresh control will replace with a timer later
 //    self.refreshControl = [[UIRefreshControl alloc] init];
@@ -53,14 +79,13 @@
 //    [_mainTableView addSubview:self.refreshControl];
 
     
-    //populate the tables from local database
-    [self loadData:_name];
-
-    
     //Initialize the chat bubbles
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc]init];
     _outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
     _incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+    
+    //populate the tables from local database
+    [self loadData];
     
     //Check in with the server every 8 second
     [self performSelectorOnMainThread:@selector(LaunchTimer) withObject:nil waitUntilDone:NO];
@@ -90,12 +115,10 @@
     
     NSInteger indexOfSender = [self.dbManager.arrColumnNames indexOfObject:@"sender"];
     NSInteger indexOfMessage = [self.dbManager.arrColumnNames indexOfObject:@"message"];
-
     
     NSString *sender = [NSString stringWithString:[[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfSender]];
     NSString *text = [NSString stringWithString:[[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfMessage]];
     
-
     JSQMessage *message = [[JSQMessage alloc] initWithSenderId:sender senderDisplayName:sender date:[NSDate date] text:text];
     
     return message;
@@ -118,20 +141,19 @@
     return nil;
 }
 
+
 -(NSAttributedString*)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-
     //get the sender of the current text
     NSInteger indexOfSender = [self.dbManager.arrColumnNames indexOfObject:@"sender"];
     NSString *sender = [NSString stringWithString:[[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfSender]];
     
-
     /**
      *  iOS7-style sender name labels
      */
-//    if ([sender isEqualToString:self.senderId]) {
-//        return nil;
-//    }
+    if ([sender isEqualToString:self.senderId]) {
+        return nil;
+    }
     
     //display the sender only if it is a different person
     if (indexPath.item - 1 > 0) {
@@ -142,7 +164,17 @@
     }
     
     return [[NSAttributedString alloc] initWithString:sender];
+}
 
+
+-(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.item % 3 == 0) {
+        NSInteger indexOfTime = [self.dbManager.arrColumnNames indexOfObject:@"time"];
+        NSString *time = [NSString stringWithString:[[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfTime]];
+        return [[NSAttributedString alloc] initWithString:time];
+    }
+    return nil;
 }
 
 #pragma mark - UICollectionView DataSource
@@ -155,8 +187,9 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
-
+    
     cell.textView.textColor = [UIColor blackColor];
+    
 //    cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : [UIColor redColor],
 //                                          NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
 
@@ -174,9 +207,9 @@
      *  iOS7-style sender name labels
      */
     
-    //    if ([sender isEqualToString:self.senderId]) {
-    //        return 0.0f;
-    //    }
+        if ([sender isEqualToString:self.senderId]) {
+            return 0.0f;
+        }
     
     //check if previous sender is the same and adjust height accordingly
     if (indexPath.item - 1 > 0) {
@@ -189,10 +222,26 @@
     return kJSQMessagesCollectionViewCellLabelHeightDefault;
 }
 
+
+-(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if (indexPath.item % 3 == 0) {
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
+    
+    return 0.0f;
+}
+
 #pragma mark - JSQMessagesViewController Methods
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date
 {
-    [self postMessage:text withSender:self.phoneOwner withReceiver:_name];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"MMM dd, yyyy HH:mm"];
+    NSString *time = [format stringFromDate:date];
+    
+    [self postMessage:text withSender:self.phoneOwner withReceiver:self.incomingNumber withTime:time withUrgency:self.urgency];
+    
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     [self finishSendingMessageAnimated:YES];
 }
@@ -243,7 +292,8 @@
 
 #pragma mark - send message methods
 
--(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver {
+-(void) postMessage:(NSString*) message withSender:(NSString*)sender withReceiver:(NSString *)receiver withTime:(NSString *) time withUrgency:(NSString *)urgency
+{
     
     if (![message isEqual:@""]){
         NSMutableString *postString = [NSMutableString stringWithString:sendURL];
@@ -252,14 +302,18 @@
         
         [postString appendString:[NSString stringWithFormat:@"&%@=%@", @"receiver", receiver]];
         
-        
         [postString appendString:[NSString stringWithFormat:@"&%@=%@", @"message", message]];
+        
+        [postString appendString:[NSString stringWithFormat:@"&%@=%@", @"time", time]];
+        
+        [postString appendString:[NSString stringWithFormat:@"&%@=%@", @"urgency", urgency]];
         
         [postString setString:[postString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postString]];
         [request setHTTPMethod:@"POST"];
         
+        NSLog(@"%@",postString);
         _postConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
     }
     
@@ -268,10 +322,10 @@
 
 #pragma mark - read message methods
 
--(void)loadData:(NSString*)personTalkingTo{
-    
+-(void)loadData
+{
     //Form the query
-    NSString *query = [NSString stringWithFormat:@"select * from messageTable where (sender = '%@' and receiver = '%@') or (sender = '%@' and receiver = '%@') order by messageID", personTalkingTo,_phoneOwner,_phoneOwner,personTalkingTo];
+    NSString *query = [NSString stringWithFormat:@"select * from messageTable where (sender = '%@' and receiver = '%@') or (sender = '%@' and receiver = '%@') order by messageID", self.incomingNumber,_phoneOwner,_phoneOwner,self.incomingNumber];
     
     // Get the results.
     if (self.arrMessage != nil) {
@@ -348,7 +402,7 @@
     
     BOOL didUpdateDatabase = NO;
     
-    _json = [NSJSONSerialization JSONObjectWithData:_data options:nil error:nil];
+    _json = [NSJSONSerialization JSONObjectWithData:_data options:NSJSONReadingMutableContainers error:nil];
     
     //store the json data into local database
     for(int i = 0; i<[_json count];i++)
@@ -357,9 +411,13 @@
         NSString *sender = [[_json objectAtIndex:i] objectForKey:@"sender"];
         NSString *receiver = [[_json objectAtIndex:i] objectForKey:@"receiver"];
         NSString *message = [[_json objectAtIndex:i] objectForKey:@"message"];
+        NSString *time = [[_json objectAtIndex:i] objectForKey:@"time"];
+        NSString *urgency = [[_json objectAtIndex:i] objectForKey:@"urgency"];
+        
+        
         
         NSString *query;
-        query = [NSString stringWithFormat:@"insert into messageTable values('%@', '%@', '%@', '%@')", messageID,sender,receiver,message];
+        query = [NSString stringWithFormat:@"insert into messageTable values('%@', '%@', '%@', '%@', '%@', '%@')", messageID,sender,receiver,message,time,urgency];
         
         // Execute the query.
         [self.dbManager executeQuery:query];
@@ -379,7 +437,7 @@
         }
     }
     
-    [self loadData:_name];
+    [self loadData];
     if(didUpdateDatabase)
     {
         [self scrollToBottomAnimated:YES];
@@ -393,6 +451,7 @@
     //[errorView show];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
+
 
 
 

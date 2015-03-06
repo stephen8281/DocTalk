@@ -12,8 +12,16 @@
 
 @end
 
-@implementation sortContactsContainer{
-    NSArray *options;
+@implementation sortContactsContainer
+
+static NSMutableArray *sort = nil;
+
++ (NSMutableArray *)sortOrder {
+    return sort;
+}
+
++ (void)initialize {
+    sort = [NSMutableArray arrayWithObjects: @"First Name", @"Last Name", nil];
 }
 
 - (void)viewDidLoad {
@@ -23,8 +31,6 @@
     _sortContactsTable.dataSource = self;
     
     [_sortContactsTable setEditing:YES animated:YES];
-    
-    options = [NSArray arrayWithObjects: @"First Name", @"Last Name", nil];
     
     // This will remove extra separators from tableview
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -52,7 +58,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sortContactCell"];
     
     //    Set the message title
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [options objectAtIndex:indexPath.row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[sortContactsContainer sortOrder] objectAtIndex:indexPath.row]];
     cell.showsReorderControl = YES;
     
     return cell;
@@ -65,7 +71,12 @@
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    
+    //    Rearrange the options list to reflect changes
+    NSMutableArray * options = [sortContactsContainer sortOrder];
+    id temp = [options objectAtIndex:sourceIndexPath.row];
+    [options removeObjectAtIndex:sourceIndexPath.row];
+    [options insertObject:temp atIndex:destinationIndexPath.row];
+    sort = options;
 }
 
 // This function pretty much just gets rid of the delete control

@@ -16,5 +16,7 @@
 
 - (IBAction)showAddressBook:(id)sender;
 
+@property (strong, nonatomic) NSString *phone;
+
 @end
 
