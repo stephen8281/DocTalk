@@ -25,4 +25,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *hospital;
 - (IBAction)backgroundTap:(id)sender;
 
+@property (strong, nonatomic) NSString *userid;
+
 @end

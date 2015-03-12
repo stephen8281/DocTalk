@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="KBO-eJ-bnL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="LlH-0j-OHw">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -508,7 +508,7 @@
         <!--Settings-->
         <scene sceneID="KAF-UK-NKv">
             <objects>
-                <tableViewController id="1rf-Et-qhw" sceneMemberID="viewController">
+                <tableViewController id="1rf-Et-qhw" customClass="TableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="nrQ-ZK-Zpl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -589,8 +589,8 @@
                             </tableViewSection>
                         </sections>
                         <connections>
-                            <outlet property="dataSource" destination="1rf-Et-qhw" id="I9b-re-kXB"/>
-                            <outlet property="delegate" destination="1rf-Et-qhw" id="tbn-M4-hzF"/>
+                            <outlet property="dataSource" destination="1rf-Et-qhw" id="p08-rD-5OJ"/>
+                            <outlet property="delegate" destination="1rf-Et-qhw" id="2bY-1R-dp6"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="cql-vt-5oE"/>
@@ -723,7 +723,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1834" y="1864"/>
+            <point key="canvasLocation" x="1834" y="1710"/>
         </scene>
         <!--Change Password-->
         <scene sceneID="u1H-2o-9NC">

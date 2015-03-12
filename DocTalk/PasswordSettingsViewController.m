@@ -10,13 +10,19 @@
 
 @interface PasswordSettingsViewController ()
 
+@property (nonatomic, strong) NSString *phoneUID;
+
 @end
 
 @implementation PasswordSettingsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
+    
+    self.phoneUID = _userid;
+    NSLog(@"%@",self.phoneUID);
     
     _oldPassword.delegate = self;
     _oldPassword.returnKeyType = UIReturnKeyDone;
