@@ -85,7 +85,7 @@
             NSInteger compareVal = 0;
             for (NSInteger index = 0; index < [order count]; index++) {
                 if ([[order objectAtIndex:index]  isEqual: @"Sender"]) {
-                    compareVal = (NSInteger)[[NameA objectAtIndex:0] compare:[NameB objectAtIndex:0]];
+                    compareVal = (NSInteger)[[[NameA objectAtIndex:0]objectAtIndex:0] compare:[[NameB objectAtIndex:0]objectAtIndex:0 ]];
                     if (compareVal != 0) {
                         break;
                     }
@@ -93,7 +93,7 @@
                     //            Get the index of the thing we want to sort on
                     NSInteger messageIndex = [MessageSortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
                     //            Sort based on that field
-                    compareVal = (NSInteger)[[messageA objectAtIndex:messageIndex] compare:[messageB objectAtIndex:messageIndex]];
+                    compareVal = (NSInteger)[[[messageA objectAtIndex:0]objectAtIndex :messageIndex] compare:[[messageB objectAtIndex:0]objectAtIndex :messageIndex] ];
                     //            If the two people dont have the same value in this field we're done, otherwise check compare the next field
                     if (compareVal != 0) {
                         break;
