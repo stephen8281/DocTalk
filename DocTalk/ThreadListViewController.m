@@ -69,16 +69,35 @@
         NSArray *MessageSortingMap = [NSArray arrayWithObjects:@"messageID", @"Sender", @"receiver", @"text", @"Time", @"Urgency", nil];
         NSArray *order = [sortMessagesContainer sortOrder];
         NSArray *tempArray = [self.arrContact sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+            NSString *nameQueryA = [NSString stringWithFormat:@"SELECT firstname FROM peopleInfo WHERE mobilenumber =  '%@' ", [a objectAtIndex:0]];
+            NSString *nameQueryB = [NSString stringWithFormat:@"SELECT firstname FROM peopleInfo WHERE mobilenumber =  '%@' ", [b objectAtIndex:0]];
+            
+            NSArray *NameA = [[NSMutableArray alloc] initWithArray:[self.dbManangerContact loadDataFromDB:nameQueryA]];
+            NSArray *NameB = [[NSMutableArray alloc] initWithArray:[self.dbManangerContact loadDataFromDB:nameQueryB]];
+            
+            NSString *messageQueryA = [NSString stringWithFormat:@"SELECT * FROM messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')) AND messageID = (SELECT MAX(messageID) FROM messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')))", [a objectAtIndex:0],_phone,_phone,[a objectAtIndex:0], [a objectAtIndex:0],_phone,_phone,[a objectAtIndex:0]];
+            NSString *messageQueryB = [NSString stringWithFormat:@"SELECT * FROM messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')) AND messageID = (SELECT MAX(messageID) FROM messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')))", [b objectAtIndex:0],_phone,_phone,[b objectAtIndex:0], [b objectAtIndex:0],_phone,_phone,[b objectAtIndex:0]];
+            
+            NSArray *messageA = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:messageQueryA]];
+            NSArray *messageB = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:messageQueryB]];
+            
             //        First sort based on the first thing in the order list, then by the second and so on
             NSInteger compareVal = 0;
             for (NSInteger index = 0; index < [order count]; index++) {
-                //            Get the index of the thing we want to sort on
-                NSInteger messageIndex = [MessageSortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
-                //            Sort based on that field
-                compareVal = (NSInteger)[[a objectAtIndex:messageIndex] compare:[b objectAtIndex:messageIndex]];
-                //            If the two people dont have the same value in this field we're done, otherwise check compare the next field
-                if (compareVal != 0) {
-                    break;
+                if ([[order objectAtIndex:index]  isEqual: @"Sender"]) {
+                    compareVal = (NSInteger)[[NameA objectAtIndex:0] compare:[NameB objectAtIndex:0]];
+                    if (compareVal != 0) {
+                        break;
+                    }
+                } else {
+                    //            Get the index of the thing we want to sort on
+                    NSInteger messageIndex = [MessageSortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
+                    //            Sort based on that field
+                    compareVal = (NSInteger)[[messageA objectAtIndex:messageIndex] compare:[messageB objectAtIndex:messageIndex]];
+                    //            If the two people dont have the same value in this field we're done, otherwise check compare the next field
+                    if (compareVal != 0) {
+                        break;
+                    }
                 }
             }
             return compareVal;
@@ -88,8 +107,6 @@
     
     //reload the contentview
     [self.tableView reloadData];
-    
-    
 }
 
 #pragma mark - Table view data source
