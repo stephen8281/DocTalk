@@ -22,19 +22,24 @@
 -(void) deleteMessage:(NSString*)messageID;
 -(void) loadData;
 
+//database objects for chat.sql
 @property (nonatomic, strong) DBManager *dbManager;
-@property (nonatomic, strong) NSMutableArray *arrMessage; // 2 dimensional array for result from querying local database
+@property (nonatomic, strong) NSMutableArray *arrMessage;
 
-//
+//database objects for contact.sql
 @property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
 @property (nonatomic, strong) DBManager *dbManagerForContact;
 
+//private properties
 @property (nonatomic, strong) NSString *phoneOwner;
 @property (nonatomic, strong) NSString *incomingNumber;
+@property (nonatomic, strong) NSMutableString *incomingPersonInitial;
 //@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @property (nonatomic, strong) NSString *urgency;
 @property (nonatomic, strong) NSString *time;
+@property (nonatomic, strong) JSQMessagesAvatarImage *outgoingProfileImage;
+@property (nonatomic, strong) JSQMessagesAvatarImage *incomingProfileImage;
 
 @end
 
@@ -46,14 +51,17 @@
     self.title = _receiverName;
     
     //set the phoneOwner to be the phone number retrieved from online database
-    self.phoneOwner = _phone;
-    //  self.phoneOwner = @"Stephen";
+    //self.phoneOwner = _phone;
+    self.phoneOwner = @"Stephen";
         
     //Initialize database to store messages locally
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"chat.sql"];
 
     //reformat the phone number of the person chatting with to get rid of brackets and dash
-    self.incomingNumber = [[_receiverNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
+    //self.incomingNumber = [[_receiverNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
+    self.incomingNumber = _receiverNumber;
+    self.incomingPersonInitial = [NSMutableString stringWithFormat:@"%c%c",[_receiverName characterAtIndex:0],[_receiverLastName characterAtIndex:0]];
+    
 
 
     
@@ -61,13 +69,21 @@
     self.senderId = _phoneOwner;
     self.senderDisplayName = _phoneOwner;
     self.showLoadEarlierMessagesHeader = YES;
-    
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"MMM dd, yyyy HH:mm"];
-    NSDate *now = [[NSDate alloc] init];
-    self.time = [format stringFromDate:now];
+
     
     self.urgency = @"Green";
+    
+    
+    self.outgoingProfileImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"ST"
+                                                                            backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0]
+                                                                            textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
+                                                                            font:[UIFont systemFontOfSize:14.0f]
+                                                                            diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+    self.incomingProfileImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:self.incomingPersonInitial
+                                                                    backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0]
+                                                                          textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
+                                                                               font:[UIFont systemFontOfSize:14.0f]
+                                                                           diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -138,7 +154,15 @@
 
 -(id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    //get the sender of the current text
+    NSInteger indexOfSender = [self.dbManager.arrColumnNames indexOfObject:@"sender"];
+    NSString *sender = [NSString stringWithString:[[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfSender]];
+    
+    if ([sender isEqualToString:self.senderId]) {
+        return self.outgoingProfileImage;
+    }
+    
+    return self.incomingProfileImage;
 }
 
 
@@ -207,9 +231,9 @@
      *  iOS7-style sender name labels
      */
     
-        if ([sender isEqualToString:self.senderId]) {
-            return 0.0f;
-        }
+    if ([sender isEqualToString:self.senderId]) {
+        return 0.0f;
+    }
     
     //check if previous sender is the same and adjust height accordingly
     if (indexPath.item - 1 > 0) {
@@ -370,9 +394,9 @@
     
     NSMutableString *postString = [NSMutableString stringWithString:readURL];
     [postString appendString:[NSString stringWithFormat:@"?%@=%@", @"receiver", self.phoneOwner]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postString]];
-    [request setHTTPMethod:@"POST"];
-    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postString]cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20];
+    //[request setHTTPMethod:@"POST"];
+    NSLog(@"HERE");
     _readConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 
 }
@@ -383,17 +407,19 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     _data = [[NSMutableData alloc] init];
-    NSLog(@"response received");
+    NSLog(@"didReceiveResponse");
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)theData
 {
     [_data appendData:theData];
+        NSLog(@"didReceiveData");
 }
 
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+        NSLog(@"connectionDidFinishLoading");
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     if(connection == _deleteConnection)
     {
@@ -404,6 +430,8 @@
     
     _json = [NSJSONSerialization JSONObjectWithData:_data options:NSJSONReadingMutableContainers error:nil];
     
+    //NSDictionary *json = [NSJSONSerialization JSONObjectWithData:_data options:kNilOptions error:nil];
+
     //store the json data into local database
     for(int i = 0; i<[_json count];i++)
     {
@@ -414,6 +442,14 @@
         NSString *time = [[_json objectAtIndex:i] objectForKey:@"time"];
         NSString *urgency = [[_json objectAtIndex:i] objectForKey:@"urgency"];
         
+//        NSString *messageID = [json objectForKey:@"messageID"];
+//        NSString *sender = [json objectForKey:@"sender"];
+//        NSString *receiver = [json objectForKey:@"receiver"];
+//        NSString *message = [json objectForKey:@"message"];
+//        NSString *time = [json objectForKey:@"time"];
+//        NSString *urgency = [json objectForKey:@"urgency"];
+        
+        NSLog(@"%@, %@, %@,%@, %@, %@",messageID,sender,receiver,message,time,urgency);
         
         
         NSString *query;
@@ -449,6 +485,8 @@
 {
     //UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Message read/send error - please make sure you are connected to either 3G or WI-FI" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     //[errorView show];
+        NSLog(@"didFailWithError");
+    NSLog(@"%@",error);
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
