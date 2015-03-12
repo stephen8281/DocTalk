@@ -89,12 +89,38 @@
                     if (compareVal != 0) {
                         break;
                     }
-                } else {
-                    //            Get the index of the thing we want to sort on
+                } else if ([[order objectAtIndex:index]  isEqual: @"Time"]) {
+                    NSArray *months = [NSArray arrayWithObjects:@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec", nil];
                     NSInteger messageIndex = [MessageSortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
-                    //            Sort based on that field
+                    NSString *dateA = [[messageA objectAtIndex:0] objectAtIndex:messageIndex];
+                    NSString *yearA = [dateA substringWithRange:NSMakeRange(7, 4)];
+                    NSString *monthA = [NSString stringWithFormat:@"%i", [months indexOfObject:[dateA substringWithRange:NSMakeRange(0, 3)]]];
+                    NSString *dayA = [dateA substringWithRange:NSMakeRange(4, 2)];
+                    NSString *timeA = [dateA substringWithRange:NSMakeRange(12, 5)];
+                    
+                    
+                    NSString *dateB = [[messageB objectAtIndex:0] objectAtIndex:messageIndex];
+                    NSString *yearB = [dateB substringWithRange:NSMakeRange(7, 4)];
+                    NSString *monthB = [NSString stringWithFormat:@"%i", [months indexOfObject:[dateB substringWithRange:NSMakeRange(0, 3)]]];
+                    NSString *dayB = [dateB substringWithRange:NSMakeRange(4, 2)];
+                    NSString *timeB = [dateB substringWithRange:NSMakeRange(12, 5)];
+                    
+                    compareVal = (NSInteger)[yearA compare:yearB];
+                    if (compareVal == 0) {
+                        compareVal = (NSInteger)[monthA compare:monthB];
+                        if (compareVal == 0) {
+                            compareVal = (NSInteger)[dayA compare:dayB];
+                            if (compareVal == 0) {
+                                compareVal = (NSInteger)[timeA compare:timeB];
+                            }
+                        }
+                    }
+                    if (compareVal != 0) {
+                        break;
+                    }
+                }else if ([[order objectAtIndex:index]  isEqual: @"Urgency"]) {
+                    NSInteger messageIndex = [MessageSortingMap indexOfObjectIdenticalTo:@"Urgency"];
                     compareVal = (NSInteger)[[[messageA objectAtIndex:0]objectAtIndex :messageIndex] compare:[[messageB objectAtIndex:0]objectAtIndex :messageIndex] ];
-                    //            If the two people dont have the same value in this field we're done, otherwise check compare the next field
                     if (compareVal != 0) {
                         break;
                     }
