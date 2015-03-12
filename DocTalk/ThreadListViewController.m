@@ -9,6 +9,7 @@
 #import "ThreadListViewController.h"
 #import "SendMessageController.h"
 #import "DBManager.h"
+#import "sortMessagesContainer.h"
 
 @interface ThreadListViewController ()
 @property (nonatomic, strong) DBManager *dbManager;
@@ -63,6 +64,27 @@
     }
     self.arrContact = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     
+    //    Sort the messages
+    if (self.arrContact.count > 1) {
+        NSArray *MessageSortingMap = [NSArray arrayWithObjects:@"messageID", @"Sender", @"receiver", @"text", @"Time", @"Urgency", nil];
+        NSArray *order = [sortMessagesContainer sortOrder];
+        NSArray *tempArray = [self.arrContact sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+            //        First sort based on the first thing in the order list, then by the second and so on
+            NSInteger compareVal = 0;
+            for (NSInteger index = 0; index < [order count]; index++) {
+                //            Get the index of the thing we want to sort on
+                NSInteger messageIndex = [MessageSortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
+                //            Sort based on that field
+                compareVal = (NSInteger)[[a objectAtIndex:messageIndex] compare:[b objectAtIndex:messageIndex]];
+                //            If the two people dont have the same value in this field we're done, otherwise check compare the next field
+                if (compareVal != 0) {
+                    break;
+                }
+            }
+            return compareVal;
+        }];
+        self.arrContact = [[NSMutableArray alloc] initWithArray:tempArray];;
+    }
     
     //reload the contentview
     [self.tableView reloadData];
