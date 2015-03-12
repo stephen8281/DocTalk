@@ -159,12 +159,12 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         
         NSString *incomingPerson = [NSString stringWithString:[[self.arrContact objectAtIndex:indexPath.row] objectAtIndex:0]];
-        NSString *query = [NSString stringWithFormat:@"SELECT firstname FROM peopleInfo WHERE mobilenumber =  '%@' ",incomingPerson];
+        NSString *query = [NSString stringWithFormat:@"SELECT firstname,lastname FROM peopleInfo WHERE mobilenumber =  '%@' ",incomingPerson];
         NSMutableArray *result = [[NSMutableArray alloc]initWithArray:[self.dbManangerContact loadDataFromDB:query]];
         
-
         [[segue destinationViewController] setReceiverNumber: [[self.arrContact objectAtIndex:indexPath.row] objectAtIndex:0]];
         [[segue destinationViewController] setReceiverName: [NSString stringWithString:[[result objectAtIndex:0] objectAtIndex:0]]];
+        [[segue destinationViewController] setReceiverLastName: [NSString stringWithString:[[result objectAtIndex:0] objectAtIndex:1]]];
         [[segue destinationViewController] setPhone: _phone];
             
     }
