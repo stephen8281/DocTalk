@@ -90,28 +90,27 @@
                         break;
                     }
                 } else if ([[order objectAtIndex:index]  isEqual: @"Time"]) {
-                    NSArray *months = [NSArray arrayWithObjects:@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec", nil];
-                    NSInteger messageIndex = [MessageSortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
+                    NSDictionary *months = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"01", @"02", @"03", @"04", @"05", @"06", @"07", @"08", @"09", @"10", @"11", @"12", nil] forKeys:[NSArray arrayWithObjects:@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec", nil]];                    NSInteger messageIndex = [MessageSortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
                     NSString *dateA = [[messageA objectAtIndex:0] objectAtIndex:messageIndex];
-                    NSString *yearA = [dateA substringWithRange:NSMakeRange(7, 4)];
-                    NSString *monthA = [NSString stringWithFormat:@"%i", [months indexOfObject:[dateA substringWithRange:NSMakeRange(0, 3)]]];
+                    NSString *yearA = [dateA substringWithRange:NSMakeRange(8, 4)];
+                    NSString *monthA = [NSString stringWithFormat:@"%@", [months objectForKey:[dateA substringWithRange:NSMakeRange(0, 3)]]];
                     NSString *dayA = [dateA substringWithRange:NSMakeRange(4, 2)];
-                    NSString *timeA = [dateA substringWithRange:NSMakeRange(12, 5)];
+                    NSString *timeA = [dateA substringWithRange:NSMakeRange(13, 5)];
                     
                     
                     NSString *dateB = [[messageB objectAtIndex:0] objectAtIndex:messageIndex];
-                    NSString *yearB = [dateB substringWithRange:NSMakeRange(7, 4)];
-                    NSString *monthB = [NSString stringWithFormat:@"%i", [months indexOfObject:[dateB substringWithRange:NSMakeRange(0, 3)]]];
+                    NSString *yearB = [dateB substringWithRange:NSMakeRange(8, 4)];
+                    NSString *monthB = [NSString stringWithFormat:@"%@", [months objectForKey:[dateB substringWithRange:NSMakeRange(0, 3)]]];
                     NSString *dayB = [dateB substringWithRange:NSMakeRange(4, 2)];
-                    NSString *timeB = [dateB substringWithRange:NSMakeRange(12, 5)];
+                    NSString *timeB = [dateB substringWithRange:NSMakeRange(13, 5)];
                     
-                    compareVal = (NSInteger)[yearA compare:yearB];
+                    compareVal = (NSInteger)[yearB compare:yearA];
                     if (compareVal == 0) {
-                        compareVal = (NSInteger)[monthA compare:monthB];
+                        compareVal = (NSInteger)[monthB compare:monthA];
                         if (compareVal == 0) {
-                            compareVal = (NSInteger)[dayA compare:dayB];
+                            compareVal = (NSInteger)[dayB compare:dayA];
                             if (compareVal == 0) {
-                                compareVal = (NSInteger)[timeA compare:timeB];
+                                compareVal = (NSInteger)[timeB compare:timeA];
                             }
                         }
                     }
