@@ -39,8 +39,10 @@
 
 - (IBAction)signinClicked:(id)sender {
     //    Added this line of code for testing purposes
+
 //    [self performSegueWithIdentifier:@"login_success" sender:self];
 //    return;
+
     
     NSInteger success = 0;
     @try {
@@ -52,10 +54,11 @@
         } else {
             NSString *post =[[NSString alloc] initWithFormat:@"username=%@&password=%@",[self.txtUsername text],[self.txtPassword text]];
             NSLog(@"PostData: %@",post);
-      
-            NSURL *url=[NSURL URLWithString:@"http://128.189.244.100/jsonlogin2.php"];
+            
+            NSURL *url=[NSURL URLWithString:@"http://192.168.1.74/jsonlogin2.php"];
             // NSURL *url=[NSURL URLWithString:@"http://128.189.245.75:1200"];
             //NSURL *url=[NSURL URLWithString:@"http://localhost/jsonlogin2.php"];
+
             
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             
@@ -91,12 +94,14 @@
                 success = [jsonData[@"success"] integerValue];
                 //NSString *phoneNumber = [jsonData objectForKey:@"phonenumber"];
                 _phone = [jsonData objectForKey:@"phonenumber"];
+                _userid = [jsonData objectForKey:@"getuserid"];
                 NSLog(@"Success: %ld",(long)success);
                 
                 if(success == 1)
                 {
                     NSLog(@"Login SUCCESS");
-                    //NSLog(@"%@",_phone);
+                    NSLog(@"%@",_phone);
+                    NSLog(@"%@",_userid);
                     
                 } else {
                     
@@ -122,7 +127,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"login_success"]) {
+
+         
         UITabBarController *tabBar = segue.destinationViewController;
+        
         UINavigationController *navController = [tabBar.viewControllers objectAtIndex:0];
         ViewController *cvc = [navController.viewControllers objectAtIndex:0];
         cvc.phone = _phone;
@@ -130,7 +138,9 @@
         UINavigationController *navController1 = [tabBar.viewControllers objectAtIndex:1];
         ThreadListViewController *tlvc = [navController1.viewControllers objectAtIndex:0];
         tlvc.phone = _phone;
+
     }
+    
 }
 
 - (void) alertStatus:(NSString *)msg :(NSString *)title :(int) tag

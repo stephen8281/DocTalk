@@ -105,10 +105,12 @@
 {
     if ([[segue identifier] isEqualToString:@"showContactThread"]) {
         NSString *name = [NSString stringWithString:[_dictContactDetails objectForKey:@"firstName"]];
+        NSString *lastName = [NSString stringWithString:[_dictContactDetails objectForKey:@"lastName"]];
         NSString *phoneNumber = [NSString stringWithString:[_dictContactDetails objectForKey:@"mobileNumber"]];
         
         SendMessageController *destination = [segue destinationViewController];
         [destination setReceiverName: name];
+        [destination setReceiverLastName:lastName];
         [destination setReceiverNumber: phoneNumber];
         [destination setPhone: _phone];
     }

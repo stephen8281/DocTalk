@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *myMessages;
 @property (strong, nonatomic) NSString *phone;
+@property (strong, nonatomic) NSString *userid;
 
 @end

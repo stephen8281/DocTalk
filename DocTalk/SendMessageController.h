@@ -8,15 +8,12 @@
 #import "JSQMessages.h"
 #import <UIKit/UIKit.h>
 
-
 //#define sendURL @"http://192.168.43.249:12000"
 //#define readURL @"http://192.168.43.249:12000"
 //#define deleteURL @"http://192.168.43.249:12000"
 #define sendURL @"http://128.189.244.100/postmessage.php"
 #define readURL @"http://128.189.244.100/readmessage.php"
 #define deleteURL @"http://128.189.244.100/deletemessage.php"
-
-
 
 @interface SendMessageController : JSQMessagesViewController<UIActionSheetDelegate>
 
@@ -34,6 +31,7 @@
 
 //name of the person chatting with
 @property(nonatomic,strong) NSString *receiverName;
+@property(nonatomic,strong) NSString *receiverLastName;
 @property(nonatomic,strong) NSString *receiverNumber;
 
 //objects for receiving json data from server
