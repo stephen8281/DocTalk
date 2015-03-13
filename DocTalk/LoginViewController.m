@@ -55,7 +55,7 @@
             NSString *post =[[NSString alloc] initWithFormat:@"username=%@&password=%@",[self.txtUsername text],[self.txtPassword text]];
             NSLog(@"PostData: %@",post);
             
-            NSURL *url=[NSURL URLWithString:@"http://128.189.245.211/jsonlogin2.php"];
+            NSURL *url=[NSURL URLWithString:@"http://192.168.1.74/jsonlogin2.php"];
 
             // NSURL *url=[NSURL URLWithString:@"http://128.189.245.75:1200"];
             //NSURL *url=[NSURL URLWithString:@"http://localhost/jsonlogin2.php"];
@@ -128,7 +128,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"login_success"]) {
-        /* errors when trying to integrate both cvc and tlvcs for phone and userid. hence, testing userid indepenedantly for now
+
          
         UITabBarController *tabBar = segue.destinationViewController;
         
@@ -139,26 +139,6 @@
         UINavigationController *navController1 = [tabBar.viewControllers objectAtIndex:1];
         ThreadListViewController *tlvc = [navController1.viewControllers objectAtIndex:0];
         tlvc.phone = _phone;
-        
-        */
-        
-        // ----------------------------------------------------------------------------------
-        
-        UITabBarController *tabBar = segue.destinationViewController;
-        
-        UINavigationController *navController = [tabBar.viewControllers objectAtIndex:3];
-        ViewController *cvc = [navController.viewControllers objectAtIndex:0];
-        cvc.userid = _userid;
-        
-        UINavigationController *navController1 = [tabBar.viewControllers objectAtIndex:0];
-        ThreadListViewController *tlvc = [navController1.viewControllers objectAtIndex:0];
-        tlvc.userid = _userid;
-
-        
-
-        
-        
-        
 
     }
     

@@ -51,8 +51,8 @@
     self.title = _receiverName;
     
     //set the phoneOwner to be the phone number retrieved from online database
-    //self.phoneOwner = _phone;
-    self.phoneOwner = @"Stephen";
+    self.phoneOwner = _phone;
+    //self.phoneOwner = @"Stephen";
         
     //Initialize database to store messages locally
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"chat.sql"];
@@ -61,6 +61,7 @@
     //self.incomingNumber = [[_receiverNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
     self.incomingNumber = _receiverNumber;
     self.incomingPersonInitial = [NSMutableString stringWithFormat:@"%c%c",[_receiverName characterAtIndex:0],[_receiverLastName characterAtIndex:0]];
+    NSLog(@"%@",self.incomingPersonInitial);
     
 
 
@@ -395,7 +396,7 @@
     NSMutableString *postString = [NSMutableString stringWithString:readURL];
     [postString appendString:[NSString stringWithFormat:@"?%@=%@", @"receiver", self.phoneOwner]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postString]cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20];
-    //[request setHTTPMethod:@"POST"];
+    [request setHTTPMethod:@"POST"];
     NSLog(@"HERE");
     _readConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 

@@ -13,9 +13,9 @@
 //#define sendURL @"http://128.189.72.103:12000/postmessage"
 //#define readURL @"http://128.189.72.103:12000/readmessage"
 //#define deleteURL @"http://128.189.72.103:12000/deletemessage"
-#define sendURL @"http://128.189.244.100/postmessage.php"
-#define readURL @"http://128.189.244.100/readmessage.php"
-#define deleteURL @"http://128.189.244.100/deletemessage.php"
+#define sendURL @"http://192.168.1.74/postmessage.php"
+#define readURL @"http://192.168.1.74/readmessage.php"
+#define deleteURL @"http://192.168.1.74/deletemessage.php"
 
 
 
