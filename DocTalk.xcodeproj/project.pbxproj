@@ -56,6 +56,7 @@
 		DC6A611C1A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6A60F11A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.m */; };
 		DC6A611D1A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC6A60F21A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.xib */; };
 		DC6A611F1A8B12CC0016538E /* contact.sql in Resources */ = {isa = PBXBuildFile; fileRef = DC6A611E1A8B12CC0016538E /* contact.sql */; };
+		DC6FEA211AB5155400806EA4 /* ContactDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6FEA201AB5155400806EA4 /* ContactDetails.m */; };
 		DC711A2D1A85B74F00FBC7F1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC711A2C1A85B74F00FBC7F1 /* AudioToolbox.framework */; };
 		DCA622851A648AB100830A80 /* chat.sql in Resources */ = {isa = PBXBuildFile; fileRef = DCA622841A648AB100830A80 /* chat.sql */; };
 		DCC2C8B31A29762D00B7A97C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC2C8B21A29762D00B7A97C /* main.m */; };
@@ -77,7 +78,6 @@
 		DF24772B1A7AE61A00FBC65E /* sortMessagesContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = DF24772A1A7AE61A00FBC65E /* sortMessagesContainer.m */; };
 		DF2477311A82D15C00FBC65E /* sortContactsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2477301A82D15C00FBC65E /* sortContactsContainer.m */; };
 		DF2477341A93F32100FBC65E /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2477331A93F32100FBC65E /* TabBarController.m */; };
-		DF6C51FC1AA916730093FA3D /* ContactDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = DF6C51FB1AA916730093FA3D /* ContactDetails.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -201,6 +201,8 @@
 		DC6A60F11A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesTypingIndicatorFooterView.m; sourceTree = "<group>"; };
 		DC6A60F21A8B0EE80016538E /* JSQMessagesTypingIndicatorFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesTypingIndicatorFooterView.xib; sourceTree = "<group>"; };
 		DC6A611E1A8B12CC0016538E /* contact.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = contact.sql; sourceTree = "<group>"; };
+		DC6FEA1F1AB5155400806EA4 /* ContactDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDetails.h; sourceTree = "<group>"; };
+		DC6FEA201AB5155400806EA4 /* ContactDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDetails.m; sourceTree = "<group>"; };
 		DC711A2C1A85B74F00FBC7F1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DCA622841A648AB100830A80 /* chat.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = chat.sql; sourceTree = "<group>"; };
 		DCC2C8AD1A29762D00B7A97C /* DocTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,8 +241,6 @@
 		DF2477301A82D15C00FBC65E /* sortContactsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sortContactsContainer.m; sourceTree = "<group>"; };
 		DF2477321A93F32100FBC65E /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		DF2477331A93F32100FBC65E /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
-		DF6C51FA1AA916730093FA3D /* ContactDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactDetails.h; path = ../ContactDetails.h; sourceTree = "<group>"; };
-		DF6C51FB1AA916730093FA3D /* ContactDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactDetails.m; path = ../ContactDetails.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -479,8 +479,8 @@
 				DCC2C8B51A29762D00B7A97C /* AppDelegate.m */,
 				DCC2C8B71A29762D00B7A97C /* ViewController.h */,
 				DCC2C8B81A29762D00B7A97C /* ViewController.m */,
-				DF6C51FA1AA916730093FA3D /* ContactDetails.h */,
-				DF6C51FB1AA916730093FA3D /* ContactDetails.m */,
+				DC6FEA1F1AB5155400806EA4 /* ContactDetails.h */,
+				DC6FEA201AB5155400806EA4 /* ContactDetails.m */,
 				DF239DB41A2A413000652DC8 /* ThreadListViewController.h */,
 				DF239DB51A2A413000652DC8 /* ThreadListViewController.m */,
 				DF2477171A65B5ED00FBC65E /* StatusViewController.h */,
@@ -664,7 +664,6 @@
 				DC6A610B1A8B0EE80016538E /* JSQPhotoMediaItem.m in Sources */,
 				DC6A61141A8B0EE80016538E /* JSQMessagesComposerTextView.m in Sources */,
 				DC6A611A1A8B0EE80016538E /* JSQMessagesToolbarContentView.m in Sources */,
-				DF6C51FC1AA916730093FA3D /* ContactDetails.m in Sources */,
 				DC6A61151A8B0EE80016538E /* JSQMessagesInputToolbar.m in Sources */,
 				DC6A60FF1A8B0EE80016538E /* JSQMessagesBubbleImageFactory.m in Sources */,
 				DC6A61091A8B0EE80016538E /* JSQMessagesAvatarImage.m in Sources */,
@@ -710,6 +709,7 @@
 				DF2477221A6EC62C00FBC65E /* PasswordSettingsViewController.m in Sources */,
 				DC6A61071A8B0EE80016538E /* JSQMediaItem.m in Sources */,
 				DF24772B1A7AE61A00FBC65E /* sortMessagesContainer.m in Sources */,
+				DC6FEA211AB5155400806EA4 /* ContactDetails.m in Sources */,
 				DC6A60F71A8B0EE80016538E /* UIColor+JSQMessages.m in Sources */,
 				DC5DE2C41A77163A00298C29 /* LoginViewController.m in Sources */,
 			);
