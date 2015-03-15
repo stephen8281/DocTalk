@@ -10,11 +10,6 @@
 
 @interface SettingViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
-
-//@property (strong, nonatomic) IBOutlet UITableViewCell *profileSettings;
-//@property (strong, nonatomic) IBOutlet UITableViewCell *changePassword;
-//@property (strong, nonatomic) IBOutlet UITableViewCell *messageDeletion;
-//@property (strong, nonatomic) IBOutlet UITableViewCell *contactMessageSorting;
 @property (strong, nonatomic) NSString *userid;
 @property (strong, nonatomic) NSString *phone;
 @property (strong, nonatomic) NSString *username;
