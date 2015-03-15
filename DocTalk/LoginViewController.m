@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "ThreadListViewController.h"
+#import "SettingViewController.h"
 
 
 @interface LoginViewController ()
@@ -95,13 +96,13 @@
                 //NSString *phoneNumber = [jsonData objectForKey:@"phonenumber"];
                 _phone = [jsonData objectForKey:@"phonenumber"];
                 _userid = [jsonData objectForKey:@"getuserid"];
+                _username = [jsonData objectForKey:@"getusername"];
                 NSLog(@"Success: %ld",(long)success);
                 
                 if(success == 1)
                 {
                     NSLog(@"Login SUCCESS");
-                    NSLog(@"%@",_phone);
-                    NSLog(@"%@",_userid);
+                    NSLog(@"phone:%@, userid:%@, username:%@",_phone,_userid,_username);                    
                     
                 } else {
                     
@@ -131,13 +132,24 @@
          
         UITabBarController *tabBar = segue.destinationViewController;
         
+        //ContactDetails
         UINavigationController *navController = [tabBar.viewControllers objectAtIndex:0];
         ViewController *cvc = [navController.viewControllers objectAtIndex:0];
         cvc.phone = _phone;
         
+        //ThreadlistViewController
         UINavigationController *navController1 = [tabBar.viewControllers objectAtIndex:1];
         ThreadListViewController *tlvc = [navController1.viewControllers objectAtIndex:0];
         tlvc.phone = _phone;
+        
+        //SettingViewController
+        UINavigationController *navController3 = [tabBar.viewControllers objectAtIndex:3];
+        SettingViewController  *svc = [navController3.viewControllers objectAtIndex:0];
+        svc.userid = _userid;
+        svc.phone = _phone;
+        svc.username = _username;
+        
+        
 
     }
     
