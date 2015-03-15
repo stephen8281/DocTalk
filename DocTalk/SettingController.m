@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 DocTalk. All rights reserved.
 //
 
-#import "TableViewController.h"
+#import "SettingViewController.h"
 
 @interface TableViewController ()
 

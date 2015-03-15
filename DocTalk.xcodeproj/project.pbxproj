@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7DF668A61AB244D0005FDA6F /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF668A51AB244D0005FDA6F /* TableViewController.m */; };
+		7DF668A61AB244D0005FDA6F /* SettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF668A51AB244D0005FDA6F /* SettingController.m */; };
 		DC5DE2C31A77163A00298C29 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5DE2BE1A77163A00298C29 /* HomeViewController.m */; };
 		DC5DE2C41A77163A00298C29 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5DE2C01A77163A00298C29 /* LoginViewController.m */; };
 		DC5DE2C51A77163A00298C29 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5DE2C21A77163A00298C29 /* SignUpViewController.m */; };
@@ -91,8 +91,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7DF668A41AB244D0005FDA6F /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
-		7DF668A51AB244D0005FDA6F /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		7DF668A41AB244D0005FDA6F /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		7DF668A51AB244D0005FDA6F /* SettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingController.m; sourceTree = "<group>"; };
 		DC5DE2BD1A77163A00298C29 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		DC5DE2BE1A77163A00298C29 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		DC5DE2BF1A77163A00298C29 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -497,8 +497,8 @@
 				DF24772A1A7AE61A00FBC65E /* sortMessagesContainer.m */,
 				DF24772F1A82D15C00FBC65E /* sortContactsContainer.h */,
 				DF2477301A82D15C00FBC65E /* sortContactsContainer.m */,
-				7DF668A41AB244D0005FDA6F /* TableViewController.h */,
-				7DF668A51AB244D0005FDA6F /* TableViewController.m */,
+				7DF668A41AB244D0005FDA6F /* SettingViewController.h */,
+				7DF668A51AB244D0005FDA6F /* SettingController.m */,
 				DCC2C8BA1A29762D00B7A97C /* Main.storyboard */,
 				DCC2C8BD1A29762D00B7A97C /* Images.xcassets */,
 				DCC2C8BF1A29762D00B7A97C /* LaunchScreen.xib */,
@@ -689,7 +689,7 @@
 				DC6A61191A8B0EE80016538E /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				DC6A60FE1A8B0EE80016538E /* JSQMessagesAvatarImageFactory.m in Sources */,
 				DF2477281A7AAC0900FBC65E /* sortSettingsViewController.m in Sources */,
-				7DF668A61AB244D0005FDA6F /* TableViewController.m in Sources */,
+				7DF668A61AB244D0005FDA6F /* SettingController.m in Sources */,
 				DF2477191A65B5ED00FBC65E /* StatusViewController.m in Sources */,
 				DC6A61061A8B0EE80016538E /* JSQLocationMediaItem.m in Sources */,
 				DC6A610A1A8B0EE80016538E /* JSQMessagesBubbleImage.m in Sources */,
