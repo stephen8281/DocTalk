@@ -60,10 +60,12 @@
     //reformat the phone number of the person chatting with to get rid of brackets and dash
     //self.incomingNumber = [[_receiverNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
     self.incomingNumber = _receiverNumber;
-    self.incomingPersonInitial = [NSMutableString stringWithFormat:@"%c%c",[_receiverName characterAtIndex:0],[_receiverLastName characterAtIndex:0]];
-    NSLog(@"%@",self.incomingPersonInitial);
     
-
+    if([_receiverLastName isEqualToString:@""]){
+        self.incomingPersonInitial = [NSMutableString stringWithFormat:@"%c",[_receiverName characterAtIndex:0]];
+    }else{
+        self.incomingPersonInitial = [NSMutableString stringWithFormat:@"%c%c",[_receiverName characterAtIndex:0],[_receiverLastName characterAtIndex:0]];
+    }
 
     
     //set the senderID and senderDisplayName that will be used by JSQMessage
@@ -71,7 +73,7 @@
     self.senderDisplayName = _phoneOwner;
     self.showLoadEarlierMessagesHeader = YES;
 
-    
+    //default urgency is green
     self.urgency = @"Green";
     
     
@@ -97,9 +99,9 @@
 
     
     //Initialize the chat bubbles
-    JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc]init];
-    _outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
-    _incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+//    JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc]init];
+//    _outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+//    _incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
     
     //populate the tables from local database
     [self loadData];
@@ -147,6 +149,24 @@
     NSInteger indexOfSender = [self.dbManager.arrColumnNames indexOfObject:@"sender"];
     NSString *sender = [NSString stringWithString:[[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfSender]];
     
+    NSInteger indexOfUrgency = [self.dbManager.arrColumnNames indexOfObject:@"urgency"];
+    NSString *urgency = [NSString stringWithString:[[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfUrgency]];
+    
+    JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc]init];
+    
+    if([urgency isEqualToString:@"Red"]){
+        _outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleRedColor]];
+        _incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleRedColor]];
+        
+    }else if([urgency isEqualToString:@"Orange"]){
+        _outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleBlueColor]];
+        _incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleBlueColor]];
+        
+    }else{
+        _outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+        _incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+    }
+
     if ([sender isEqualToString:self.senderId]) {
         return _outgoingBubbleImageData;
     }
@@ -188,13 +208,13 @@
         }
     }
     
-    return [[NSAttributedString alloc] initWithString:sender];
+    return [[NSAttributedString alloc] initWithString:_receiverName];
 }
 
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.item % 3 == 0) {
+    if (indexPath.item % 5 == 0) {
         NSInteger indexOfTime = [self.dbManager.arrColumnNames indexOfObject:@"time"];
         NSString *time = [NSString stringWithString:[[self.arrMessage objectAtIndex:indexPath.row] objectAtIndex:indexOfTime]];
         return [[NSAttributedString alloc] initWithString:time];
@@ -207,6 +227,7 @@
 {
     
     return [self.arrMessage count];
+
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -251,7 +272,7 @@
 -(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if (indexPath.item % 3 == 0) {
+    if (indexPath.item % 5 == 0) {
         return kJSQMessagesCollectionViewCellLabelHeightDefault;
     }
     
@@ -273,11 +294,11 @@
 
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Media messages"
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Set Message Urgency"
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Send photo", @"Send video", nil];
+                                              otherButtonTitles:@"Red", @"Orange", @"Green", nil];
     
     [sheet showFromToolbar:self.inputToolbar];
 }
@@ -288,32 +309,26 @@
         return;
     }
     
-//    switch (buttonIndex) {
-//        case 0:
-//            [self.demoData addPhotoMediaMessage];
-//            break;
-//            
-//        case 1:
-//        {
-//            __weak UICollectionView *weakView = self.collectionView;
-//            
-//            [self.demoData addLocationMediaMessageCompletion:^{
-//                [weakView reloadData];
-//            }];
-//        }
-//            break;
-//            
-//        case 2:
-//            [self.demoData addVideoMediaMessage];
-//            break;
-//    }
-//    
-//    [JSQSystemSoundPlayer jsq_playMessageSentSound];
-//    
-//    [self finishSendingMessageAnimated:YES];
+    switch (buttonIndex) {
+        case 0:
+            self.urgency = @"Red";
+            break;
+        case 1:
+            self.urgency = @"Orange";
+            break;
+    
+        case 2:
+            self.urgency = @"Green";
+            break;
+    }
+    
 }
+#pragma mark - JSQMessagesLoadEarlierHeaderViewDelegate
 
-
+-(void)headerView:(JSQMessagesLoadEarlierHeaderView *)headerView didPressLoadButton:(UIButton *)sender
+{
+    
+}
 
 #pragma mark - send message methods
 
@@ -357,6 +372,8 @@
         self.arrMessage = nil;
     }
     self.arrMessage = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    
+    
     
     //reload the contentview
     [self.collectionView reloadData];
