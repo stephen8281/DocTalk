@@ -8,8 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SettingViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
+
+//@property (strong, nonatomic) IBOutlet UITableViewCell *profileSettings;
+//@property (strong, nonatomic) IBOutlet UITableViewCell *changePassword;
+//@property (strong, nonatomic) IBOutlet UITableViewCell *messageDeletion;
+//@property (strong, nonatomic) IBOutlet UITableViewCell *contactMessageSorting;
 @property (strong, nonatomic) NSString *userid;
+@property (strong, nonatomic) NSString *phone;
+@property (strong, nonatomic) NSString *username;
+
+@property (strong, nonatomic) IBOutlet UILabel *useridLabel;
+@property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *phoneLabel;
+
 
 @end
