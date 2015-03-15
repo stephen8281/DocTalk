@@ -15,9 +15,7 @@
 #define readURL @"http://192.168.1.74/readmessage.php"
 #define deleteURL @"http://192.168.1.74/deletemessage.php"
 
-@interface SendMessageController : JSQMessagesViewController<UIActionSheetDelegate>
-
-//UIViewController <UITextFieldDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource,MessageComposerViewDelegate>
+@interface SendMessageController : JSQMessagesViewController<UIActionSheetDelegate, JSQMessagesLoadEarlierHeaderViewDelegate>
 
 
 //Chat bubbles objects
