@@ -2,6 +2,7 @@
 
 header('Content-type: application/json');
 if($_POST) {
+	$id = $_POST['id'];
 	$name   = $_POST['name'];
 	$phonenumber = $_POST['phonenumber'];
 	$email   = $_POST['email'];
@@ -19,14 +20,15 @@ if($_POST) {
 				error_log("Connect failed: " . mysqli_connect_error());
 				echo '{"success":0,"error_message":"' . mysqli_connect_error() . '"}';
 			} else {
-				$stmt = $mysqli->prepare("INSERT INTO users (name, phonenumber, email, hospital) VALUES (?, ?, ?, ?)");
+				$stmt = $mysqli->prepare("UPDATE users SET name = ?, phonenumber = ?, email = ?, hospital = ? WHERE id =?");
 				//$password = md5($password);
 				
 				//try getting sha-256 to work
 				//PORT 3306 DEFAULT ON XAMPP
 
 				//$password = hash("sha256", $password);
-				$stmt->bind_param("ssss", $name, $phonenumber, $email, $hospital);
+				$stmt->bind_param("ssssi", $name, $phonenumber, $email, $hospital, $id);
+
 
 				/* execute prepared statement */
 				$stmt->execute();
