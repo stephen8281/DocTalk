@@ -132,18 +132,18 @@
                 } else {
                     
                     NSString *error_msg = (NSString *) jsonData[@"error_message"];
-                    [self alertStatus:error_msg :@"Sign up Failed!" :0];
+                    [self alertStatus:error_msg :@"Password change failed!" :0];
                 }
                 
             } else {
                 //if (error) NSLog(@"Error: %@", error);
-                [self alertStatus:@"Connection Failed" :@"Sign up Failed!" :0];
+                [self alertStatus:@"Connection Failed" :@"Password change failed!" :0];
             }
         }
     }
     @catch (NSException * e) {
         NSLog(@"Exception: %@", e);
-        [self alertStatus:@"Sign Up Failed." :@"Error!" :0];
+        [self alertStatus:@"Password change failed." :@"Error!" :0];
     }
     if (success) {
         //[self performSegueWithIdentifier:@"login_success" sender:self];
