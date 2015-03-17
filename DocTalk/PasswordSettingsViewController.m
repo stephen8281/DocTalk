@@ -89,8 +89,8 @@
             NSString *post =[[NSString alloc] initWithFormat:@"id=%@&oldpassword=%@&updatedpassword=%@&repeatedpassword=%@",self.phoneUID,[self.oldPassword text], [self.updatedPassword text],[self.repeatedPassword text]];
             NSLog(@"PostData: %@",post);
             
-            //NSURL *url=[NSURL URLWithString:@"http://192.168.1.74/jsonsignup.php"];
-            NSURL *url=[NSURL URLWithString:@"http://localhost/jsonpwchange.php"];
+            NSURL *url=[NSURL URLWithString:@"http://192.168.1.74/jsonpwchange.php"];
+            //NSURL *url=[NSURL URLWithString:@"http://localhost/jsonpwchange.php"];
             
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             

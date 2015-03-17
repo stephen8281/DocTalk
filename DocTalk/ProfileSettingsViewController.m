@@ -134,8 +134,8 @@
             NSString *post =[[NSString alloc] initWithFormat:@"id=%@&name=%@&phonenumber=%@&email=%@&hospital=%@",self.phoneUID,[self.txtName text],[self.txtPhoneNumber text],[self.txtEmail text],[self.txtHospital text]];
             NSLog(@"PostData: %@",post);
             
-            //NSURL *url=[NSURL URLWithString:@"http://192.168.1.73/profilesettings.php"];
-            NSURL *url=[NSURL URLWithString:@"http://localhost/profilesettings.php"];
+            NSURL *url=[NSURL URLWithString:@"http://192.168.1.74/profilesettings.php"];
+            //NSURL *url=[NSURL URLWithString:@"http://localhost/profilesettings.php"];
             
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             

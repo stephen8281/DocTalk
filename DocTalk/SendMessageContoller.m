@@ -77,7 +77,7 @@
     self.urgency = @"Green";
     
     
-    self.outgoingProfileImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"ST"
+    self.outgoingProfileImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"Me"
                                                                             backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0]
                                                                             textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
                                                                             font:[UIFont systemFontOfSize:14.0f]
