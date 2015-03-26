@@ -47,12 +47,12 @@ NSString *_sellected;
 
 
 // The number of columns of data
-- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 2;
 }
 
 // The number of rows of data
-- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     if (component == 0) {
         return [_mainOptions count];
     } else if ([_sellected isEqual: @"Available"]) {
