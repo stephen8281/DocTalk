@@ -11,13 +11,15 @@ public class MySQLsetup
 	private final static boolean DEBUG = false;
 	private final static String dataBaseName = "docTalk";
 	private final static String messageTableName = "docTalkMessages";
-	private final static String passwordTableName = "docTalkPasswords";
+	private final static String passwordTableName = "docTalkUsers";
 	private static Connection messageConn = null;
 	private static Statement massageStatment = null;
 	private static Connection passwordConn = null;
 	private static Statement passwordStatment = null;
 	private final static String url="jdbc:mysql://localhost:3306/";
     final static int mySQLnameFieldSize = 35;
+    final static int mySQLtimeFieldSize = 24;
+    final static int mySQLurgencyFieldSize = 10;
     
     
 	public static void setupMessageTables(String userName,String password)
@@ -35,15 +37,15 @@ public class MySQLsetup
           //conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?" + "user=DocTalk&password=BantingandBest");
             setupStatment(userName,password);
             int result = massageStatment.executeUpdate("CREATE DATABASE IF NOT EXISTS " + dataBaseName);
-            System.out.println("result is: " + result);
+            if(DEBUG) System.out.println("result is: " + result);
             
             massageStatment.setCursorName("docTalkCursor");
             ResultSet res = massageStatment.executeQuery("SHOW DATABASES;");
             res.first();
-            printResultSet(res);
+            if(DEBUG) printResultSet(res);
             massageStatment.execute("USE " + dataBaseName + ";");
             //s.execute("DROP TABLE IF EXISTS " + messageTableName + ";");
-            massageStatment.execute("CREATE TABLE IF NOT EXISTS " + messageTableName + " (id INT NOT NULL AUTO_INCREMENT, sender VARCHAR("+mySQLnameFieldSize+"), reciver VARCHAR("+mySQLnameFieldSize+"), message VARCHAR(1000), PRIMARY KEY (id) );");
+            massageStatment.execute("CREATE TABLE IF NOT EXISTS " + messageTableName + " (id INT NOT NULL AUTO_INCREMENT, sender VARCHAR("+mySQLnameFieldSize+"), reciver VARCHAR("+mySQLnameFieldSize+"), message VARCHAR(1000), time VARCHAR("+mySQLtimeFieldSize+"), urgency VARCHAR("+mySQLurgencyFieldSize+"), PRIMARY KEY (id) );");
             if(DEBUG)
             {
 	            massageStatment.execute("SHOW TABLES;");
@@ -78,7 +80,8 @@ public class MySQLsetup
 //            res.first();
 //            printResultSet(res);
             passwordStatment.execute("USE " + dataBaseName + ";");
-            passwordStatment.execute("CREATE TABLE IF NOT EXISTS " + passwordTableName + " (id INT NOT NULL AUTO_INCREMENT, sender VARCHAR("+mySQLnameFieldSize+"), message VARCHAR(64), PRIMARY KEY (id) );");
+//            passwordStatment.execute("CREATE TABLE IF NOT EXISTS " + passwordTableName + " (id INT NOT NULL AUTO_INCREMENT, sender VARCHAR("+mySQLnameFieldSize+"), message VARCHAR(64), PRIMARY KEY (id) );");
+            passwordStatment.execute("CREATE TABLE IF NOT EXISTS " + passwordTableName + " (id INT NOT NULL AUTO_INCREMENT, username VARCHAR("+mySQLnameFieldSize+"), phonenumber VARCHAR(64), password VARCHAR(64), email VARCHAR(64), hospital VARCHAR(64), PRIMARY KEY (id) );");
             if(DEBUG)
             {
 	            passwordStatment.execute("SHOW TABLES;");
@@ -144,12 +147,135 @@ public class MySQLsetup
 		return new String(res+'\n');
 	}
 	
+	public String queryPasswordTableByUser(String usrname, String password)
+	{
+		String res = null;
+		try 
+		{
+			//printResultSet(passwordStatment.executeQuery("SHOW DATABASES;"));
+			passwordStatment.execute("USE " + dataBaseName + ";");
+			passwordStatment.execute("SELECT phonenumber, id, username FROM " + passwordTableName + " WHERE username = '"+ usrname +"' and password='"+password+"';");
+			res = resultSetToString(passwordStatment.getResultSet());
+			if(DEBUG) System.out.println("res set to \"" + res + "\"");
+			if(res.equals(""))
+			{
+				if(DEBUG) System.out.println("no such user");
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new String(res+'\n');
+	}
+	
+	public String updatePasswordTableByUser(String id,String password)
+	{
+		String res = "-1";
+		try 
+		{
+			//printResultSet(passwordStatment.executeQuery("SHOW DATABASES;"));
+			passwordStatment.execute("USE " + dataBaseName + ";");
+			passwordStatment.execute("UPDATE " + passwordTableName + " SET password = '"+ password +"' WHERE id = '" + id +"';");
+			passwordStatment.execute("SELECT password from " + passwordTableName + " WHERE id='" + id +"';");
+			res = resultSetToString(passwordStatment.getResultSet());
+			res = res.split("password ")[1].split("\\n")[0];
+			if(DEBUG) System.out.println("res set to \"" + res + "\"");
+			if(null!=res && res.equals(password))
+			{
+				//check that the password has been updated
+				res = "1";
+				
+			}
+			else
+			{
+				res = "0";
+				if(DEBUG) System.out.println("no such user");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new String(res);
+	}
+	
+	public String updateUserTableProfile(String[] brokenClientSentence)
+	{
+		String res = "-1";
+		try 
+		{
+			//printResultSet(passwordStatment.executeQuery("SHOW DATABASES;"));
+			passwordStatment.execute("USE " + dataBaseName + ";");
+			
+			String NOVALUESENT = "";
+			
+			String ID = brokenClientSentence[0];
+			String name = brokenClientSentence[1];//getFieldByID("username",passwordTableName,brokenClientSentence[4]);
+			String phoneNumber = brokenClientSentence[2];
+			String email = brokenClientSentence[3];
+			String hospital = brokenClientSentence[4];
+			//System.out.println("\""+brokenClientSentence[3]+"\"");
+			
+//			name = brokenClientSentence[1].equals(NOVALUESENT)?name:brokenClientSentence[1];
+//			phoneNumber = brokenClientSentence[2].equals(NOVALUESENT)?phoneNumber:brokenClientSentence[2];
+//			email = brokenClientSentence[3].equals(NOVALUESENT)?email:brokenClientSentence[3];
+//			hospital = brokenClientSentence[4].equals(NOVALUESENT)?hospital:brokenClientSentence[4];
+			
+			passwordStatment.execute("UPDATE " + passwordTableName + " SET username = '" + name + "' WHERE id = '" + ID +"';");
+			passwordStatment.execute("UPDATE " + passwordTableName + " SET phonenumber = '" + phoneNumber + "' WHERE id = '" + ID +"';");
+			passwordStatment.execute("UPDATE " + passwordTableName + " SET email = '" + email + "' WHERE id = '" + ID +"';");
+			passwordStatment.execute("UPDATE " + passwordTableName + " SET hospital = '" + hospital + "' WHERE id = '" + ID +"';");
+
+			res = "1";
+						
+//			if(null!=res && res.equals(password))
+//			{
+//				//check that the password has been updated
+//				res = "1";
+//				
+//			}
+//			else
+//			{
+//				res = "0";
+//				if(DEBUG) System.out.println("no such user");
+//			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new String(res);
+	}
+	
+	private String getFieldByID(String field, String table, String id)
+	{
+		String ret = null;
+		try {
+			passwordStatment.execute("SELECT " + field + " from " + table + " WHERE id='" + id +"';");
+			ret = resultSetToString(passwordStatment.getResultSet());
+			if(DEBUG)
+			{
+				System.out.println("raw \"" + ret + "\"");
+				System.out.println("field \"" + field + "\"");
+				System.out.println("table \"" + table + "\"");
+				System.out.println("id \"" + id + "\"");
+			}
+			ret = ret.split(field+" ")[1].split("\\n")[0];
+			if(DEBUG) System.out.println("res set to \"" + ret + "\"");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
 	public String queryMessageTableByReciever(String reciever)
 	{
 		String res = null;
 		try 
 		{
-			printResultSet(massageStatment.executeQuery("SHOW DATABASES;"));
+			//printResultSet(massageStatment.executeQuery("SHOW DATABASES;"));
 			massageStatment.execute("USE " + dataBaseName + ";");
 			massageStatment.execute("SELECT * FROM " + messageTableName + " WHERE reciver='" + reciever + "';");
 			res = resultSetToString(massageStatment.getResultSet());
@@ -178,39 +304,58 @@ public class MySQLsetup
 		return new String(res+'\n');
 	}
 	
-	public boolean insertPassword(String[] args)
+	/*
+	 * send this function {username, phonenumber, password}
+	 */
+	public int insertPassword(String[] args)
 	{
-		boolean sucsess = false;
-		if(3 == args.length)
-		{
-			try {
-				passwordStatment.executeUpdate("INSERT INTO " + passwordTableName + " (sender,message) VALUES ('" + args[1] + "','" + args[2] + "');" );
-				printResultSet(passwordStatment.getResultSet());
-				sucsess = true;
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return sucsess;
-	}
-	
-	public boolean insertMessage(String[] args)
-	{
-		boolean sucsess = false;
+		int id=-1;
 		if(4 == args.length)
 		{
 			try {
-				massageStatment.executeUpdate("INSERT INTO " + messageTableName + " (sender,reciver,message) VALUES ('" + args[1] + "','" + args[2] + "','" + args[3] +"');" );
-				printResultSet(massageStatment.getResultSet());
-		//		s.execute("COMMIT;");
-				sucsess = true;
+				passwordStatment.executeUpdate("INSERT INTO " + passwordTableName + " (username,phonenumber,password,email,hospital) VALUES ('" + args[0] + "','" + args[1] + "','" + args[2] + "','n/a','n/a');" );
+				//printResultSet(passwordStatment.getResultSet());
+				ResultSet idResultSet = massageStatment.getGeneratedKeys();
+//				String key = resultSetToString(idResultSet);
+//				if(DEBUG) System.out.println(key);
+//				key = key.split("KEY ")[1];
+//				key = key.split("\\n")[0];
+//				if(DEBUG) System.out.println(key);
+//				id = Integer.parseInt(key,10);
+				id = 1;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		return sucsess;
+		return id;
+	}
+	
+	public int insertMessage(String[] args)
+	{
+		//boolean sucsess = false;
+		int id = -1;
+		if(5 == args.length)
+		{
+			try {
+				massageStatment.executeUpdate("INSERT INTO " + messageTableName + " (sender,reciver,message,time,urgency) VALUES ('" + args[0] + "','" + args[1] + "','" + args[2] + "','" + args[3] + "','" + args[4] +"');", Statement.RETURN_GENERATED_KEYS );
+		//		printResultSet(massageStatment.getResultSet());
+		//		s.execute("COMMIT;");
+				ResultSet idResultSet = massageStatment.getGeneratedKeys();
+				String key = resultSetToString(idResultSet);
+				if(DEBUG) System.out.println(key);
+				key = key.split("KEY ")[1];
+				key = key.split("\\n")[0];
+				if(DEBUG) System.out.println(key);
+				id = Integer.parseInt(key,10);
+				
+		//		sucsess = true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return id;
 	}
 	
 	public boolean deleteMessage(String idNum)

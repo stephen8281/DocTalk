@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
 public class Server 
 {
 	static final int PORT = 12000;
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 	private MySQLsetup mySQLmessage = new MySQLsetup();
 	private MySQLsetup mySQLpassowrds = new MySQLsetup();
 	private static String userName="root";

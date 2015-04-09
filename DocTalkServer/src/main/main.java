@@ -15,12 +15,17 @@ public class main
 	{
 		try
 		{
+			
 			if(1<=args.length)
 			{
 				switch(args[0])
 				{
 				case "-s": case "--server":
-					myServer.run(args);
+					//myServer.run(args);
+					if(3<=args.length)
+					{
+						mylistener.runHTTP(args);
+					}
 					break;
 				case "-c": case "--client":
 					myTestClient.run(args);
