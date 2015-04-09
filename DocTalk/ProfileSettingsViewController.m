@@ -10,6 +10,8 @@
 
 @interface ProfileSettingsViewController ()
 
+@property (nonatomic, strong) NSString *phoneUID;
+
 @end
 
 @implementation ProfileSettingsViewController
@@ -22,8 +24,13 @@
 @synthesize phoneNumber;
 @synthesize hospital;
 
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    self.phoneUID = _userid;
+    NSLog(@"%@",self.phoneUID);
     
     name.delegate = self;
     name.returnKeyType = UIReturnKeyDone;
@@ -42,7 +49,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+/*
 -(BOOL) textFieldShouldReturn:(UITextField*) textField {
     if (textField == email) {
 //        Make sure it contains an @ sign
@@ -78,6 +85,7 @@
     
     return YES;
 }
+*/
 
 - (IBAction)browseProfilePic:(id)sender {
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
@@ -123,11 +131,11 @@
             
         }
         else {
-            NSString *post =[[NSString alloc] initWithFormat:@"name=%@&phonenumber=%@&email=%@&hospital=%@",[self.txtName text],[self.txtPhoneNumber text],[self.txtEmail text],[self.txtHospital text]];
+            NSString *post =[[NSString alloc] initWithFormat:@"id=%@&name=%@&phonenumber=%@&email=%@&hospital=%@",self.phoneUID,[self.txtName text],[self.txtPhoneNumber text],[self.txtEmail text],[self.txtHospital text]];
             NSLog(@"PostData: %@",post);
             
-            //NSURL *url=[NSURL URLWithString:@"http://192.168.1.73/profilesettings.php"];
-            NSURL *url=[NSURL URLWithString:@"http://localhost/profilesettings.php"];
+            NSURL *url=[NSURL URLWithString:@"http://192.168.1.74/profilesettings.php"];
+            //NSURL *url=[NSURL URLWithString:@"http://localhost/profilesettings.php"];
             
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             
@@ -165,7 +173,7 @@
                 
                 if(success == 1)
                 {
-                    NSLog(@"Sign up SUCCESS");
+                    NSLog(@"Contact information change SUCCESS");
                 } else {
                     
                     NSString *error_msg = (NSString *) jsonData[@"error_message"];
@@ -184,7 +192,13 @@
     }
     if (success) {
         //[self performSegueWithIdentifier:@"login_success" sender:self];
-        [self performSegueWithIdentifier:@"goto_login" sender:self];
+        //[self performSegueWithIdentifier:@"goto_login" sender:self];
+        //[self performSegueWithIdentifier:@"goto_settings" sender:self];
+        
+        NSLog(@"Contact change SUCCESS");
+        [self alertStatus:@"Contact change success." :@"Success!" :0];
+
+        
     }
     
     

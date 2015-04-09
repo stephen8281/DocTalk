@@ -36,10 +36,13 @@ if($_POST) {
 					/* close statement */
 					$stmt->close();
 
-					$getPhoneNumber = "SELECT phonenumber FROM users WHERE username = '$username' ";
+					$getPhoneNumber = "SELECT phonenumber, id, username FROM users WHERE username = '$username' ";
 					$result = mysqli_query($mysqli,$getPhoneNumber);
 					$row = mysqli_fetch_row($result);
 					$phonenumber = $row[0];
+					$getuserid = $row[1];
+					$getusername = $row[2];
+		
 				}
 
 				/* close connection */
@@ -48,7 +51,9 @@ if($_POST) {
 				if ($id) {
 					error_log("User $username: password match.");
 					//echo '{"success":1}';
-					echo json_encode(array('success' => 1,'phonenumber' => $phonenumber));
+					//echo json_encode(array('success' => 1,'phonenumber' => $phonenumber);
+					echo json_encode(array('success' => 1,'phonenumber' => $phonenumber, 'getuserid' => $getuserid, 'getusername' => $getusername));
+
 				} else {
 					error_log("User $username: password doesn't match.");
 					echo '{"success":0,"error_message":"Invalid Username/Password"}';

@@ -17,4 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *updateButton;
 - (IBAction)backgroundTap:(id)sender;
 
+@property (strong, nonatomic) NSString *userid;
+- (IBAction)updateClicked:(id)sender;
+
 @end

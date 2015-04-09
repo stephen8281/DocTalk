@@ -3,10 +3,12 @@
 header('Content-type: application/json');
 if($_POST) {
 	$id = $_POST['id'];
-	$name   = $_POST['name'];
-	$phonenumber = $_POST['phonenumber'];
-	$email   = $_POST['email'];
-	$hospital = $_POST['hospital'];
+	$oldpassword = $_POST['oldpassword'];
+	$updatedpassword = $_POST['updatedpassword'];
+	$repeatedpassword   = $_POST['repeatedpassword'];
+
+	if($_POST['oldpassword']) {
+		if ( $updatedpassword == $repeatedpassword ) {
 
 			$db_name     = 'authentication';
 			$db_user     = 'root';
@@ -20,15 +22,14 @@ if($_POST) {
 				error_log("Connect failed: " . mysqli_connect_error());
 				echo '{"success":0,"error_message":"' . mysqli_connect_error() . '"}';
 			} else {
-				$stmt = $mysqli->prepare("UPDATE users SET name = ?, phonenumber = ?, email = ?, hospital = ? WHERE id =?");
+				$stmt = $mysqli->prepare("UPDATE users SET password = ? WHERE id = ?");
 				//$password = md5($password);
 				
 				//try getting sha-256 to work
 				//PORT 3306 DEFAULT ON XAMPP
 
-				//$password = hash("sha256", $password);
-				$stmt->bind_param("ssssi", $name, $phonenumber, $email, $hospital, $id);
-
+				$password = hash("sha256", $repeatedpassword);
+				$stmt->bind_param("ss", $password, $id);
 
 				/* execute prepared statement */
 				$stmt->execute();
@@ -48,10 +49,16 @@ if($_POST) {
 					//error_log("User '$username' created.");
 					echo '{"success":1}';
 				} else {
-					echo '{"success":0,"error_message":"Could not update Contact Profile."}';
+					echo '{"success":0,"error_message":"Username Exist."}';
 				}
 			}
 		} else {
-			echo '{"success":0,"error_message":"ERROR"}';
+			echo '{"success":0,"error_message":"Passwords does not match."}';
 		}
+	} else {
+		echo '{"success":0,"error_message":"Invalid Username."}';
+	}
+}else {
+	echo '{"success":0,"error_message":"Invalid Data."}';
+}
 ?>

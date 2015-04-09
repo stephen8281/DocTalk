@@ -21,5 +21,7 @@
 - (IBAction)backgroundTap:(id)sender;
 
 @property (strong, nonatomic) NSString *phone;
+@property (strong, nonatomic) NSString *userid;
+@property (strong, nonatomic) NSString *username;
 
 @end

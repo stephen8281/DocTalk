@@ -9,6 +9,7 @@
 #import "ThreadListViewController.h"
 #import "SendMessageController.h"
 #import "DBManager.h"
+#import "sortMessagesContainer.h"
 
 @interface ThreadListViewController ()
 @property (nonatomic, strong) DBManager *dbManager;
@@ -63,11 +64,74 @@
     }
     self.arrContact = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     
+    //    Sort the messages
+    if (self.arrContact.count > 1) {
+        NSArray *MessageSortingMap = [NSArray arrayWithObjects:@"messageID", @"Sender", @"receiver", @"text", @"Time", @"Urgency", nil];
+        NSArray *order = [sortMessagesContainer sortOrder];
+        NSArray *tempArray = [self.arrContact sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+            NSString *nameQueryA = [NSString stringWithFormat:@"SELECT firstname FROM peopleInfo WHERE mobilenumber =  '%@' ", [a objectAtIndex:0]];
+            NSString *nameQueryB = [NSString stringWithFormat:@"SELECT firstname FROM peopleInfo WHERE mobilenumber =  '%@' ", [b objectAtIndex:0]];
+            
+            NSArray *NameA = [[NSMutableArray alloc] initWithArray:[self.dbManangerContact loadDataFromDB:nameQueryA]];
+            NSArray *NameB = [[NSMutableArray alloc] initWithArray:[self.dbManangerContact loadDataFromDB:nameQueryB]];
+            
+            NSString *messageQueryA = [NSString stringWithFormat:@"SELECT * FROM messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')) AND messageID = (SELECT MAX(messageID) FROM messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')))", [a objectAtIndex:0],_phone,_phone,[a objectAtIndex:0], [a objectAtIndex:0],_phone,_phone,[a objectAtIndex:0]];
+            NSString *messageQueryB = [NSString stringWithFormat:@"SELECT * FROM messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')) AND messageID = (SELECT MAX(messageID) FROM messageTable WHERE ((sender = '%@' and receiver = '%@') OR (sender = '%@' and receiver = '%@')))", [b objectAtIndex:0],_phone,_phone,[b objectAtIndex:0], [b objectAtIndex:0],_phone,_phone,[b objectAtIndex:0]];
+            
+            NSArray *messageA = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:messageQueryA]];
+            NSArray *messageB = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:messageQueryB]];
+            
+            //        First sort based on the first thing in the order list, then by the second and so on
+            NSInteger compareVal = 0;
+            for (NSInteger index = 0; index < [order count]; index++) {
+                if ([[order objectAtIndex:index]  isEqual: @"Sender"]) {
+                    compareVal = (NSInteger)[[[NameA objectAtIndex:0]objectAtIndex:0] compare:[[NameB objectAtIndex:0]objectAtIndex:0 ]];
+                    if (compareVal != 0) {
+                        break;
+                    }
+                } else if ([[order objectAtIndex:index]  isEqual: @"Time"]) {
+                    NSDictionary *months = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"01", @"02", @"03", @"04", @"05", @"06", @"07", @"08", @"09", @"10", @"11", @"12", nil] forKeys:[NSArray arrayWithObjects:@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec", nil]];                    NSInteger messageIndex = [MessageSortingMap indexOfObjectIdenticalTo:[order objectAtIndex:index]];
+                    NSString *dateA = [[messageA objectAtIndex:0] objectAtIndex:messageIndex];
+                    NSString *yearA = [dateA substringWithRange:NSMakeRange(8, 4)];
+                    NSString *monthA = [NSString stringWithFormat:@"%@", [months objectForKey:[dateA substringWithRange:NSMakeRange(0, 3)]]];
+                    NSString *dayA = [dateA substringWithRange:NSMakeRange(4, 2)];
+                    NSString *timeA = [dateA substringWithRange:NSMakeRange(13, 5)];
+                    
+                    
+                    NSString *dateB = [[messageB objectAtIndex:0] objectAtIndex:messageIndex];
+                    NSString *yearB = [dateB substringWithRange:NSMakeRange(8, 4)];
+                    NSString *monthB = [NSString stringWithFormat:@"%@", [months objectForKey:[dateB substringWithRange:NSMakeRange(0, 3)]]];
+                    NSString *dayB = [dateB substringWithRange:NSMakeRange(4, 2)];
+                    NSString *timeB = [dateB substringWithRange:NSMakeRange(13, 5)];
+                    
+                    compareVal = (NSInteger)[yearB compare:yearA];
+                    if (compareVal == 0) {
+                        compareVal = (NSInteger)[monthB compare:monthA];
+                        if (compareVal == 0) {
+                            compareVal = (NSInteger)[dayB compare:dayA];
+                            if (compareVal == 0) {
+                                compareVal = (NSInteger)[timeB compare:timeA];
+                            }
+                        }
+                    }
+                    if (compareVal != 0) {
+                        break;
+                    }
+                }else if ([[order objectAtIndex:index]  isEqual: @"Urgency"]) {
+                    NSInteger messageIndex = [MessageSortingMap indexOfObjectIdenticalTo:@"Urgency"];
+                    compareVal = (NSInteger)[[[messageA objectAtIndex:0]objectAtIndex :messageIndex] compare:[[messageB objectAtIndex:0]objectAtIndex :messageIndex] ];
+                    if (compareVal != 0) {
+                        break;
+                    }
+                }
+            }
+            return compareVal;
+        }];
+        self.arrContact = [[NSMutableArray alloc] initWithArray:tempArray];;
+    }
     
     //reload the contentview
     [self.tableView reloadData];
-    
-    
 }
 
 #pragma mark - Table view data source
@@ -159,12 +223,12 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         
         NSString *incomingPerson = [NSString stringWithString:[[self.arrContact objectAtIndex:indexPath.row] objectAtIndex:0]];
-        NSString *query = [NSString stringWithFormat:@"SELECT firstname FROM peopleInfo WHERE mobilenumber =  '%@' ",incomingPerson];
+        NSString *query = [NSString stringWithFormat:@"SELECT firstname,lastname FROM peopleInfo WHERE mobilenumber =  '%@' ",incomingPerson];
         NSMutableArray *result = [[NSMutableArray alloc]initWithArray:[self.dbManangerContact loadDataFromDB:query]];
         
-
         [[segue destinationViewController] setReceiverNumber: [[self.arrContact objectAtIndex:indexPath.row] objectAtIndex:0]];
         [[segue destinationViewController] setReceiverName: [NSString stringWithString:[[result objectAtIndex:0] objectAtIndex:0]]];
+        [[segue destinationViewController] setReceiverLastName: [NSString stringWithString:[[result objectAtIndex:0] objectAtIndex:1]]];
         [[segue destinationViewController] setPhone: _phone];
             
     }
