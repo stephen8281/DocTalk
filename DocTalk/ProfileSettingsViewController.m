@@ -135,6 +135,7 @@
             NSLog(@"PostData: %@",post);
             
             NSURL *url=[NSURL URLWithString:@"http://192.168.1.74/profilesettings.php"];
+            //NSURL *url=[NSURL URLWithString:@"http://128.189.245.75:1200/profilesettings.php"];
             //NSURL *url=[NSURL URLWithString:@"http://localhost/profilesettings.php"];
             
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];

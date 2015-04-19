@@ -50,7 +50,8 @@
             NSString *post =[[NSString alloc] initWithFormat:@"username=%@&phonenumber=%@&password=%@&c_password=%@",[self.txtUsername text],[self.txtNumber text],[self.txtPassword text],[self.txtConfirmPassword text]];
             NSLog(@"PostData: %@",post);
             
-            NSURL *url=[NSURL URLWithString:@"http://192.168.1.74/jsonsignup.php"];
+            NSURL *url=[NSURL URLWithString:@"http://192.168.1.67/jsonsignup.php"];
+            //NSURL *url=[NSURL URLWithString:@"http://128.189.245.75:1200/jsonsignup.php"];
             //NSURL *url=[NSURL URLWithString:@"http://localhost/jsonsignup.php"];
             
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];

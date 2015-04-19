@@ -90,6 +90,7 @@
             NSLog(@"PostData: %@",post);
             
             NSURL *url=[NSURL URLWithString:@"http://192.168.1.74/jsonpwchange.php"];
+            //NSURL *url=[NSURL URLWithString:@"http://128.189.245.75:1200/jsonpwchange.php"];
             //NSURL *url=[NSURL URLWithString:@"http://localhost/jsonpwchange.php"];
             
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];

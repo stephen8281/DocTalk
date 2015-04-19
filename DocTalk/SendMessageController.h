@@ -8,12 +8,12 @@
 #import "JSQMessages.h"
 #import <UIKit/UIKit.h>
 
-//#define sendURL @"http://192.168.43.249:12000"
-//#define readURL @"http://192.168.43.249:12000"
-//#define deleteURL @"http://192.168.43.249:12000"
-#define sendURL @"http://192.168.1.71/postmessage.php"
-#define readURL @"http://192.168.1.71/readmessage.php"
-#define deleteURL @"http://192.168.1.71/deletemessage.php"
+//#define sendURL @"http://192.168.43.249:12000/postmessage.php"
+//#define readURL @"http://192.168.43.249:12000/readmessage.php"
+//#define deleteURL @"http://192.168.43.249:12000/deletemessage.php"
+#define sendURL @"http://192.168.1.67/postmessage.php"
+#define readURL @"http://192.168.1.67/readmessage.php"
+#define deleteURL @"http://192.168.1.67/deletemessage.php"
 
 @interface SendMessageController : JSQMessagesViewController<UIActionSheetDelegate, JSQMessagesLoadEarlierHeaderViewDelegate>
 
